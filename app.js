@@ -1,3 +1,5 @@
+// load our JSON file
+
 function loadJSON(callback) {
   var xobj = new XMLHttpRequest();
       xobj.overrideMimeType("application/json");
@@ -10,12 +12,10 @@ function loadJSON(callback) {
   xobj.send(null);
  }
 
-var body = '';
-
+// On Initialize parse JSON and construct panels
 function init() {
   loadJSON(function(response) {
     var data = JSON.parse(response);
-    console.log(data.agencies.length)
     for(var i = 0; i < data.agencies.length; i++){
       var agency = data.agencies[i]
       var container_div = document.createElement('div');
@@ -30,8 +30,6 @@ function init() {
         var body = document.createElement('div');
         body.className = "col-lg-3 panel panel-default"
         container_div.appendChild(body)
-
-
         var ruleName = document.createElement('div')
         ruleName.className = "panel-header"
         var rule_title = "<h4>" + businessRule.title + "</h4>";
@@ -42,7 +40,6 @@ function init() {
           var requirement_div = document.createElement('div')
           requirement_div.className = "panel-body text-left"
           body.append(requirement_div)
-
           for (var prop in requirements) {
               var requirement_visual = prop + ' : ' + requirements[prop]
               requirement_div.innerHTML = requirement_visual
@@ -52,10 +49,6 @@ function init() {
     }
   })
 };
-
-function insertAfter(referenceNode, newNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-}
 
 document.addEventListener("DOMContentLoaded", function(event) {
   init()
