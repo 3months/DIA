@@ -20,7 +20,7 @@
             {"applicantMinimumAge": "16"},
             {"citizenOrResident?": "true"},
             {"livingInNZ?": "true"},
-            {"benefitSocialHousing": "true"}
+            {"SocialHousingBenefit?": "true"}
           ]
         },
         {
