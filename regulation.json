@@ -1,0 +1,93 @@
+{
+  "agencies": [
+    {
+      "title": "WorkAndIncome",
+      "businessRules": [
+        {
+          "title": "SuperAnnuation",
+          "requirements": [
+            {"applicantMinimumAge": "65"},
+            {"yearsInNzSince20": "10"},
+            {"yearsInNzSince50": "5"},
+            {"citizenOrResident?": "true"},
+            {"livingInNZ?": "true"}
+          ]
+        },
+        {
+          "title": "AccommodationSupplement",
+          "requirements": [
+            {"ongoingCosts?": "true"},
+            {"applicantMinimumAge": "16"},
+            {"citizenOrResident?": "true"},
+            {"livingInNZ?": "true"},
+            {"benefitSocialHousing": "true"}
+          ]
+        },
+        {
+          "title": "DisabilityAllowance",
+          "requirements": [
+            {"disabilityMinimum": "6"},
+            {"ongoingCosts?": "true"},
+            {"citizenOrResident?": "true"},
+            {"livingInNZ?": "true"}
+          ]
+        },
+        {
+          "title": "TemporaryAdditionalSupport",
+          "requirements": [
+            {"applicantMinimumAge": "16"},
+            {"citizenOrResident?": "true"},
+            {"hasExistingBenefit?": "false"}
+          ]
+        },
+        {
+          "title": "SpecialNeedsGrant",
+          "requirements": [
+            {"urgent?": "true"},
+            {"citizenOrResident?": "true"},
+            {"livingInNZ?": "true"}
+          ]
+        },
+        {
+          "title": "SuperGoldCard",
+          "requirements": [
+            {"pension?": "true"}
+          ]
+        },
+        {
+          "title": "FuneralGrant",
+          "requirements": [
+            {"relatedOrGuardian?": "true"},
+            {"organiser?": "true"},
+            {"completedIncomeAndAssetTest?": "true"}
+          ]
+        },
+        {
+          "title": "CommunityServicesCard",
+          "requirements": [
+            {"applicantMinimumAge": "16"},
+            {"dependentChild?": "false"},
+            {"incomeLessThan": "45800"},
+            {"citizenOrResident?": "true"},
+            {"livingInNZ?": "true"},
+            {"refugeeOrProtectionStatus?": "true"}
+          ]
+        },
+        {
+          "title": "SoleParentSupport",
+          "requirements": [
+            {"singleCaregiver": "true"},
+            {"dependentChild?": "true"},
+            {"dependentChildMaxAge": "14"},
+            {"applicantMinimumAge": "20"},
+            {"applicantStatus": "single"},
+            {"applicantInsufficientFinances?": "true"},
+            {"citizenOrResident?": "true"},
+            {"livingInNZ?": "true"},
+            {"livingInNzMinimumYears": "2"}
+          ]
+        }
+      ]
+    }
+  ]
+}
