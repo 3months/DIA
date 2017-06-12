@@ -47,6 +47,8 @@ function createChildElement(obj, child, counter){
       $(panel_body).append(text)
     }
   }
+  var requirementsCount = "<p>" + countRequirements(panel_body) + " requirements</p>"
+  $(parent).append(requirementsCount)
 }
 
 function returnTitle(text){
@@ -62,6 +64,11 @@ function returnRequirementKey(text){
     case "livingInNZ?": return "Is the applicant currently living in NZ"
     default: return text
   }
+}
+
+function countRequirements(div){
+  var count = document.getElementById(div.id).childElementCount;
+  return count
 }
 
 // $(function() {
