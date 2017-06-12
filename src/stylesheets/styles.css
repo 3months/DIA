@@ -1,3 +1,7 @@
 .panel-default {
   min-height: 300px;
 }
+
+input {
+  width: 30%;
+}

@@ -4,17 +4,28 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel= "stylesheet" href= "src/stylesheets/styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href='styles.css'>
+    <script src='src/javascripts/app.js'></script>
+
   </head>
+
   <body>
-    <div class="col-lg-12 text-center">
-      <input placeholder="what are you looking for?">
-      <button class="btn btn-success"> Submit </button>
+    <div class="container-fluid">
+      <div class="col-lg-12 text-center">
+        <div class="text-center">
+          <h1>Discovery</h1>
+        </div>
+        <div class="row text-center">
+          <div class='text-center' id="input">
+            <input placeholder="what are you looking for?"></input>
+            <button class="btn-success">Search</button>
+          </div>
+        </div>
+        <div class="row" id="list"></div>
+      </div>
     </div>
-    <div class="col-lg-12 text-center"id="output"></div>
-  <script src="app.js"></script>
   </body>
 </html>
