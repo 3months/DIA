@@ -1,81 +1,177 @@
-{"agencies": [{
-"title": "WorkAndIncome",
-"businessRules": [
-  {"name": "SuperAnnuation",
-    "requirements": {
-      "applicantMinimumAge": "65",
-      "yearsInNzSince20": "10",
-      "yearsInNzSince50": "5",
-      "citizenOrResident?": "true",
-      "livingInNZ?": "true"
-    }
-  },{
-    "name": "AccommodationSupplement",
-    "requirements": {
-      "ongoingCosts?": "true",
-      "applicantMinimumAge": "16",
-      "citizenOrResident?": "true",
-      "livingInNZ?": "true",
-      "SocialHousingBenefit?": "true"
-    }
-  },{
-    "name": "DisabilityAllowance",
-    "requirements": {
-      "disabilityMinimum": "6",
-      "ongoingCosts?": "true",
-      "citizenOrResident?": "true",
-      "livingInNZ?": "true"
-    }
-  },{
-    "name": "TemporaryAdditionalSupport",
-    "requirements": {
-      "applicantMinimumAge": "16",
-      "citizenOrResident?": "true",
-      "hasExistingBenefit?": "false"
-    }
-  },{
-    "name": "SpecialNeedsGrant",
-    "requirements": {
-      "urgent?": "true",
-      "citizenOrResident?": "true",
-      "livingInNZ?": "true"
-    }
-  },{
-    "name": "SuperGoldCard",
-    "requirements": {
-      "pension?": "true"
-    }
-  },{
-    "name": "FuneralGrant",
-    "requirements": {
-      "relatedOrGuardian?": "true",
-      "organiser?": "true",
-      "completedIncomeAndAssetTest?": "true"
-    }
-  },{
-    "name": "CommunityServicesCard",
-    "requirements": {
-      "applicantMinimumAge": "16",
-      "dependentChild?": "false",
-      "incomeLessThan": "45800",
-      "citizenOrResident?": "true",
-      "livingInNZ?": "true",
-      "refugeeOrProtectionStatus?": "true"
-    }
-  },{
-    "name": "SoleParentSupport",
-    "requirements": {
-      "singleCaregiver": "true",
-      "dependentChild?": "true",
-      "dependentChildMaxAge": "14",
-      "applicantMinimumAge": "20",
-      "applicantStatus": "single",
-      "applicantInsufficientFinances?": "true",
-      "citizenOrResident?": "true",
-      "livingInNZ?": "true",
-      "livingInNzMinimumYears": "2"
-    }
-  }
-  ]
-}]
+{"agencies": [
+  {
+    "title": "WorkAndIncome",
+    "businessRules": [
+      {"name": "SuperAnnuation",
+        "category": "retirement",
+        "requirements": {
+          "applicantMinimumAge": "65",
+          "yearsInNzSince20": "10",
+          "yearsInNzSince50": "5",
+          "citizenOrResident?": "true",
+          "livingInNZ?": "true"
+        }
+      },{
+        "name": "AccommodationSupplement",
+        "category": "hardship",
+        "requirements": {
+          "ongoingCosts?": "true",
+          "applicantMinimumAge": "16",
+          "citizenOrResident?": "true",
+          "livingInNZ?": "true",
+          "SocialHousingBenefit?": "true"
+        }
+      },{
+        "name": "DisabilityAllowance",
+        "category": "hardship",
+        "requirements": {
+          "disabilityMinimum": "6",
+          "ongoingCosts?": "true",
+          "citizenOrResident?": "true",
+          "livingInNZ?": "true"
+        }
+      },{
+        "name": "TemporaryAdditionalSupport",
+        "category": "hardship",
+        "requirements": {
+          "applicantMinimumAge": "16",
+          "citizenOrResident?": "true",
+          "hasExistingBenefit?": "false"
+        }
+      },{
+        "name": "SpecialNeedsGrant",
+        "category": "hardship",
+        "requirements": {
+          "urgent?": "true",
+          "citizenOrResident?": "true",
+          "livingInNZ?": "true"
+        }
+      },{
+        "name": "SuperGoldCard",
+        "category": "retirement",
+        "requirements": {
+          "pension?": "true"
+        }
+      },{
+        "name": "FuneralGrant",
+        "category": "bereavement",
+        "requirements": {
+          "relatedOrGuardian?": "true",
+          "organiser?": "true",
+          "completedIncomeAndAssetTest?": "true"
+        }
+      },{
+        "name": "CommunityServicesCard",
+        "category": "childCare",
+        "requirements": {
+          "applicantMinimumAge": "16",
+          "dependentChild?": "false",
+          "incomeLessThan": "45800",
+          "citizenOrResident?": "true",
+          "livingInNZ?": "true",
+          "refugeeOrProtectionStatus?": "true"
+        }
+      },{
+        "name": "SoleParentSupport",
+        "category": "childCare",
+        "requirements": {
+          "singleCaregiver": "true",
+          "dependentChild?": "true",
+          "dependentChildMaxAge": "14",
+          "applicantMinimumAge": "20",
+          "applicantStatus": "single",
+          "applicantInsufficientFinances?": "true",
+          "citizenOrResident?": "true",
+          "livingInNZ?": "true",
+          "livingInNzMinimumYears": "2"
+        }
+      },{
+        "name": "EmergencyBenefit",
+        "category": "hardship",
+        "requirements": {
+          "contactWorkandIncome": "true"
+        }
+      },{
+        "name": "SchoolAndYearStartupFund",
+        "category": "childCare",
+        "requirements": {
+          "alreadyReceiving": {
+            "benefit": {
+              "OrphansBenefit": "true",
+              "UnsupportedChildsBenefit": "true"
+            }
+          },
+          "appliedBetweenMidJanEndFeb": "true"
+        }
+      },{
+        "name": "ExtraodinaryCareFund",
+        "category": "childCare",
+        "requirements": {
+          "alreadyReceiving": {
+            "benefit": {
+              "OrphansBenefit": "true",
+              "UnsupportedChildsBenefit": "true"
+            }
+          },
+          "promisingChild?": "true",
+          "difficultChild?": "true"
+        }
+      },{
+        "name": "VeteransPension",
+        "category": "retirement",
+        "requirements": {
+          "ServedInMilitaryOrEmergency?": "true",
+          "citizenOrResident?": "true",
+          "livingInNZ?": "true",
+          "applicantMinimumAge": "65"
+        }
+      },{
+        "name": "ChildDisabilityAllowance",
+        "category": "childCare",
+        "requirements": {
+          "mainCaregiver?": "true",
+          "citizenOrResident?": "true",
+          "childAssessment?": "true",
+          "livingInNZ?": "true",
+          "applicantMinimumAge": "65",
+          "dependentChildMaxAge": "18"
+        }
+      },{
+        "name": "ChildCareSubsidy",
+        "category": "childCare",
+        "requirements": {
+          "mainCaregiver?": "true",
+          "citizenOrResident?": "true",
+          "incomeLessThan": "45800",
+          "livingInNZ?": "true",
+          "incomeAssesment": "true"
+        }
+      },{
+        "name": "UnsupportedChildBenefit",
+        "category": "childCare",
+        "requirements": {
+          "familyBreakdownHasOccurred?": "true",
+          "dependentChildMaxAge": "18",
+          "childFinanciallyDependent?": "true",
+          "childNeedsAssistance?": "true",
+          "applicantMinimumAge": "65",
+          "mainCaregiver?": "true",
+          "MainCaregiverMinimumTimeInMonths": "12",
+          "citizenOrResident?": "true",
+          "applicantNotNormalCaregiver?": "true"
+        }
+      },{
+        "name": "EstablishmentGrant",
+        "category": "childCare",
+        "requirements": {
+          "alreadyReceiving": {
+            "benefit": {
+              "OrphansBenefit": "true",
+              "UnsupportedChildsBenefit": "true"
+            }
+          }
+        }
+      }
+    ]
+  }]
 }
