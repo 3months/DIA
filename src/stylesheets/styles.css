@@ -3,12 +3,12 @@ input {
 }
 
 .col-lg-3{
-  min-height: 30%;
+  padding: 0;
 }
 
 
 .form-group input[type="checkbox"] {
-    /*display: none;*/
+    display: none;
 }
 
 .form-group input[type="checkbox"] + .btn-group > label span {

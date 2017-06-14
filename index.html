@@ -5,11 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel= "stylesheet" href= "src/stylesheets/styles.css" />
+    <link rel= "stylesheet" href= "src/stylesheets/styles.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src='src/javascripts/app.js'></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
   </head>
 
   <body>
@@ -17,68 +16,81 @@
       <div class="col-lg-12 text-center">
         <div class="text-center">
           <h1>Discovery</h1>
-
         </div>
         <div class="row text-center">
           <div class='text-center' id="input">
-            <div class="col-lg-2 text-left">
-              <h3>life stages</h3>
-              <div class="[ form-group ]">
-                <input type="checkbox" name="fancy-checkbox-default" id="fancy-checkbox-default" autocomplete="off" />
-                <div class="[ btn-group ]">
-                  <label for="fancy-checkbox-default" class="[ btn btn-default ]">
-                    <span class="[ glyphicon glyphicon-ok ]"></span>
-                    <span> </span>
-                  </label>
-                  <label for="fancy-checkbox-default" class="[ btn btn-default active ]">
-                      immigration
-                  </label>
+            <h3>life stages</h3>
+            <div class="row">
+              <div class="col-lg-3 life-events">
+                <div class="[ form-group ]">
+                  <input type="checkbox" name="fancy-checkbox-immigration" id="fancy-checkbox-immigration" autocomplete="off" />
+                  <div class="[ btn-group ]">
+                    <label for="fancy-checkbox-immigration" class="[ btn btn-default ]">
+                      <span class="[ glyphicon glyphicon-ok ]"></span>
+                      <span> </span>
+                    </label>
+                    <label for="fancy-checkbox-immigration" class="[ btn btn-default active ]">
+                        immigration
+                    </label>
+                  </div>
                 </div>
               </div>
 
-              <div class="[ form-group ]">
-                <input type="checkbox" name="fancy-checkbox-retired" id="fancy-checkbox-retired" autocomplete="off" />
-                <div class="[ btn-group ]">
-                  <label for="fancy-checkbox-retired" class="[ btn btn-default ]">
-                    <span class="[ glyphicon glyphicon-ok ]"></span>
-                    <span> </span>
-                  </label>
-                  <label for="fancy-checkbox-retired" class="[ btn btn-default active ]">
-                      retired
-                  </label>
+              <div class="col-lg-3">
+                <div class="[ form-group ]">
+                  <input type="checkbox" name="fancy-checkbox-retired" id="fancy-checkbox-retired" autocomplete="off" />
+                  <div class="[ btn-group ]">
+                    <label for="fancy-checkbox-retired" class="[ btn btn-default ]">
+                      <span class="[ glyphicon glyphicon-ok ]"></span>
+                      <span> </span>
+                    </label>
+                    <label for="fancy-checkbox-retired" class="[ btn btn-default active ]">
+                        retired
+                    </label>
+                  </div>
                 </div>
               </div>
 
-              <div class="[ form-group ]">
-                <input type="checkbox" name="fancy-checkbox-health" id="fancy-checkbox-health" autocomplete="off" />
-                <div class="[ btn-group ]">
-                  <label for="fancy-checkbox-health" class="[ btn btn-default ]">
-                    <span class="[ glyphicon glyphicon-ok ]"></span>
-                    <span> </span>
-                  </label>
-                  <label for="fancy-checkbox-health" class="[ btn btn-default active ]">
-                      health
-                  </label>
+              <div class="col-lg-3">
+                <div class="[ form-group ]">
+                  <input type="checkbox" name="fancy-checkbox-health" id="fancy-checkbox-health" autocomplete="off" />
+                  <div class="[ btn-group ]">
+                    <label for="fancy-checkbox-health" class="[ btn btn-default ]">
+                      <span class="[ glyphicon glyphicon-ok ]"></span>
+                      <span> </span>
+                    </label>
+                    <label for="fancy-checkbox-health" class="[ btn btn-default active ]">
+                        health
+                    </label>
+                  </div>
                 </div>
               </div>
 
-              <div class="[ form-group ]">
-                <input type="checkbox" name="fancy-checkbox-childcare" id="fancy-checkbox-childcare" autocomplete="off" />
-                <div class="[ btn-group ]">
-                  <label for="fancy-checkbox-childcare" class="[ btn btn-default ]" id="checkbox-childcare">
-                    <span class="[ glyphicon glyphicon-ok ]"></span>
-                    <span> </span>
-                  </label>
-                  <label for="fancy-checkbox-childcare" class="[ btn btn-default active ]">
-                      childcare
-                  </label>
+              <div class="col-lg-3">
+                <div class="[ form-group ]">
+                  <input type="checkbox" name="fancy-checkbox-childcare" id="fancy-checkbox-childcare" autocomplete="off" />
+                  <div class="[ btn-group ]">
+                    <label for="fancy-checkbox-childcare" class="[ btn btn-default ]" id="checkbox-childcare">
+                      <span class="[ glyphicon glyphicon-ok ]"></span>
+                      <span> </span>
+                    </label>
+                    <label for="fancy-checkbox-childcare" class="[ btn btn-default active ]">
+                        childcare
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="row text-center" id="criteria1"></div>
+        <div class="row text-center" id="criteria2"></div>
+        <div class="row text-center" id="results"></div>
+
+
         <div class="row" id="list"></div>
       </div>
     </div>
+    <script src='src/javascripts/app.js'></script>
   </body>
 </html>

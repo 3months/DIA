@@ -54,7 +54,7 @@
         }
       },{
         "name": "FuneralGrant",
-        "category": "bereavement",
+        "category": "retirement",
         "requirements": {
           "relatedOrGuardian?": "true",
           "organiser?": "true",
