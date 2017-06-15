@@ -96,10 +96,8 @@
         "category": "childCare",
         "requirements": {
           "alreadyReceiving": {
-            "benefit": {
-              "OrphansBenefit": "true",
-              "UnsupportedChildsBenefit": "true"
-            }
+            "OrphansBenefit": "true",
+            "UnsupportedChildsBenefit": "true"
           },
           "appliedBetweenMidJanEndFeb": "true"
         }
@@ -108,10 +106,8 @@
         "category": "childCare",
         "requirements": {
           "alreadyReceiving": {
-            "benefit": {
-              "OrphansBenefit": "true",
-              "UnsupportedChildsBenefit": "true"
-            }
+            "OrphansBenefit": "true",
+            "UnsupportedChildsBenefit": "true"
           },
           "promisingChild?": "true",
           "difficultChild?": "true"
@@ -165,10 +161,8 @@
         "category": "childCare",
         "requirements": {
           "alreadyReceiving": {
-            "benefit": {
-              "OrphansBenefit": "true",
-              "UnsupportedChildsBenefit": "true"
-            }
+            "OrphansBenefit": "true",
+            "UnsupportedChildsBenefit": "true"
           }
         }
       }
