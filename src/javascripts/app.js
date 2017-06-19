@@ -163,36 +163,11 @@ function countRequirements(div) {
   return count;
 }
 
-$("#fancy-checkbox-immigration").change(function() {
+var lifeEventClicked = function() {
+  var eventType = $(this).attr('eventType');
+  console.log(eventType);
   if ($(this).is(":checked")) {
-    recursiveLoop(getObjects(myJson, "category", "immigration"));
-    var panel = $(".panel-body");
-    // Find most common requirement
-    // Ask question related to most common requirement
-    askQuestion(returnTopRequirement());
-    $(".panel-body").each(function(key, value) {
-      var count = value.childElementCount;
-      var parent = $("#" + value.id).parent().parent();
-      if (($("#" + value.id).length = 0)) {
-        parent.append("<p id=" + value.id + ">" + count + " requirements </p>");
-      }
-    });
-  } else {
-    $("button:contains('immigration')")
-      .parent()
-      .parent()
-      .parent()
-      .parent()
-      .parent()
-      .parent()
-      .remove();
-    askQuestion(returnTopRequirement());
-  }
-});
-
-$("#fancy-checkbox-retired").change(function() {
-  if ($(this).is(":checked")) {
-    recursiveLoop(getObjects(myJson, "category", "retirement"));
+    recursiveLoop(getObjects(myJson, "category", eventType));
     var panel = $(".panel-body");
     // Find most common requirement
     // Ask question related to most common requirement
@@ -202,7 +177,7 @@ $("#fancy-checkbox-retired").change(function() {
       var count = value.childElementCount;
       var parent = $("#" + value.id).parent().parent();
       for (var i = 0; i < parent.length; i++) {
-        var test_string = "retirement";
+        var test_string = eventType;
         if ($(parent[i]).find(".btn").text().indexOf(test_string) >= 0) {
           if ($("#" + value.id).length != 0) {
             var text = "<p id=" + value.id + ">" + count + " requirements </p>";
@@ -215,7 +190,7 @@ $("#fancy-checkbox-retired").change(function() {
       }
     });
   } else {
-    $("button:contains('retirement')")
+    $("button:contains('" + eventType + "')")
       .parent()
       .parent()
       .parent()
@@ -225,79 +200,9 @@ $("#fancy-checkbox-retired").change(function() {
       .remove();
     askQuestion(returnTopRequirement());
   }
-});
+};
 
-$("#fancy-checkbox-health").change(function() {
-  if ($(this).is(":checked")) {
-    recursiveLoop(getObjects(myJson, "category", "hardship"));
-    var panel = $(".panel-body");
-    // Find most common requirement
-    // Ask question related to most common requirement
-    askQuestion(returnTopRequirement());
-    $(".panel-body").each(function(key, value) {
-      var count = value.childElementCount;
-      var parent = $("#" + value.id).parent().parent();
-      for (var i = 0; i < parent.length; i++) {
-        var test_string = "hardship";
-        if ($(parent[i]).find(".btn").text().indexOf(test_string) >= 0) {
-          if ($("#" + value.id).length != 0) {
-            var text = "<p id=" + value.id + ">" + count + " requirements </p>";
-            p = $(document.createElement("p")).attr("id", "id-" + value.id);
-            $(
-              "<p id=" + value.id + ">" + count + " requirements </p>"
-            ).appendTo("#" + parent[i].id);
-          }
-        }
-      }
-    });
-  } else {
-    $("button:contains('hardship')")
-      .parent()
-      .parent()
-      .parent()
-      .parent()
-      .parent()
-      .parent()
-      .remove();
-    askQuestion(returnTopRequirement());
-  }
-});
-
-$("#fancy-checkbox-childcare").change(function() {
-  if ($(this).is(":checked")) {
-    recursiveLoop(getObjects(myJson, "category", "childCare"));
-    var panel = $(".panel-body");
-    // Find most common requirement
-    // Ask question related to most common requirement
-    askQuestion(returnTopRequirement());
-    $(".panel-body").each(function(key, value) {
-      var count = value.childElementCount;
-      var parent = $("#" + value.id).parent().parent();
-      for (var i = 0; i < parent.length; i++) {
-        var test_string = "childCare";
-        if ($(parent[i]).find(".btn").text().indexOf(test_string) >= 0) {
-          if ($("#" + value.id).length != 0) {
-            var text = "<p id=" + value.id + ">" + count + " requirements </p>";
-            p = $(document.createElement("p")).attr("id", "id-" + value.id);
-            $(
-              "<p id=" + value.id + ">" + count + " requirements </p>"
-            ).appendTo("#" + parent[i].id);
-          }
-        }
-      }
-    });
-  } else {
-    $("button:contains('childCare')")
-      .parent()
-      .parent()
-      .parent()
-      .parent()
-      .parent()
-      .parent()
-      .remove();
-    askQuestion(returnTopRequirement());
-  }
-});
+$("#fancy-checkbox-immigration, #fancy-checkbox-retired, #fancy-checkbox-health, #fancy-checkbox-childcare").change(lifeEventClicked);
 
 function returnTopRequirement() {
   var array = [
