@@ -117,7 +117,7 @@ function returnTitle(text) {
 function returnRequirementKey(text) {
   switch (text) {
     case "applicantMinimumAge":
-      return "Minimum age of applicant";
+      return "How old are you?";
     case "yearsInNzSince20":
       return "Years applicant should have spent in NZ since turning 20";
     case "yearsInNzSince50":

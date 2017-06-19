@@ -1,3 +1,7 @@
+body {
+  background-color: #e0f8ff;
+}
+
 input {
   width: 30%;
 }
@@ -6,8 +10,34 @@ input {
   padding: 0;
 }
 
+/* Override Bootstrap CSS */
+
+.form-group {
+  margin-bottom: 0;
+}
+
+.panel-success>.panel-heading {
+  background-color: #D9ED96;
+}
+.panel-success {
+  border-color: #b2b5b0;
+}
+
+.btn-default:hover {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+
+/* End Overrides */
+
+.event-container {
+  padding: 20px;
+}
+
 #input {
-  background-color: lightgrey;
+  background-color: #D9ED96;
+  padding-bottom: 20px;
 }
 
 #list {
