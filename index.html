@@ -47,8 +47,8 @@
         </div>
     </script>
 
-    <script id="listTpl" type="text/template">
-      <div class='col-lg-3'>
+    <script id="bizRuleCardTpl" type="text/template">
+      <div class='col-lg-3 biz-rule-card' data-event-type="{{type}}">
         <div class='panel panel-default' id="{{text}}">
           <div class='panel-heading'>
             <div class='panel-title'>
@@ -57,8 +57,14 @@
               </button>
             </div>
           </div>
+          <div class='panel-body card-preview'>
+          </div>
         </div>
       </div>
+    </script>
+
+    <script id="requirementsNumTpl" type="text/template">
+      <p id="{{id}}">{{count}} requirements </p>
     </script>
 
     <script id="benefitPanelTpl" type="text/template">
@@ -68,8 +74,8 @@
     </script>
 
     <script id="requirementTpl" type="text/template">
-      <p class='requirement' id="{{key}}">
-        {{requirementKey}} :<strong>{{child}}</strong>
+      <p class='requirement' id="{{id}}">
+        {{requirement_name}} :<strong>{{requirement_value}}</strong>
       </p>
     </script>
 
