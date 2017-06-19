@@ -164,8 +164,7 @@ function countRequirements(div) {
 }
 
 var lifeEventClicked = function() {
-  var eventType = $(this).attr('eventType');
-  console.log(eventType);
+  var eventType = $(this).attr('data-event-type');
   if ($(this).is(":checked")) {
     recursiveLoop(getObjects(myJson, "category", eventType));
     var panel = $(".panel-body");
