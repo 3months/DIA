@@ -40,13 +40,49 @@ function recursiveLoop(obj) {
       var child_obj = obj[k].approvedCountry;
       createNestedPanelElement(obj[k], child_obj, counter)
     }
+    if (obj[k].hasOwnProperty("alreadyReceiving")) {
+      recursiveLoop(obj[k].approvedCountry);
+      var child_obj = obj[k].approvedCountry;
+      createNestedPanelElement(obj[k], child_obj, counter)
+    }
+
+    if (obj[k].hasOwnProperty("alreadyInNZ?")) {
+      recursiveLoop(obj[k].alreadyInNZ);
+      var child_obj = obj[k].alreadyInNZ;
+      createNestedPanelElement(obj[k], child_obj, counter)
+    }
+    if (obj[k].hasOwnProperty("notInNzYet?")) {
+      recursiveLoop(obj[k].notInNzYet);
+      var child_obj = obj[k].notInNzYet;
+      createNestedPanelElement(obj[k], child_obj, counter)
+    }
+    if (obj[k].hasOwnProperty("BeingInMilitaryService")) {
+      recursiveLoop(obj[k].BeingInMilitaryService);
+      var child_obj = obj[k].BeingInMilitaryService;
+      createNestedPanelElement(obj[k], child_obj, counter)
+    }
+    if (obj[k].hasOwnProperty("InjuryOrIllnessRelatedToQualifyingService")) {
+      recursiveLoop(obj[k].InjuryOrIllnessRelatedToQualifyingService);
+      var child_obj = obj[k].InjuryOrIllnessRelatedToQualifyingService;
+      createNestedPanelElement(obj[k], child_obj, counter)
+    }
+    if (obj[k].hasOwnProperty("BeforeTurning65")) {
+      recursiveLoop(obj[k].BeforeTurning65);
+      var child_obj = obj[k].BeforeTurning65;
+      createNestedPanelElement(obj[k], child_obj, counter)
+    }
+    if (obj[k].hasOwnProperty("dependentChild?")) {
+      recursiveLoop(obj[k].dependentChild);
+      var child_obj = obj[k].dependentChild;
+      createNestedPanelElement(obj[k], child_obj, counter)
+    }
+
     if (typeof obj[k] == "object" && obj[k] !== null) {
       recursiveLoop(obj[k]);
     }
     counter++;
   }
 }
-
 
 var parentCategory = "";
 // Create a new div for each business Rule
@@ -109,11 +145,11 @@ function createNestedChildElement(obj, child, parent) {
 function createNestedPanelElement(obj, child, parent) {
   var parentPanel = "panel" + parentCategory;
   var parent = document.getElementById(parentPanel)
+  // console.log(obj)
   // Here we loop through a new object simply to extract the titles of the objects
   var keyNames = Object.keys(obj)
   // We assign them to new nested panels
   for (var key in keyNames) {
-    console.log(keyNames[key])
     var body_key = key+keyNames[key]
     var view_data = {
       title: keyNames[key],
@@ -122,23 +158,21 @@ function createNestedPanelElement(obj, child, parent) {
       requirement_name_name: returnRequirementKey(key),
       body_key: body_key
     }
-
     var template = $('#requirementsPanelTpl').html();
+    // We create a nested panel for each object
     $(parent).append(Mustache.to_html(template, view_data));
-
-    for (var key in child) {
-      console.log(child)
-      if (child.hasOwnProperty(key)) {
-        var view_data = {
-          key: key,
-          requirement_value: returnRequirementKey(key),
-          requirement_name: child[key]
-        }
-        var template = $('#requirementTpl').html();
-        $("#"+body_key).append(Mustache.to_html(template, view_data));
-        // $(parent).append(Mustache.to_html(template, view_data));
-        // removeAlreadyReceiving();
+    // We loop through content inside keyNames object
+    var title = obj[keyNames[key]]
+    for (var key in title) {
+      console.log('name :' + returnRequirementKey(key))
+      console.log('value :' + title[key])
+      var view_data = {
+        key: key,
+        requirement_name: returnRequirementKey(key),
+        requirement_value: title[key]
       }
+      var template = $('#requirementTpl').html();
+      $("div").find("[data-panel-type='" + body_key + "']").append(Mustache.to_html(template, view_data));
     }
   }
 }
