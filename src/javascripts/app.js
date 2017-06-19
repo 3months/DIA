@@ -52,12 +52,11 @@ function createDiv(obj, counter) {
   category = obj.category;
   parentCategory = text + counter;
   var title = returnTitle(text);
-  var type = category;
   var view_data = {
     text: text,
     counter: counter,
     title: title,
-    type: type
+    type: category
   }
   var template = $('#bizRuleCardTpl').html();
   $("#list").append(Mustache.to_html(template, view_data));
@@ -76,7 +75,7 @@ function createChildElement(obj, child, counter) {
     var panel_body = document.getElementById(panel_body_id);
     if (child.hasOwnProperty(key)) {
       var view_data = {
-        key: key,
+        id: key,
         requirement_name: returnRequirementKey(key),
         requirement_value: child[key]
       }
@@ -92,7 +91,7 @@ function createNestedChildElement(obj, child, parent) {
   for (var key in child) {
     if (child.hasOwnProperty(key)) {
       var view_data = {
-        key: key,
+        id: key,
         requirement_value: returnRequirementKey(key),
         requirement_name: child[key]
       }
@@ -211,9 +210,10 @@ function askQuestion(requirementCount) {
       var divRow = $(document.createElement("div")).addClass("row");
       var h2 = $(document.createElement("h2")).text("First Question");
       divRow.append(h2.append());
+      console.log(question);
       var view_data = {
         key: returnRequirementKey(key),
-        question_key: question[key]
+        num_requirements: question[key]
       }
       var template = $('#questionTpl').html();
       $("#criteria1").html(Mustache.to_html(template, view_data));
