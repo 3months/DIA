@@ -53,35 +53,35 @@ function createDiv(obj, counter) {
   parentCategory = text + counter;
   var title = returnTitle(text);
   var type = category;
-  var list_view = {
+  var view_data = {
     text: text,
     counter: counter,
     title: title,
     type: type
   }
-  var template = $('#listTpl').html();
-  $("#list").append(Mustache.to_html(template, list_view));
+  var template = $('#bizRuleCardTpl').html();
+  $("#list").append(Mustache.to_html(template, view_data));
 }
 
 // Create a new child element for nested properties
 function createChildElement(obj, child, counter) {
   var parent = document.getElementById(obj.name);
-  var benefit_panel = {
+  var view_data = {
     id: obj.name + counter
   }
   var template = $('#benefitPanelTpl').html();
-  $(parent).append(Mustache.to_html(template, benefit_panel));
+  $(parent).append(Mustache.to_html(template, view_data));
   for (var key in child) {
     var panel_body_id = "panel" + obj.name + counter;
     var panel_body = document.getElementById(panel_body_id);
     if (child.hasOwnProperty(key)) {
-      var requirement = {
+      var view_data = {
         key: key,
-        requirementKey: returnRequirementKey(key),
-        child: child[key]
+        requirement_name: returnRequirementKey(key),
+        requirement_value: child[key]
       }
       var template = $('#requirementTpl').html();
-      $(panel_body).append(Mustache.to_html(template, requirement));
+      $(panel_body).append(Mustache.to_html(template, view_data));
     }
   }
 }
@@ -91,13 +91,13 @@ function createNestedChildElement(obj, child, parent) {
   var parent = document.getElementById(parentPanel);
   for (var key in child) {
     if (child.hasOwnProperty(key)) {
-      var requirement = {
+      var view_data = {
         key: key,
-        requirementKey: returnRequirementKey(key),
-        child: child[key]
+        requirement_value: returnRequirementKey(key),
+        requirement_name: child[key]
       }
       var template = $('#requirementTpl').html();
-      $(parent).append(Mustache.to_html(template, requirement));
+      $(parent).append(Mustache.to_html(template, view_data));
       removeAlreadyReceiving();
     }
   }
@@ -157,29 +157,20 @@ var lifeEventClicked = function() {
   var eventType = $(this).attr('data-event-type');
   if ($(this).is(":checked")) {
     recursiveLoop(getObjects(myJson, "category", eventType));
-    var panel = $(".panel-body");
     // Find most common requirement
     // Ask question related to most common requirement
     askQuestion(returnTopRequirement());
 
-    $(".panel-body").each(function(key, value) {
-      var count = value.childElementCount;
-      var parent = $("#" + value.id).parent().parent();
-      for (var i = 0; i < parent.length; i++) {
-        var test_string = eventType;
-        if ($(parent[i]).find(".btn").text().indexOf(test_string) >= 0) {
-          if ($("#" + value.id).length != 0) {
-            var text = "<p id=" + value.id + ">" + count + " requirements </p>";
-            p = $(document.createElement("p")).attr("id", "id-" + value.id);
-            $(
-              "<p id=" + value.id + ">" + count + " requirements </p>"
-            ).appendTo("#" + parent[i].id);
-          }
-        }
+    $(".biz-rule-card").each(function showRequirementCount(i, card) {
+      var view_data = {
+        id: $(card).attr('id'),
+        count: $(card).find('.requirement').length
       }
+      var template = $('#requirementsNumTpl').html();
+      $(card).find('.card-preview').append(Mustache.to_html(template, view_data));
     });
   } else {
-    $("button:contains('" + eventType + "')").closest('.regulation-container').remove();
+    $('[data-event-type="' + eventType + '"].biz-rule-card').remove();
     askQuestion(returnTopRequirement());
   }
 };
@@ -220,12 +211,12 @@ function askQuestion(requirementCount) {
       var divRow = $(document.createElement("div")).addClass("row");
       var h2 = $(document.createElement("h2")).text("First Question");
       divRow.append(h2.append());
-      var question_view = {
+      var view_data = {
         key: returnRequirementKey(key),
         question_key: question[key]
       }
       var template = $('#questionTpl').html();
-      $("#criteria1").html(Mustache.to_html(template, question_view));
+      $("#criteria1").html(Mustache.to_html(template, view_data));
       console.log(key + ":" + question[key]);
       if ($("#fancy-checkbox-question1_1").length > 0) {
         $("#fancy-checkbox-question1_1").change(function() {
