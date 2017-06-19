@@ -5,6 +5,7 @@ $.ajax({
   dataType: "json",
   success: function(json) {
     myJson = json;
+    console.log(myJson)
   }
 });
 
@@ -24,27 +25,29 @@ function getObjects(obj, key, val) {
 // Recursively loop through JSON file
 function recursiveLoop(obj) {
   for (var k in obj) {
-    var i = 0;
+    var counter = 0;
     if (obj[k].hasOwnProperty("name")) {
-      createDiv(obj[k], i);
+      createDiv(obj[k], counter);
       recursiveLoop(obj[k]);
     }
     if (obj[k].hasOwnProperty("requirements")) {
       recursiveLoop(obj[k].requirements);
       var child = obj[k].requirements;
-      createChildElement(obj[k], child, i);
+      createChildElement(obj[k], child, counter);
     }
-    if (obj[k].hasOwnProperty("alreadyReceiving")) {
-      recursiveLoop(obj[k].alreadyReceiving);
-      var child = obj[k].alreadyReceiving;
-      createNestedChildElement(obj[k], child);
+    if (obj[k].hasOwnProperty("approvedCountry")) {
+      recursiveLoop(obj[k].approvedCountry);
+      var child_obj = obj[k].approvedCountry;
+      createNestedPanelElement(obj[k], child_obj, counter)
     }
     if (typeof obj[k] == "object" && obj[k] !== null) {
       recursiveLoop(obj[k]);
     }
-    i++;
+    counter++;
   }
 }
+
+
 var parentCategory = "";
 // Create a new div for each business Rule
 function createDiv(obj, counter) {
@@ -98,7 +101,44 @@ function createNestedChildElement(obj, child, parent) {
       }
       var template = $('#requirementTpl').html();
       $(parent).append(Mustache.to_html(template, view_data));
-      removeAlreadyReceiving();
+      // removeAlreadyReceiving();
+    }
+  }
+}
+
+function createNestedPanelElement(obj, child, parent) {
+  var parentPanel = "panel" + parentCategory;
+  var parent = document.getElementById(parentPanel)
+  // Here we loop through a new object simply to extract the titles of the objects
+  var keyNames = Object.keys(obj)
+  // We assign them to new nested panels
+  for (var key in keyNames) {
+    console.log(keyNames[key])
+    var body_key = key+keyNames[key]
+    var view_data = {
+      title: keyNames[key],
+      key: key,
+      type: keyNames[key],
+      requirement_name_name: returnRequirementKey(key),
+      body_key: body_key
+    }
+
+    var template = $('#requirementsPanelTpl').html();
+    $(parent).append(Mustache.to_html(template, view_data));
+
+    for (var key in child) {
+      console.log(child)
+      if (child.hasOwnProperty(key)) {
+        var view_data = {
+          key: key,
+          requirement_value: returnRequirementKey(key),
+          requirement_name: child[key]
+        }
+        var template = $('#requirementTpl').html();
+        $("#"+body_key).append(Mustache.to_html(template, view_data));
+        // $(parent).append(Mustache.to_html(template, view_data));
+        // removeAlreadyReceiving();
+      }
     }
   }
 }

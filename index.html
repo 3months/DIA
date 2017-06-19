@@ -63,6 +63,23 @@
       </div>
     </script>
 
+    <script id="requirementsPanelTpl" type="text/template">
+      <div class='nested-benefit-panel-card' data-event-type="{{type}}">
+        <div class='panel panel-default' id="{{key}}">
+          <div class='panel-heading'>
+            <div class='panel-title'>
+              <button class="btn btn-primary" data-toggle='collapse' href='#{{title}}{{key}}'>
+                {{title}}
+              </button>
+            </div>
+          </div>
+          <div class='panel-body card-preview' id={{body_key}}>
+          </div>
+        </div>
+      </div>
+    </script>
+
+
     <script id="requirementsNumTpl" type="text/template">
       <p id="{{id}}">{{count}} requirements </p>
     </script>
