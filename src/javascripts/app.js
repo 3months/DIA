@@ -323,14 +323,12 @@ function askQuestion(requirementCount) {
       var divRow = $(document.createElement("div")).addClass("row");
       var h2 = $(document.createElement("h2")).text("First Question");
       divRow.append(h2.append());
-      var question1 =
-        '<div class="row"><h2> First Question <h2></div><div class="text-center" id="input"><h4>' +
-        returnRequirementKey(key) +
-        " (required in " +
-        question[key] +
-        " business rules)" +
-        '</h4><div class="row"><div class="col-lg-6 question1"><div class="[ form-group ]"><input type="checkbox" name="fancy-checkbox-question1_1" id="fancy-checkbox-question1_1" autocomplete="off" /><div class="[ btn-group ]"><label for="fancy-checkbox-question1_1" class="[ btn btn-default ]"><span class="[ glyphicon glyphicon-ok ]"></span><span> </span></label><label for="fancy-checkbox-question1_1" class="[ btn btn-default active ]">65 and over</label></div></div></div><div class="col-lg-6 question1_2"><div class="[ form-group ]"><input type="checkbox" name="fancy-checkbox-question1_2" id="fancy-checkbox-question1_2" autocomplete="off" /><div class="[ btn-group ]"><label for="fancy-checkbox-question1_2" class="[ btn btn-default ]"><span class="[ glyphicon glyphicon-ok ]"></span><span> </span></label><label for="fancy-checkbox-question1_2" class="[ btn btn-default active ]">under 65</label>';
-      $("#criteria1").html(question1);
+      var question_view = {
+        key: returnRequirementKey(key),
+        question_key: question[key]
+      }
+      var template = $('#questionTpl').html();
+      $("#criteria1").html(Mustache.to_html(template, question_view));
       console.log(key + ":" + question[key]);
       if ($("#fancy-checkbox-question1_1").length > 0) {
         $("#fancy-checkbox-question1_1").change(function() {
