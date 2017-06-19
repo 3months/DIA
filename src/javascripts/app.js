@@ -54,7 +54,7 @@ function createDiv(obj, counter) {
   var title = returnTitle(text);
   var type = category;
   $("#list").append(
-    "<div class='col-lg-3'><div class='panel panel-default' id=" +
+    "<div class='col-lg-3 regulation-container'><div class='panel panel-default' id=" +
       text +
       "><div class='panel-heading'>" +
       "<div class='row'><div class='col-lg-12'><div class='col-lg-6'><h2 class='panel-title'> <a data-toggle='collapse' href='#" +
@@ -189,14 +189,7 @@ var lifeEventClicked = function() {
       }
     });
   } else {
-    $("button:contains('" + eventType + "')")
-      .parent()
-      .parent()
-      .parent()
-      .parent()
-      .parent()
-      .parent()
-      .remove();
+    $("button:contains('" + eventType + "')").closest('.regulation-container').remove();
     askQuestion(returnTopRequirement());
   }
 };
