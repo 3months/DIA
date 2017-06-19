@@ -167,5 +167,196 @@
         }
       }
     ]
-  }]
+  },{
+    "title": "ImmigrationServices",
+    "businessRules": [
+      {"name": "ParentOrGrandparentVisitorVisa",
+        "category": "immigration",
+        "requirements": {
+          "ProofOfIdentity?": "true",
+          "InGoodHealth?": "true",
+          "OfGoodCharachter?": "true",
+          "IntendToMeetVisaConditions?": "true",
+          "SponsorIsChildOrParent?": "true",
+          "SponsorIsResidentOrCitizen?": "true",
+          "SponsorIsRelative?": "true",
+          "CoverOwnHealthcareCosts?": "true"
+        }
+      },{
+        "name": "ParentRetirementResidentVisa",
+        "category": "immigration",
+        "requirements": {
+          "proofOfIdentity?": "true"
+        }
+      },{
+        "name": "Pets",
+        "category": "immigration",
+        "requirements": {
+          "approvedCountry": {
+            "permitToImport?": "true"
+          },
+          "arrivingFromAustralia": {
+            "postArrivalInspection": "true"
+          },
+          "otherCountry": {
+            "petSpent6MonthsInApprovedCountry?": "true",
+            "vetCertificateProvided?": "true"
+          }
+        }
+      }
+    ]
+  },{
+    "title": "JusticeServices",
+    "businessRules": [
+      {"name": "LegallyAppointOrRemoveGuardian",
+        "category": "childCare",
+        "requirements": {
+          "CompleteGuardianshipForm?": "true",
+          "CompleteDeclarationOfParentOfChildForm?": "true",
+          "IncludeCopyOfCriminalRecord?": "true",
+          "FileApplicationInPerson?": "true"
+        }
+      }
+    ]
+  },{
+    "title": "VeteransAffairs",
+    "businessRules": [
+      {"name": "VeteransIndependenceProgramme",
+        "category": "retirement",
+        "requirements": {
+          "BeingInMilitaryService": {
+            "Before1April1974?": "true",
+            "QualifyingOperationService": "true"
+          },
+          "RequireSupportToStayIndependent?": "true",
+          "CurrentlyLivingAtHome?": "true"
+        }
+      },{"name": "HearingAidAndAppliancesSupport",
+        "category": "retirement",
+        "requirements": {
+          "ServiceRelatedHearingLoss?": "true",
+          "ReceivingIncomeCompensationDueToHearingLoss?": "true"
+        }
+      },{"name": "Treatment",
+        "category": "retirement",
+        "requirements": {
+          "InjuryOrIllnessRelatedToQualifyingService": {
+            "HasTreatmentCard?": "true",
+            "DisablementPension?": "true",
+            "WarDisablementPension?": "true",
+            "WeeklyCompensation?": "true",
+            "PermanentImpairmentCompensation?": "true"
+          },
+          "BeingInMilitaryService": {
+            "Before1April1974?": "true",
+            "QualifyingOperationService": "true"
+          }
+        }
+      },{"name": "RetirementLumpSum",
+        "category": "retirement",
+        "requirements": {
+          "BeingInMilitaryService": {
+            "Before1April1974?": "true",
+            "QualifyingOperationService": "true"
+          },
+          "Turned65After6December2014?": "true",
+          "BeforeTurning65": {
+            "HadVeteransIncomeSupportForAtLeast10YearsVia": {
+              "VeteransPension": "true",
+              "WeeklyCompensation": "true",
+              "WeeklyIncomeCompensation": "true",
+              "EconomicPension": "true",
+              "WarServicePension": "true",
+              "WarVeteransAllowance": "true"
+            }
+          },
+          "WhenTurning65": {
+            "AssetsBelowAssetTestThreshold": "true"
+          }
+        }
+      }
+    ]
+  },{
+    "title": "HealthServices",
+    "businessRules": [
+      {"name": "HomeSupportServices",
+        "category": "retirement",
+        "requirements": {
+          "NeedsAssessmentCompleted?": "true"
+        }
+      },
+      {"name": "SupportServicesForOlderPeople",
+        "category": "retirement",
+        "requirements": {
+          "citizenOrResident?": "true",
+          "eligableForPublicHealthOrDisabilityServices?": "true",
+          "NeedsAssessmentCompleted?": "true"
+        }
+      }
+    ]
+  },{
+    "title": "InlandRevenueDepartment",
+    "businessRules": [
+      {"name": "WorkingForFamiliesTaxCredits",
+        "category": "hardship",
+        "requirements": {
+          "dependentChild?": {
+            "aged15OrYounger": {
+              "low/MediumIncomeBracket?": "true",
+              "numberOfChildren": "undefined"
+            },
+            "aged16to17": {
+              "financiallyIndependent?": "false",
+              "low/MediumIncomeBracket?": "true",
+              "numberOfChildren": "undefined"
+            },
+            "aged18": {
+              "attendingSecondaryOrTertiaryInstitution?": "true",
+              "financiallyIndependent?": "false",
+              "low/MediumIncomeBracket?": "true",
+              "numberOfChildren": "undefined"
+            },
+            "notInMarriageCivilUnionorDeFactoRelationship": {
+              "low/MediumIncomeBracket?": "true",
+              "numberOfChildren": "undefined"
+            }
+          },
+        "principalCaregiver?" : "true",
+        "aged16orOver?": "true",
+        "applicantOrChildMeetsResidencyRequirement?" : "true"
+        }
+      },
+      {"name": "GettingAnIrdNumber",
+        "category": "immigration",
+        "requirements": {
+          "alreadyInNZ?": {
+            "migrantOrVisaHolder": {
+              "australianPassportHolder?": {
+                "applyOnline": "true"
+              },
+              "residentVisaHolder": {
+                "applyOnline": "true"
+              },
+              "studentOrWorkVisa": {
+                "havepassportDetails?": "true",
+                "haveMostRecentOverseasTaxNumber?": "true",
+                "haveImmigrationNZApplicationNumber?": "true",
+                "haveNzBankAccount?": "true"
+              },
+              "RseVisaHolder": {
+                "willBeDoneForApplicantByServices": "true"
+              }
+            },
+            "nzCitizen":{
+              "haveCompletedIrdApplicationForm?": "true"
+            }
+          },
+          "notInNzYet?": {
+            "haveCompletedOffshoreForm?": "true"
+          }
+        }
+      }
+    ]
+    }
+  ]
 }
