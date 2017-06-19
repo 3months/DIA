@@ -53,46 +53,35 @@ function createDiv(obj, counter) {
   parentCategory = text + counter;
   var title = returnTitle(text);
   var type = category;
-  $("#list").append(
-    "<div class='col-lg-3 regulation-container'><div class='panel panel-default' id=" +
-      text +
-      "><div class='panel-heading'>" +
-      "<div class='row'><div class='col-lg-12'><div class='col-lg-6'><h2 class='panel-title'> <a data-toggle='collapse' href='#" +
-      text +
-      counter +
-      "'>" +
-      title +
-      "</a></h2></div><div class='col-lg-6'><button class='btn btn-info'>" +
-      type +
-      "</button></div></div></div></div></div>"
-  );
+  var list_view = {
+    text: text,
+    counter: counter,
+    title: title,
+    type: type
+  }
+  var template = $('#listTpl').html();
+  $("#list").append(Mustache.to_html(template, list_view));
 }
 
 // Create a new child element for nested properties
 function createChildElement(obj, child, counter) {
   var parent = document.getElementById(obj.name);
-  $(parent).append(
-    "<div id=" +
-      obj.name +
-      counter +
-      " class='panel-collapse collapse'><div class='panel-body text-left' id='panel" +
-      obj.name +
-      counter +
-      "'></div></div></div>"
-  );
+  var benefit_panel = {
+    id: obj.name + counter
+  }
+  var template = $('#benefitPanelTpl').html();
+  $(parent).append(Mustache.to_html(template, benefit_panel));
   for (var key in child) {
     var panel_body_id = "panel" + obj.name + counter;
     var panel_body = document.getElementById(panel_body_id);
     if (child.hasOwnProperty(key)) {
-      var text =
-        "<p class='requirement' id=" +
-        key +
-        ">" +
-        returnRequirementKey(key) +
-        " :<strong>" +
-        child[key] +
-        "</strong></p>";
-      $(panel_body).append(text);
+      var requirement = {
+        key: key,
+        requirementKey: returnRequirementKey(key),
+        child: child[key]
+      }
+      var template = $('#requirementTpl').html();
+      $(panel_body).append(Mustache.to_html(template, requirement));
     }
   }
 }
@@ -101,15 +90,16 @@ function createNestedChildElement(obj, child, parent) {
   var parentPanel = "panel" + parentCategory;
   var parent = document.getElementById(parentPanel);
   for (var key in child) {
-    if (child.hasOwnProperty(key))
-      var text =
-        "<p>" +
-        returnRequirementKey(key) +
-        " :<strong>" +
-        child[key] +
-        "</strong></p>";
-    $(parent).append(text);
-    removeAlreadyReceiving();
+    if (child.hasOwnProperty(key)) {
+      var requirement = {
+        key: key,
+        requirementKey: returnRequirementKey(key),
+        child: child[key]
+      }
+      var template = $('#requirementTpl').html();
+      $(parent).append(Mustache.to_html(template, requirement));
+      removeAlreadyReceiving();
+    }
   }
 }
 
@@ -230,14 +220,12 @@ function askQuestion(requirementCount) {
       var divRow = $(document.createElement("div")).addClass("row");
       var h2 = $(document.createElement("h2")).text("First Question");
       divRow.append(h2.append());
-      var question1 =
-        '<div class="row"><h2> First Question <h2></div><div class="text-center" id="input"><h4>' +
-        returnRequirementKey(key) +
-        " (required in " +
-        question[key] +
-        " business rules)" +
-        '</h4><div class="row"><div class="col-lg-6 question1"><div class="[ form-group ]"><input type="checkbox" name="fancy-checkbox-question1_1" id="fancy-checkbox-question1_1" autocomplete="off" /><div class="[ btn-group ]"><label for="fancy-checkbox-question1_1" class="[ btn btn-default ]"><span class="[ glyphicon glyphicon-ok ]"></span><span> </span></label><label for="fancy-checkbox-question1_1" class="[ btn btn-default active ]">65 and over</label></div></div></div><div class="col-lg-6 question1_2"><div class="[ form-group ]"><input type="checkbox" name="fancy-checkbox-question1_2" id="fancy-checkbox-question1_2" autocomplete="off" /><div class="[ btn-group ]"><label for="fancy-checkbox-question1_2" class="[ btn btn-default ]"><span class="[ glyphicon glyphicon-ok ]"></span><span> </span></label><label for="fancy-checkbox-question1_2" class="[ btn btn-default active ]">under 65</label>';
-      $("#criteria1").html(question1);
+      var question_view = {
+        key: returnRequirementKey(key),
+        question_key: question[key]
+      }
+      var template = $('#questionTpl').html();
+      $("#criteria1").html(Mustache.to_html(template, question_view));
       console.log(key + ":" + question[key]);
       if ($("#fancy-checkbox-question1_1").length > 0) {
         $("#fancy-checkbox-question1_1").change(function() {
