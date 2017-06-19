@@ -92,7 +92,12 @@ function createChildElement(obj, child, counter) {
         " :<strong>" +
         child[key] +
         "</strong></p>";
-      $(panel_body).append(text);
+      var requirement = {
+        key: key,
+        requirementKey: returnRequirementKey(key)
+      }
+      var template = $('#requirementTpl').html();
+      $(panel_body).append(Mustache.to_html(template, requirement));
     }
   }
 }
