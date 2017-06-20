@@ -87,14 +87,16 @@
     </script>
 
     <script id="benefitPanelTpl" type="text/template">
-        <div class='panel-collapse requirement'>
-          <p>{{text}}</p>
-          <div class='panel-body text-left' id='{{id}}'></div>
+        <div class='panel panel-default panel-collapse requirement text-left'>
+          <div class='panel-heading'>
+            <button class="btn btn-primary" data-toggle="collapse" href="#{{id}}">{{requirement_name}}</button>
+          </div>
+          <div class='panel-body panel-collapse collapse' id='{{id}}'></div>
         </div>
     </script>
 
     <script id="requirementTpl" type="text/template">
-      <p class="requirement id="{{id}}">{{requirement_name}} :<strong>{{requirement_value}}</strong></p>
+      <p class="requirement">{{requirement_name}} :<strong>{{requirement_value}}</strong></p>
     </script>
 
   </head>

@@ -46,7 +46,7 @@ function createChildren(requirement_name, requirement_value, rule_panel) {
   if (typeof requirement_value == "object" && requirement_value !== null) {
     for (var child in requirement_value) {
       if (requirement_value.hasOwnProperty(child)) {
-        createChildren(child, requirement_value[child], rule_panel + requirement_name);
+        createChildren(child, requirement_value[child], getValidId(rule_panel + requirement_name));
       }
     }
   }
@@ -65,6 +65,10 @@ function createRulePanel(rule, id) {
   $("#list").append(Mustache.to_html(template, view_data));
 }
 
+function getValidId(id) {
+  return id.replace(/\?/, '');
+}
+
 // Create a new panel for each requirement
 function createRequirementPanel(requirement_name, requirement_value, rule_id) {
   var value = '';
@@ -72,7 +76,7 @@ function createRequirementPanel(requirement_name, requirement_value, rule_id) {
 
   if (typeof requirement_value !== "object" && requirement_value !== null) {
     var view_data = {
-      requirement_name: requirement_name,
+      requirement_name: returnRequirementKey(requirement_name),
       requirement_value: requirement_value,
     }
     var template = $('#requirementTpl').html();
@@ -80,8 +84,8 @@ function createRequirementPanel(requirement_name, requirement_value, rule_id) {
     value = requirement_value
   } else {
     var view_data = {
-      id: rule_id + requirement_name,
-      text: requirement_name,
+      id: getValidId(rule_id + requirement_name),
+      requirement_name: returnRequirementKey(requirement_name),
     }
     var template = $('#benefitPanelTpl').html();
     $(parent_panel).append(Mustache.to_html(template, view_data));
