@@ -240,7 +240,7 @@
       },{"name": "Treatment",
         "category": "retirement",
         "requirements": {
-          "InjuryOrIllnessRelatedToQualifyingService": {
+          "ConditionRelatedToQualifyingService": {
             "HasTreatmentCard?": "true",
             "DisablementPension?": "true",
             "WarDisablementPension?": "true",
@@ -255,13 +255,13 @@
       },{"name": "RetirementLumpSum",
         "category": "retirement",
         "requirements": {
+          "65AfterDec2014?": "true",
           "BeingInMilitaryService": {
             "Before1April1974?": "true",
             "QualifyingOperationService": "true"
           },
-          "Turned65AfterDec2014?": "true",
           "BeforeTurning65": {
-            "HadVeteransIncomeSupportForAtLeast10YearsVia": {
+            "VeteransIncomeSupportFor10YearsVia": {
               "VeteransPension": "true",
               "WeeklyCompensation": "true",
               "WeeklyIncomeCompensation": "true",

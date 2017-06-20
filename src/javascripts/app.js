@@ -35,17 +35,18 @@ function recursiveLoop(obj) {
       var child = obj[k].requirements;
       createChildElement(obj[k], child, counter);
     }
+    // Everything below this line relates to isolated sub nodes in JSON
+    // Todo fix this somehow
     if (obj[k].hasOwnProperty("approvedCountry")) {
       recursiveLoop(obj[k].approvedCountry);
       var child_obj = obj[k].approvedCountry;
       createNestedPanelElement(obj[k], child_obj, counter)
     }
     if (obj[k].hasOwnProperty("alreadyReceiving")) {
-      recursiveLoop(obj[k].approvedCountry);
-      var child_obj = obj[k].approvedCountry;
+      recursiveLoop(obj[k].alreadyReceiving);
+      var child_obj = obj[k].alreadyReceiving;
       createNestedPanelElement(obj[k], child_obj, counter)
     }
-
     if (obj[k].hasOwnProperty("alreadyInNZ?")) {
       recursiveLoop(obj[k].alreadyInNZ);
       var child_obj = obj[k].alreadyInNZ;
@@ -61,21 +62,17 @@ function recursiveLoop(obj) {
       var child_obj = obj[k].BeingInMilitaryService;
       createNestedPanelElement(obj[k], child_obj, counter)
     }
-    if (obj[k].hasOwnProperty("InjuryOrIllnessRelatedToQualifyingService")) {
-      recursiveLoop(obj[k].InjuryOrIllnessRelatedToQualifyingService);
-      var child_obj = obj[k].InjuryOrIllnessRelatedToQualifyingService;
-      createNestedPanelElement(obj[k], child_obj, counter)
-    }
-    if (obj[k].hasOwnProperty("BeforeTurning65")) {
+    if (obj[k].hasOwnProperty("VeteransIncomeSupportFor10YearsVia")) {
       recursiveLoop(obj[k].BeforeTurning65);
       var child_obj = obj[k].BeforeTurning65;
       createNestedPanelElement(obj[k], child_obj, counter)
     }
-    if (obj[k].hasOwnProperty("dependentChild?")) {
-      recursiveLoop(obj[k].dependentChild);
-      var child_obj = obj[k].dependentChild;
+    if (obj[k].hasOwnProperty("aged15OrYounger")) {
+      recursiveLoop(obj[k].ConditionRelatedToQualifyingService);
+      var child_obj = obj[k].ConditionRelatedToQualifyingService;
       createNestedPanelElement(obj[k], child_obj, counter)
     }
+
 
     if (typeof obj[k] == "object" && obj[k] !== null) {
       recursiveLoop(obj[k]);
@@ -152,7 +149,7 @@ function createNestedPanelElement(obj, child, parent) {
   for (var key in keyNames) {
     var body_key = key+keyNames[key]
     var view_data = {
-      title: keyNames[key],
+      title: returnRequirementKey(keyNames[key]),
       key: key,
       type: keyNames[key],
       requirement_name_name: returnRequirementKey(key),
@@ -168,6 +165,7 @@ function createNestedPanelElement(obj, child, parent) {
       console.log('value :' + title[key])
       var view_data = {
         key: key,
+        id: title+key,
         requirement_name: returnRequirementKey(key),
         requirement_value: title[key]
       }
@@ -217,6 +215,57 @@ function returnRequirementKey(text) {
       return "Do you have ongoing costs that you cannot currently cover?"
     case "SocialHousingBenefit?":
       return "Are you currently in receivership of a housing benefit?"
+
+    // Parent or Grandparent Visitor Visa
+    case "ProofOfIdentity?":
+      return "Applicant has supplied proof of identity?"
+    case "inGoodHealth?":
+      return "Applicant is in good health?"
+    case "OfGoodCharachter?":
+      return "Applicant is of good charachter?"
+    case "IntendToMeetVisaConditions?":
+      return "Applicant intends to meet visa conditions?"
+    case "SponsorIsChildOrParent?":
+      return "Applicant sponsor is a child or Parent?"
+    case "SponsorIsResidentOrCitizen?":
+      return "Applicant sponsor is a resident or citizen of NZ?"
+    case "SponsorIsRelative?":
+      return "Applicant sponsor is a relative?"
+    case "CoverOwnHealthcareCosts?":
+      return "Applicant can afford to cover their own healthcare costs?"
+    case "proofOfIdentity?":
+      return "Applicant has supplied proof of identity?"
+
+    // Immigration Pet visa
+    case "approvedCountry":
+      return "If pet is arriving from an approved country"
+    case "permitToImport?":
+      return "must have permit to import?"
+    case "arrivingFromAustralia":
+      return "If pet is arriving from Australia"
+    case "postArrivalInspection":
+      return "Must complete post arrival inspection"
+    case "otherCountry":
+      return "Other countries"
+    case "petSpent6MonthsInApprovedCountry?":
+      return "Pet must spend 6 months in an approved country?"
+    case "vetCertificateProvided":
+      return "Vet certicate provided?"
+
+    // GettingAnIrdNumber
+    case "alreadyInNZ?":
+      return "Already in New Zealand?"
+    case "notInNzYet?":
+      return "Not yet in New Zealand?"
+    case "migrantOrVisaHolder":
+      return "Migrant or Visa holder?"
+    case "nzCitizen":
+      return "A New Zealand Citizen?"
+    case "haveCompletedOffshoreForm?":
+      return "Have completed offshore form?"
+    case "migrantOrVisaHolder":
+      return "Migrant or Visa holder?"
+
     default:
       return text;
   }
