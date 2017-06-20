@@ -200,7 +200,8 @@ var lifeEventClicked = function() {
     $(".biz-rule-card").each(function showRequirementCount(i, card) {
       var view_data = {
         id: $(card).attr('id'),
-        count: $(card).find('.requirement').length
+        // Count top level requirements
+        count: $(card).find('.requirement-panel > .requirement').length
       }
       var template = $('#requirementsNumTpl').html();
       $(card).find('.card-preview').append(Mustache.to_html(template, view_data));
