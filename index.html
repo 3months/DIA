@@ -52,12 +52,14 @@
         <div class='panel panel-default' id="{{text}}">
           <div class='panel-heading'>
             <div class='panel-title'>
-              <button class="btn btn-primary" data-toggle='collapse' href='#{{text}}{{counter}}'>
+              <button class="btn btn-primary" data-toggle='collapse' href='#{{id}}'>
                 {{title}}
               </button>
             </div>
           </div>
           <div class='panel-body card-preview'>
+          </div>
+          <div class='panel-body requirement-panel' id={{id}}>
           </div>
         </div>
       </div class='card-preview'>
@@ -85,15 +87,14 @@
     </script>
 
     <script id="benefitPanelTpl" type="text/template">
-        <div id="{{id}}" class='panel-collapse collapse'>
-          <div class='panel-body text-left' id='panel{{id}}'></div>
+        <div class='panel-collapse'>
+          <p>{{text}}</p>
+          <div class='panel-body text-left' id='{{id}}'></div>
         </div>
     </script>
 
     <script id="requirementTpl" type="text/template">
-      <p class='requirement' id="{{id}}">
-        {{requirement_name}} :<strong>{{requirement_value}}</strong>
-      </p>
+      <p class='requirement' id="{{id}}">{{requirement_name}} :<strong>{{requirement_value}}</strong></p>
     </script>
 
   </head>

@@ -24,154 +24,67 @@ function getObjects(obj, key, val) {
 
 // Recursively loop through JSON file
 function recursiveLoop(obj) {
-  for (var k in obj) {
-    var counter = 0;
-    if (obj[k].hasOwnProperty("name")) {
-      createDiv(obj[k], counter);
-      recursiveLoop(obj[k]);
-    }
-    if (obj[k].hasOwnProperty("requirements")) {
-      recursiveLoop(obj[k].requirements);
-      var child = obj[k].requirements;
-      createChildElement(obj[k], child, counter);
-    }
-    // Everything below this line relates to isolated sub nodes in JSON
-    // Todo fix this somehow
-    if (obj[k].hasOwnProperty("approvedCountry")) {
-      recursiveLoop(obj[k].approvedCountry);
-      var child_obj = obj[k].approvedCountry;
-      createNestedPanelElement(obj[k], child_obj, counter)
-    }
-    if (obj[k].hasOwnProperty("alreadyReceiving")) {
-      recursiveLoop(obj[k].alreadyReceiving);
-      var child_obj = obj[k].alreadyReceiving;
-      createNestedPanelElement(obj[k], child_obj, counter)
-    }
-    if (obj[k].hasOwnProperty("alreadyInNZ?")) {
-      recursiveLoop(obj[k].alreadyInNZ);
-      var child_obj = obj[k].alreadyInNZ;
-      createNestedPanelElement(obj[k], child_obj, counter)
-    }
-    if (obj[k].hasOwnProperty("notInNzYet?")) {
-      recursiveLoop(obj[k].notInNzYet);
-      var child_obj = obj[k].notInNzYet;
-      createNestedPanelElement(obj[k], child_obj, counter)
-    }
-    if (obj[k].hasOwnProperty("BeingInMilitaryService")) {
-      recursiveLoop(obj[k].BeingInMilitaryService);
-      var child_obj = obj[k].BeingInMilitaryService;
-      createNestedPanelElement(obj[k], child_obj, counter)
-    }
-    if (obj[k].hasOwnProperty("VeteransIncomeSupportFor10YearsVia")) {
-      recursiveLoop(obj[k].BeforeTurning65);
-      var child_obj = obj[k].BeforeTurning65;
-      createNestedPanelElement(obj[k], child_obj, counter)
-    }
-    if (obj[k].hasOwnProperty("aged15OrYounger")) {
-      recursiveLoop(obj[k].ConditionRelatedToQualifyingService);
-      var child_obj = obj[k].ConditionRelatedToQualifyingService;
-      createNestedPanelElement(obj[k], child_obj, counter)
-    }
+  var counter = 0;
+  for (var rule_num in obj) {
+    business_rule = obj[rule_num];
 
+    var rule_id = business_rule.name + counter;
+    createRulePanel(business_rule, rule_id);
 
-    if (typeof obj[k] == "object" && obj[k] !== null) {
-      recursiveLoop(obj[k]);
+    for (var requirement_name in business_rule['requirements']) {
+      if (business_rule['requirements'].hasOwnProperty(requirement_name)) {
+        var requirement = business_rule['requirements'][requirement_name];
+        createChildren(requirement_name, requirement, rule_id);
+      }
     }
     counter++;
   }
 }
 
-var parentCategory = "";
+function createChildren(requirement_name, requirement_value, rule_panel) {
+  createRequirementPanel(requirement_name, requirement_value, rule_panel);
+  if (typeof requirement_value == "object" && requirement_value !== null) {
+    for (var child in requirement_value) {
+      if (requirement_value.hasOwnProperty(child)) {
+        createChildren(child, requirement_value[child], rule_panel + requirement_name);
+      }
+    }
+  }
+}
+
 // Create a new div for each business Rule
-function createDiv(obj, counter) {
-  text = obj.name;
-  category = obj.category;
-  parentCategory = text + counter;
-  var title = returnTitle(text);
-  var type = category;
+function createRulePanel(rule, id) {
+  text = rule.name;
   var view_data = {
     text: text,
-    counter: counter,
-    title: title,
-    type: type
+    id: id,
+    title: returnTitle(text),
+    type: rule.category
   }
   var template = $('#bizRuleCardTpl').html();
   $("#list").append(Mustache.to_html(template, view_data));
 }
 
-// Create a new child element for nested properties
-function createChildElement(obj, child, counter) {
-  var parent = document.getElementById(obj.name);
-  var view_data = {
-    id: obj.name + counter
-  }
-  var template = $('#benefitPanelTpl').html();
-  $(parent).append(Mustache.to_html(template, view_data));
-  for (var key in child) {
-    var panel_body_id = "panel" + obj.name + counter;
-    var panel_body = document.getElementById(panel_body_id);
-    if (child.hasOwnProperty(key)) {
-      var view_data = {
-        key: key,
-        requirement_name: returnRequirementKey(key),
-        requirement_value: child[key]
-      }
-      var template = $('#requirementTpl').html();
-      $(panel_body).append(Mustache.to_html(template, view_data));
-    }
-  }
-}
+// Create a new panel for each requirement
+function createRequirementPanel(requirement_name, requirement_value, rule_id) {
+  var value = '';
+  var parent_panel = document.getElementById(rule_id);
 
-function createNestedChildElement(obj, child, parent) {
-  var parentPanel = "panel" + parentCategory;
-  var parent = document.getElementById(parentPanel);
-  for (var key in child) {
-    if (child.hasOwnProperty(key)) {
-      var view_data = {
-        key: key,
-        requirement_value: returnRequirementKey(key),
-        requirement_name: child[key]
-      }
-      var template = $('#requirementTpl').html();
-      $(parent).append(Mustache.to_html(template, view_data));
-      // removeAlreadyReceiving();
-    }
-  }
-}
-
-function createNestedPanelElement(obj, child, parent) {
-  var parentPanel = "panel" + parentCategory;
-  var parent = document.getElementById(parentPanel)
-  // console.log(obj)
-  // Here we loop through a new object simply to extract the titles of the objects
-  var keyNames = Object.keys(obj)
-  // We assign them to new nested panels
-  for (var key in keyNames) {
-    var body_key = key+keyNames[key]
+  if (typeof requirement_value !== "object" && requirement_value !== null) {
     var view_data = {
-      title: returnRequirementKey(keyNames[key]),
-      key: key,
-      type: keyNames[key],
-      requirement_name_name: returnRequirementKey(key),
-      body_key: body_key
+      requirement_name: requirement_name,
+      requirement_value: requirement_value,
     }
-    var template = $('#requirementsPanelTpl').html();
-    // We create a nested panel for each object
-    $(parent).append(Mustache.to_html(template, view_data));
-    // We loop through content inside keyNames object
-    var title = obj[keyNames[key]]
-    for (var key in title) {
-      console.log('name :' + returnRequirementKey(key))
-      console.log('value :' + title[key])
-      var view_data = {
-        key: key,
-        id: title+key,
-        requirement_name: returnRequirementKey(key),
-        requirement_value: title[key]
-      }
-      var template = $('#requirementTpl').html();
-      $("div").find("[data-panel-type='" + body_key + "']").append(Mustache.to_html(template, view_data));
+    var template = $('#requirementTpl').html();
+    $(parent_panel).append(Mustache.to_html(template, view_data));
+    value = requirement_value
+  } else {
+    var view_data = {
+      id: rule_id + requirement_name,
+      text: requirement_name,
     }
+    var template = $('#benefitPanelTpl').html();
+    $(parent_panel).append(Mustache.to_html(template, view_data));
   }
 }
 
