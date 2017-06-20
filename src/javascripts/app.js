@@ -1,3 +1,4 @@
+var $ = require("jquery");
 require('bootstrap-loader');
 require('../../src/stylesheets/styles.css');
 
