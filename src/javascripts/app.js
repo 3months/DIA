@@ -1,3 +1,6 @@
+require('bootstrap-loader');
+require('../../src/stylesheets/styles.css');
+
 // Load our JSON file
 var myJson = {};
 $.ajax({
@@ -49,7 +52,7 @@ function recursiveLoop(obj) {
 var parentCategory = "";
 // Create a new div for each business Rule
 function createDiv(obj, counter) {
-  text = obj.name;
+  var text = obj.name;
   category = obj.category;
   parentCategory = text + counter;
   var title = returnTitle(text);
