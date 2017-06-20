@@ -5,11 +5,16 @@
   "main": "app.js",
   "scripts": {
     "test": "test",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "webpack"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "lodash": "^4.17.4",
     "mustache": "^2.3.0"
+  },
+  "devDependencies": {
+    "webpack": "^3.0.0"
   }
 }
