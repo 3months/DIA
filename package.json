@@ -6,7 +6,7 @@
   "scripts": {
     "test": "test",
     "start": "node server.js",
-    "build": "webpack"
+    "build": "webpack-dev-server --progress --colors --watch --content-base ./dist --open"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +15,7 @@
     "mustache": "^2.3.0"
   },
   "devDependencies": {
-    "webpack": "^3.0.0"
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.5.0"
   }
 }

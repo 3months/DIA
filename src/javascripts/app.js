@@ -5,6 +5,7 @@ $.ajax({
   dataType: "json",
   success: function(json) {
     myJson = json;
+    console.log(myJson)
   }
 });
 
