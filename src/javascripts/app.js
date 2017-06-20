@@ -107,7 +107,7 @@ function returnTitle(text) {
 function returnRequirementKey(text) {
   switch (text) {
     case "applicantMinimumAge":
-      return "Minimum age of applicant";
+      return "How old are you?";
     case "yearsInNzSince20":
       return "Years applicant should have spent in NZ since turning 20";
     case "yearsInNzSince50":
@@ -252,9 +252,10 @@ function askQuestion(requirementCount) {
       var divRow = $(document.createElement("div")).addClass("row");
       var h2 = $(document.createElement("h2")).text("First Question");
       divRow.append(h2.append());
+      console.log(question);
       var view_data = {
         key: returnRequirementKey(key),
-        question_key: question[key]
+        num_requirements: question[key]
       }
       var template = $('#questionTpl').html();
       $("#criteria1").html(Mustache.to_html(template, view_data));
