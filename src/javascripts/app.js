@@ -5,6 +5,7 @@ $.ajax({
   dataType: "json",
   success: function(json) {
     myJson = json;
+    console.log(myJson)
   }
 });
 
@@ -23,82 +24,71 @@ function getObjects(obj, key, val) {
 
 // Recursively loop through JSON file
 function recursiveLoop(obj) {
-  for (var k in obj) {
-    var i = 0;
-    if (obj[k].hasOwnProperty("name")) {
-      createDiv(obj[k], i);
-      recursiveLoop(obj[k]);
+  var counter = 0;
+  for (var rule_num in obj) {
+    business_rule = obj[rule_num];
+
+    var rule_id = business_rule.name + counter;
+    createRulePanel(business_rule, rule_id);
+
+    for (var requirement_name in business_rule['requirements']) {
+      if (business_rule['requirements'].hasOwnProperty(requirement_name)) {
+        var requirement = business_rule['requirements'][requirement_name];
+        createChildren(requirement_name, requirement, rule_id);
+      }
     }
-    if (obj[k].hasOwnProperty("requirements")) {
-      recursiveLoop(obj[k].requirements);
-      var child = obj[k].requirements;
-      createChildElement(obj[k], child, i);
-    }
-    if (obj[k].hasOwnProperty("alreadyReceiving")) {
-      recursiveLoop(obj[k].alreadyReceiving);
-      var child = obj[k].alreadyReceiving;
-      createNestedChildElement(obj[k], child);
-    }
-    if (typeof obj[k] == "object" && obj[k] !== null) {
-      recursiveLoop(obj[k]);
-    }
-    i++;
+    counter++;
   }
 }
-var parentCategory = "";
+
+function createChildren(requirement_name, requirement_value, rule_panel) {
+  createRequirementPanel(requirement_name, requirement_value, rule_panel);
+  if (typeof requirement_value == "object" && requirement_value !== null) {
+    for (var child in requirement_value) {
+      if (requirement_value.hasOwnProperty(child)) {
+        createChildren(child, requirement_value[child], getValidId(rule_panel + requirement_name));
+      }
+    }
+  }
+}
+
 // Create a new div for each business Rule
-function createDiv(obj, counter) {
-  text = obj.name;
-  category = obj.category;
-  parentCategory = text + counter;
-  var title = returnTitle(text);
+function createRulePanel(rule, id) {
+  text = rule.name;
   var view_data = {
     text: text,
-    counter: counter,
-    title: title,
-    type: category
+    id: id,
+    title: returnTitle(text),
+    type: rule.category
   }
   var template = $('#bizRuleCardTpl').html();
   $("#list").append(Mustache.to_html(template, view_data));
 }
 
-// Create a new child element for nested properties
-function createChildElement(obj, child, counter) {
-  var parent = document.getElementById(obj.name);
-  var view_data = {
-    id: obj.name + counter
-  }
-  var template = $('#benefitPanelTpl').html();
-  $(parent).append(Mustache.to_html(template, view_data));
-  for (var key in child) {
-    var panel_body_id = "panel" + obj.name + counter;
-    var panel_body = document.getElementById(panel_body_id);
-    if (child.hasOwnProperty(key)) {
-      var view_data = {
-        id: key,
-        requirement_name: returnRequirementKey(key),
-        requirement_value: child[key]
-      }
-      var template = $('#requirementTpl').html();
-      $(panel_body).append(Mustache.to_html(template, view_data));
-    }
-  }
+function getValidId(id) {
+  return id.replace(/\?/, '');
 }
 
-function createNestedChildElement(obj, child, parent) {
-  var parentPanel = "panel" + parentCategory;
-  var parent = document.getElementById(parentPanel);
-  for (var key in child) {
-    if (child.hasOwnProperty(key)) {
-      var view_data = {
-        id: key,
-        requirement_value: returnRequirementKey(key),
-        requirement_name: child[key]
-      }
-      var template = $('#requirementTpl').html();
-      $(parent).append(Mustache.to_html(template, view_data));
-      removeAlreadyReceiving();
+// Create a new panel for each requirement
+function createRequirementPanel(requirement_name, requirement_value, rule_id) {
+  var value = '';
+  var parent_panel = document.getElementById(rule_id);
+
+  if (typeof requirement_value !== "object" && requirement_value !== null) {
+    var view_data = {
+      requirement_name: returnRequirementKey(requirement_name),
+      requirement_value: requirement_value,
     }
+    var template = $('#requirementTpl').html();
+    $(parent_panel).append(Mustache.to_html(template, view_data));
+    value = requirement_value
+  } else {
+    var view_data = {
+      id: getValidId(rule_id + requirement_name),
+      requirement_name: returnRequirementKey(requirement_name),
+    }
+    var template = $('#benefitPanelTpl').html();
+    $(parent_panel).append(Mustache.to_html(template, view_data));
   }
 }
 
@@ -142,6 +132,57 @@ function returnRequirementKey(text) {
       return "Do you have ongoing costs that you cannot currently cover?"
     case "SocialHousingBenefit?":
       return "Are you currently in receivership of a housing benefit?"
+
+    // Parent or Grandparent Visitor Visa
+    case "ProofOfIdentity?":
+      return "Applicant has supplied proof of identity?"
+    case "inGoodHealth?":
+      return "Applicant is in good health?"
+    case "OfGoodCharachter?":
+      return "Applicant is of good charachter?"
+    case "IntendToMeetVisaConditions?":
+      return "Applicant intends to meet visa conditions?"
+    case "SponsorIsChildOrParent?":
+      return "Applicant sponsor is a child or Parent?"
+    case "SponsorIsResidentOrCitizen?":
+      return "Applicant sponsor is a resident or citizen of NZ?"
+    case "SponsorIsRelative?":
+      return "Applicant sponsor is a relative?"
+    case "CoverOwnHealthcareCosts?":
+      return "Applicant can afford to cover their own healthcare costs?"
+    case "proofOfIdentity?":
+      return "Applicant has supplied proof of identity?"
+
+    // Immigration Pet visa
+    case "approvedCountry":
+      return "If pet is arriving from an approved country"
+    case "permitToImport?":
+      return "must have permit to import?"
+    case "arrivingFromAustralia":
+      return "If pet is arriving from Australia"
+    case "postArrivalInspection":
+      return "Must complete post arrival inspection"
+    case "otherCountry":
+      return "Other countries"
+    case "petSpent6MonthsInApprovedCountry?":
+      return "Pet must spend 6 months in an approved country?"
+    case "vetCertificateProvided":
+      return "Vet certicate provided?"
+
+    // GettingAnIrdNumber
+    case "alreadyInNZ?":
+      return "Already in New Zealand?"
+    case "notInNzYet?":
+      return "Not yet in New Zealand?"
+    case "migrantOrVisaHolder":
+      return "Migrant or Visa holder?"
+    case "nzCitizen":
+      return "A New Zealand Citizen?"
+    case "haveCompletedOffshoreForm?":
+      return "Have completed offshore form?"
+    case "migrantOrVisaHolder":
+      return "Migrant or Visa holder?"
+
     default:
       return text;
   }
@@ -163,7 +204,8 @@ var lifeEventClicked = function() {
     $(".biz-rule-card").each(function showRequirementCount(i, card) {
       var view_data = {
         id: $(card).attr('id'),
-        count: $(card).find('.requirement').length
+        // Count top level requirements
+        count: $(card).find('.requirement-panel > .requirement').length
       }
       var template = $('#requirementsNumTpl').html();
       $(card).find('.card-preview').append(Mustache.to_html(template, view_data));

@@ -52,31 +52,51 @@
         <div class='panel panel-success' id="{{text}}">
           <div class='panel-heading'>
             <div class='panel-title'>
-              <button class="btn btn-default" data-toggle='collapse' href='#{{text}}{{counter}}'>
+              <button class="btn btn-primary" data-toggle='collapse' href='#{{id}}'>
                 {{title}}
               </button>
             </div>
           </div>
           <div class='panel-body card-preview'>
           </div>
+          <div class='panel-body requirement-panel collapse' id={{id}}>
+          </div>
+        </div>
+      </div class='card-preview'>
+    </script>
+
+    <script id="requirementsPanelTpl" type="text/template">
+      <div class='nested-benefit-panel-card' data-event-type="{{type}}">
+        <div class='panel panel-default' id="{{key}}">
+          <div class='panel-heading'>
+            <div class='panel-title'>
+              <button class="btn btn-primary" data-toggle='collapse' href='#{{title}}{{key}}'>
+                {{title}}
+              </button>
+            </div>
+          </div>
+          <div class='panel-body' data-panel-type={{body_key}}>
+          </div>
         </div>
       </div>
     </script>
+
 
     <script id="requirementsNumTpl" type="text/template">
       <p id="{{id}}">{{count}} requirements </p>
     </script>
 
     <script id="benefitPanelTpl" type="text/template">
-        <div id="{{id}}" class='panel-collapse collapse'>
-          <div class='panel-body text-left' id='panel{{id}}'></div>
+        <div class='panel panel-default panel-collapse requirement text-left'>
+          <div class='panel-heading'>
+            <button class="btn btn-primary" data-toggle="collapse" href="#{{id}}">{{requirement_name}}</button>
+          </div>
+          <div class='panel-body panel-collapse collapse' id='{{id}}'></div>
         </div>
     </script>
 
     <script id="requirementTpl" type="text/template">
-      <p class='requirement' id="{{id}}">
-        {{requirement_name}} :<strong>{{requirement_value}}</strong>
-      </p>
+      <p class="requirement">{{requirement_name}} :<strong>{{requirement_value}}</strong></p>
     </script>
 
   </head>
