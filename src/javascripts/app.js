@@ -270,6 +270,8 @@ function askQuestion(top_result) {
     }
     var template = $('#questionTpl').html();
     $("#criteria1").html(Mustache.to_html(template, view_data));
+  } else {
+    $("#criteria1").html('')
   }
 }
 
