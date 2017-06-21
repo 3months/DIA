@@ -214,7 +214,8 @@ var lifeEventClicked = function() {
         count: $(card).find('.requirement-panel > .requirement').length
       }
       var template = $('#requirementsNumTpl').html();
-      $(card).find('.card-preview').append(Mustache.to_html(template, view_data));
+      if ($(card).find('.requirement-count').length == 0)
+        $(card).find('.card-preview').append(Mustache.to_html(template, view_data));
     });
   } else {
     $('[data-event-type="' + eventType + '"].biz-rule-card').remove();
