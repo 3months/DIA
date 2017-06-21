@@ -7,70 +7,96 @@
 	<meta content="IE=edge" http-equiv="X-UA-Compatible">
 	<meta content="width=device-width, initial-scale=1" name="viewport">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js">
-	</script><!-- Templates -->
+	</script>
 
+	<!-- Templates -->
 	<script id="questionTpl" type="text/template">
-	     <div class="row">
-	       <h2> First Question </h2>
-	     </div>
-	     <div class="text-center" id="input">
-	       <h4>{{key}} (required in {{num_requirements}} business rules)</h4>
-	       <div class="row">
-	         <div class="col-lg-6 col-sm-6 question1">
-	           <div class="[ form-group ]">
-	             <input type="checkbox" name="fancy-checkbox-question1_1" id="fancy-checkbox-question1_1" autocomplete="off" />
-	               <div class="[ btn-group ]">
-	                 <label for="fancy-checkbox-question1_1" class="[ btn btn-default ]">
-	                   <span class="[ glyphicon glyphicon-ok ]"></span>
-	                   <span> </span>
-	                 </label>
-	                 <label for="fancy-checkbox-question1_1" class="[ btn btn-default active ]">65 and over</label>
-	               </div>
-	             </div>
-	           </div>
-	           <div class="col-lg-6 col-sm-6 question1_2">
-	             <div class="[ form-group ]">
-	               <input type="checkbox" name="fancy-checkbox-question1_2" id="fancy-checkbox-question1_2" autocomplete="off" />
-	               <div class="[ btn-group ]">
-	                 <label for="fancy-checkbox-question1_2" class="[ btn btn-default ]">
-	                   <span class="[ glyphicon glyphicon-ok ]"></span>
-	                   <span> </span>
-	                 </label>
-	                 <label for="fancy-checkbox-question1_2" class="[ btn btn-default active ]">under 65</label>
-	               </div>
-	             </div>
-	           </div>
-	         </div>
-	       </div>
+		<div class="row">
+			<h2> First Question </h2>
+		</div>
+		<div class="text-center" id="input">
+			<h4>{{key}} (required in {{num_requirements}} business rules)</h4>
+			<div class="row">
+				<div class="col-lg-6 col-sm-6 question1">
+					<div class="[ form-group ]">
+						<input type="checkbox" name="fancy-checkbox-question1_1" id="fancy-checkbox-question1_1" autocomplete="off" />
+							<div class="[ btn-group ]">
+								<label for="fancy-checkbox-question1_1" class="[ btn btn-default ]">
+									<span class="[ glyphicon glyphicon-ok ]"></span>
+									<span> </span>
+								</label>
+								<label for="fancy-checkbox-question1_1" class="[ btn btn-default active ]">65 and over</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-sm-6 question1_2">
+						<div class="[ form-group ]">
+							<input type="checkbox" name="fancy-checkbox-question1_2" id="fancy-checkbox-question1_2" autocomplete="off" />
+							<div class="[ btn-group ]">
+								<label for="fancy-checkbox-question1_2" class="[ btn btn-default ]">
+									<span class="[ glyphicon glyphicon-ok ]"></span>
+									<span> </span>
+								</label>
+								<label for="fancy-checkbox-question1_2" class="[ btn btn-default active ]">under 65</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 	</script>
+
 	<script id="bizRuleCardTpl" type="text/template">
-	     <div class='col-lg-3 biz-rule-card' data-event-type="{{type}}">
-	       <div class='panel panel-success' id="{{text}}">
-	         <div class='panel-heading'>
-	           <div class='panel-title'>
-	             <button class="btn btn-default" data-toggle='collapse' href='#{{text}}{{counter}}'>
-	               {{title}}
-	             </button>
-	           </div>
-	         </div>
-	         <div class='panel-body card-preview'>
-	         </div>
-	       </div>
-	     </div>
+		<div class='col-lg-3 biz-rule-card' data-event-type="{{type}}">
+			<div class='panel panel-success' id="{{text}}">
+				<div class='panel-heading'>
+					<div class='panel-title'>
+						<button class="btn btn-primary" data-toggle='collapse' href='#{{id}}'>
+							{{title}}
+						</button>
+					</div>
+				</div>
+				<div class='panel-body card-preview'>
+				</div>
+				<div class='panel-body requirement-panel collapse' id={{id}}>
+				</div>
+			</div>
+		</div class='card-preview'>
 	</script>
+
+	<script id="requirementsPanelTpl" type="text/template">
+		<div class='nested-benefit-panel-card' data-event-type="{{type}}">
+			<div class='panel panel-default' id="{{key}}">
+				<div class='panel-heading'>
+					<div class='panel-title'>
+						<button class="btn btn-primary" data-toggle='collapse' href='#{{title}}{{key}}'>
+							{{title}}
+						</button>
+					</div>
+				</div>
+				<div class='panel-body' data-panel-type={{body_key}}>
+				</div>
+			</div>
+		</div>
+	</script>
+
+
 	<script id="requirementsNumTpl" type="text/template">
-	     <p id="{{id}}">{{count}} requirements </p>
+		<p id="{{id}}">{{count}} requirements </p>
 	</script>
+
 	<script id="benefitPanelTpl" type="text/template">
-	       <div id="{{id}}" class='panel-collapse collapse'>
-	         <div class='panel-body text-left' id='panel{{id}}'></div>
-	       </div>
+			<div class='panel panel-default panel-collapse requirement text-left'>
+				<div class='panel-heading'>
+					<button class="btn btn-primary" data-toggle="collapse" href="#{{id}}">{{requirement_name}}</button>
+				</div>
+				<div class='panel-body panel-collapse collapse' id='{{id}}'></div>
+			</div>
 	</script>
+
 	<script id="requirementTpl" type="text/template">
-	     <p class='requirement' id="{{id}}">
-	       {{requirement_name}} :<strong>{{requirement_value}}</strong>
-	     </p>
+		<p class="requirement">{{requirement_name}} :<strong>{{requirement_value}}</strong></p>
 	</script>
+
 </head>
 
 <body>
@@ -79,74 +105,77 @@
 			<div class="text-center">
 				<h1>Discovery</h1>
 			</div>
-
-
 			<div class="row text-center">
 				<div class='text-center event-container' id="input">
 					<div class="row">
 						<div class="col-lg-3 col-sm-3 life-events">
 							<div class="[ form-group ]">
-								<input autocomplete="off" data-event-type="immigration" id="fancy-checkbox-immigration" name="fancy-checkbox-immigration" type="checkbox">
-
+								<input type="checkbox" name="fancy-checkbox-immigration" id="fancy-checkbox-immigration" data-event-type="immigration" autocomplete="off" />
 								<div class="[ btn-group ]">
-									<label class="[ btn btn-default ]" for="fancy-checkbox-immigration"><span class="[ glyphicon glyphicon-ok ]"></span> <span>&nbsp;</span></label> <label class="[ btn btn-default active ]" for="fancy-checkbox-immigration">Immigration</label>
+									<label for="fancy-checkbox-immigration" class="[ btn btn-default ]">
+										<span class="[ glyphicon glyphicon-ok ]"></span>
+										<span> </span>
+									</label>
+									<label for="fancy-checkbox-immigration" class="[ btn btn-default active ]">
+											Immigration
+									</label>
 								</div>
 							</div>
 						</div>
 
-
 						<div class="col-lg-3 col-sm-3 life-events">
 							<div class="[ form-group ]">
-								<input autocomplete="off" data-event-type="retirement" id="fancy-checkbox-retired" name="fancy-checkbox-retired" type="checkbox">
-
+								<input type="checkbox" name="fancy-checkbox-retired" id="fancy-checkbox-retired" data-event-type="retirement" autocomplete="off" />
 								<div class="[ btn-group ]">
-									<label class="[ btn btn-default ]" for="fancy-checkbox-retired"><span class="[ glyphicon glyphicon-ok ]"></span> <span>&nbsp;</span></label> <label class="[ btn btn-default active ]" for="fancy-checkbox-retired">Retired</label>
+									<label for="fancy-checkbox-retired" class="[ btn btn-default ]">
+										<span class="[ glyphicon glyphicon-ok ]"></span>
+										<span> </span>
+									</label>
+									<label for="fancy-checkbox-retired" class="[ btn btn-default active ]">
+											Retired
+									</label>
 								</div>
 							</div>
 						</div>
 
-
 						<div class="col-lg-3 col-sm-3 life-events">
 							<div class="[ form-group ]">
-								<input autocomplete="off" data-event-type="hardship" id="fancy-checkbox-health" name="fancy-checkbox-health" type="checkbox">
-
+								<input type="checkbox" name="fancy-checkbox-health" id="fancy-checkbox-health" data-event-type="hardship" autocomplete="off" />
 								<div class="[ btn-group ]">
-									<label class="[ btn btn-default ]" for="fancy-checkbox-health"><span class="[ glyphicon glyphicon-ok ]"></span> <span>&nbsp;</span></label> <label class="[ btn btn-default active ]" for="fancy-checkbox-health">Health</label>
+									<label for="fancy-checkbox-health" class="[ btn btn-default ]">
+										<span class="[ glyphicon glyphicon-ok ]"></span>
+										<span> </span>
+									</label>
+									<label for="fancy-checkbox-health" class="[ btn btn-default active ]">
+											Health
+									</label>
 								</div>
 							</div>
 						</div>
 
-
 						<div class="col-lg-3 col-sm-3 life-events">
 							<div class="[ form-group ]">
-								<input autocomplete="off" data-event-type="childCare" id="fancy-checkbox-childcare" name="fancy-checkbox-childcare" type="checkbox">
-
+								<input type="checkbox" name="fancy-checkbox-childcare" id="fancy-checkbox-childcare" data-event-type="childCare" autocomplete="off" />
 								<div class="[ btn-group ]">
-									<label class="[ btn btn-default ]" for="fancy-checkbox-childcare" id="checkbox-childcare"><span class="[ glyphicon glyphicon-ok ]"></span> <span>&nbsp;</span></label> <label class="[ btn btn-default active ]" for="fancy-checkbox-childcare">Childcare</label>
+									<label for="fancy-checkbox-childcare" class="[ btn btn-default ]" id="checkbox-childcare">
+										<span class="[ glyphicon glyphicon-ok ]"></span>
+										<span> </span>
+									</label>
+									<label for="fancy-checkbox-childcare" class="[ btn btn-default active ]">
+											Childcare
+									</label>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
-
-			<div class="row text-center" id="criteria1">
-			</div>
-
-
-			<div class="row text-center" id="criteria2">
-			</div>
-
-
-			<div class="row text-center" id="results">
-			</div>
-
-
-			<div class="row" id="list">
-			</div>
+			<div class="row text-center" id="criteria1"></div>
+			<div class="row text-center" id="criteria2"></div>
+			<div class="row text-center" id="results"></div>
+			<div class="row" id="list"></div>
 		</div>
 	</div>
-	<script src='bundle.js'>
-	</script>
+	<script src='bundle.js'></script>
 </body>
+</html>
