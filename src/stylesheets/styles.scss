@@ -1,10 +1,15 @@
+$light-blue: #e0f8ff;
+$light-green:  #D9ED96;
+$light-grey: #b2b5b0;
+$grey: #D9ED96;
+
 body {
-  background-color: #e0f8ff;
+  background-color: $light-blue;
   .panel-success>.panel-heading {
     background-color: #D9ED96;
   }
   .panel-success {
-    border-color: #b2b5b0;
+    border-color: $light-grey;
   }
 }
 
@@ -24,8 +29,8 @@ input {
 
 .btn-default:hover {
   color: #333;
-  background-color: #e6e6e6;
-  border-color: #adadad;
+  background-color: $light-grey;
+  border-color: $light-grey;
 }
 
 /* End Overrides */
@@ -35,7 +40,7 @@ input {
 }
 
 #input {
-  background-color: #D9ED96;
+  background-color: $light-green;
   padding-bottom: 20px;
 }
 
