@@ -6,6 +6,7 @@
   "scripts": {
     "test": "test",
     "start": "node server.js",
+    "bundle": "webpack",
     "build": "webpack-dev-server --progress --colors --watch --content-base ./dist --open"
   },
   "author": "",
