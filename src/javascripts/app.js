@@ -84,6 +84,7 @@ function createRequirementPanel(requirement_name, requirement_value, rule_id) {
     var view_data = {
       requirement_name: returnRequirementKey(requirement_name),
       requirement_value: requirement_value,
+      requirement_data_attr: requirement_name
     }
     var template = $('#requirementTpl').html();
     $(parent_panel).append(Mustache.to_html(template, view_data));
@@ -98,18 +99,12 @@ function createRequirementPanel(requirement_name, requirement_value, rule_id) {
   }
 }
 
-// If the p tag rendered is the nested property alreadyReceiving, which as properies itself\
-// Then don't render it
-function removeAlreadyReceiving() {
-  if ($('.requirement:contains("alreadyReceiving")').length > 0) {
-    $('.requirement:contains("alreadyReceiving")').remove();
-  }
-}
-
+// Split our json titles into individual words
 function returnTitle(text) {
   return text.replace(/([a-z])([A-Z])/g, "$1 $2");
 }
 
+// Grab json text and use them as a key to render text blocks
 function returnRequirementKey(text) {
   switch (text) {
     case "applicantMinimumAge":
@@ -142,7 +137,7 @@ function returnRequirementKey(text) {
     // Parent or Grandparent Visitor Visa
     case "ProofOfIdentity?":
       return "Applicant has supplied proof of identity?"
-    case "inGoodHealth?":
+    case "InGoodHealth?":
       return "Applicant is in good health?"
     case "OfGoodCharachter?":
       return "Applicant is of good charachter?"
@@ -188,17 +183,29 @@ function returnRequirementKey(text) {
       return "Have completed offshore form?"
     case "migrantOrVisaHolder":
       return "Migrant or Visa holder?"
+    case "applyOnline":
+      return "Please apply online"
+
+    // Retirement
+    case "QualifyingOperationService":
+      return "Participated in Operational Services?"
+
+    // healthcare
+    case "numberOfChildren":
+      return "Do you have any children?"
 
     default:
       return text;
   }
 }
 
+// Count the amount of requirements in a business rule
 function countRequirements(div) {
   var count = document.getElementById(div.id).childElementCount;
   return count;
 }
 
+// Render business rules specific to life event clicked
 var lifeEventClicked = function() {
   var eventType = $(this).attr('data-event-type');
   if ($(this).is(":checked")) {
@@ -225,64 +232,44 @@ var lifeEventClicked = function() {
 $("#fancy-checkbox-immigration, #fancy-checkbox-retired, #fancy-checkbox-health, #fancy-checkbox-childcare").change(lifeEventClicked);
 
 function returnTopRequirement() {
-  var array = [
-    { applicantMinimumAge: $("p[id*='applicantMinimumAge']").length },
-    { citizenOrResident: $("p[id*='citizenOrResident?']").length },
-    { livingInNZ: $("p[id*='livingInNZ?']").length },
-    { yearsInNzSince50: $("p[id*='yearsInNzSince50']").length },
-    { yearsInNzSince20: $("p[id*='yearsInNzSince20']").length },
-    { pension: $("p[id*='pension?']").length },
-    { organiser: $("p[id*='organiser?']").length },
-    { pension: $("p[id*='pension?']").length },
-    { relatedOrGuardian: $("p[id*='relatedOrGuardian?']").length },
-    {
-      completedIncomeAndAssetTest: $("p[id*='completedIncomeAndAssetTest?']")
-        .length
-    },
-    {
-      ServedInMilitaryOrEmergency: $("p[id*='ServedInMilitaryOrEmergency?']")
-        .length
-    },
-    { organiser: $("p[id*='organiser?']").length }
-  ];
-  var highest = array.sort(function(a, b) {
-    return a.ValueA - b.ValueA;
+  var requirements_array = []
+  // Gather all visible requirements text from DOM and push to array
+  var requirements = $('p.requirement').each(function(i, obj) {
+    requirements_array.push($(this).data( "requirement" ))
   });
-  return highest[0];
+  if (requirements_array.length){
+    return findMostCommonRequirement(requirements_array)
+  } else {
+    return 'error'
+  }
 }
 
-function askQuestion(requirementCount) {
-  var question = requirementCount;
-  for (var key in question) {
+function findMostCommonRequirement(array){
+  var ranked__values_object = {};
+  // Loop through array to determine how often a value is repeated
+  array.forEach(function(x) {
+    ranked__values_object[x] = (ranked__values_object[x] || 0) + 1;
+  });
+
+  // loop through and return the value that is repeated most
+  var top_result = Object.keys(ranked__values_object).reduce(function(a, b){
+    return ranked__values_object[a] > ranked__values_object[b] ? a : b
+  })
+  return top_result
+}
+
+function askQuestion(top_result) {
     if ($("#input input:checkbox:checked").length > 0) {
-      var divRow = $(document.createElement("div")).addClass("row");
-      var h2 = $(document.createElement("h2")).text("First Question");
-      divRow.append(h2.append());
-      console.log(question);
-      var view_data = {
-        key: returnRequirementKey(key),
-        num_requirements: question[key]
-      }
-      var template = $('#questionTpl').html();
-      $("#criteria1").html(Mustache.to_html(template, view_data));
-      console.log(key + ":" + question[key]);
-      if ($("#fancy-checkbox-question1_1").length > 0) {
-        $("#fancy-checkbox-question1_1").change(function() {
-          if ($(this).is(":checked")){
-            console.log('checked 1')
-          }
-        })
-      }
-      if ($("#fancy-checkbox-question1_2").length > 0) {
-        $("#fancy-checkbox-question1_2").change(function() {
-          if ($(this).is(":checked")){
-            console.log("checked 2")
-          }
-        })
-      }
-    } else {
-      $("#criteria1").html("");
+    var divRow = $(document.createElement("div")).addClass("row");
+    var h2 = $(document.createElement("h2")).text("First Question");
+    divRow.append(h2.append());
+    console.log(top_result);
+    var view_data = {
+      value: returnRequirementKey(top_result),
+      key: top_result
     }
+    var template = $('#questionTpl').html();
+    $("#criteria1").html(Mustache.to_html(template, view_data));
   }
 }
 
