@@ -1,5 +1,11 @@
 body {
   background-color: #e0f8ff;
+  .panel-success>.panel-heading {
+    background-color: #D9ED96;
+  }
+  .panel-success {
+    border-color: #b2b5b0;
+  }
 }
 
 input {
@@ -14,13 +20,6 @@ input {
 
 .form-group {
   margin-bottom: 0;
-}
-
-.panel-success>.panel-heading {
-  background-color: #D9ED96;
-}
-.panel-success {
-  border-color: #b2b5b0;
 }
 
 .btn-default:hover {

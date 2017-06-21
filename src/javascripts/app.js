@@ -1,6 +1,6 @@
 var $ = require("jquery");
 require('bootstrap-loader');
-require('../../src/stylesheets/styles.css');
+require('../../src/stylesheets/styles.scss');
 
 // Load our JSON file
 var myJson = {};
