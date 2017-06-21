@@ -263,7 +263,6 @@ function askQuestion(top_result) {
     var divRow = $(document.createElement("div")).addClass("row");
     var h2 = $(document.createElement("h2")).text("First Question");
     divRow.append(h2.append());
-    console.log(top_result);
     var view_data = {
       value: returnRequirementKey(top_result),
       key: top_result
