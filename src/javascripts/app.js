@@ -145,7 +145,7 @@ function returnRequirementKey(text) {
     case "inGoodHealth?":
       return "Applicant is in good health?"
     case "OfGoodCharachter?":
-      return "Applicant is of good charachter?"
+      return "Applicant is of good character?"
     case "IntendToMeetVisaConditions?":
       return "Applicant intends to meet visa conditions?"
     case "SponsorIsChildOrParent?":

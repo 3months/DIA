@@ -1,15 +1,33 @@
-$light-blue: #e0f8ff;
-$light-green:  #D9ED96;
-$light-grey: #b2b5b0;
-$grey: #D9ED96;
+$primary-color-dark:   #455A64;
+$primary-color:        #607D8B;
+$primary-color-light:  #CFD8DC;
+$primary-color-text:   #FFFFFF;
+$accent-color:         #FFC107;
+$primary-text-color:   #212121;
+$secondary-text-color: #757575;
+$divider-color:        #BDBDBD;
+
+$dark-text-color: $primary-text-color;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
 
 body {
-  background-color: $light-blue;
+  background-color: $primary-color-dark;
+  color: $primary-color-text;
+
+  .panel {
+    color: $dark-text-color;
+  }
   .panel-success>.panel-heading {
-    background-color: #D9ED96;
+    background-color: $primary-color;
   }
   .panel-success {
-    border-color: $light-grey;
+    border-color: $divider-color;
   }
 }
 
@@ -27,11 +45,16 @@ input {
   margin-bottom: 0;
 }
 
-.btn-default:hover {
-  color: #333;
-  background-color: $light-grey;
-  border-color: $light-grey;
+/*.btn-primary {
+  color: $dark-text-color;
+  background-color: $primary-color-light;
 }
+
+.btn-default:hover {
+  color: $dark-text-color;
+  background-color: $divider-color;
+  border-color: $divider-color;
+}*/
 
 /* End Overrides */
 
@@ -40,8 +63,10 @@ input {
 }
 
 #input {
-  background-color: $light-green;
+  @include border-radius(4px);
+  background-color: $primary-color;
   padding-bottom: 20px;
+  color: $dark-text-color;
 }
 
 #list {
