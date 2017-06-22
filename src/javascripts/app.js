@@ -260,7 +260,6 @@ function findMostCommonRequirement(array){
   array.forEach(function(x) {
     ranked_values_object[x] = (ranked_values_object[x] || 0) + 1;
   });
-  console.log(ranked_values_object)
 
   // If user has no object filtered_result_keys = ranked_values_object
   var filtered_result_keys = ranked_values_object
@@ -309,6 +308,8 @@ function askQuestion(top_result) {
   }
 }
 
+// This assigns click events to questions
+// on click they pop the selected value and the question asked into the user object
 function addListeners(string, question){
   if (string.length > 0){
     string.find('input').each(function(index, element){
@@ -318,7 +319,6 @@ function addListeners(string, question){
           user_obj = {
             [question]: value
           }
-          console.log(user_obj)
         }
       }
     )
