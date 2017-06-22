@@ -3,6 +3,12 @@
 var $ = require("jquery");
 require('bootstrap-loader');
 require('../../src/stylesheets/styles.scss');
+require('../../src/javascripts/bootstrap-switch.min.js')
+require('../../src/stylesheets/bootstrap-switch.min.scss')
+
+$(document).ready(function() {
+  $("[name='setting-anonymous']").bootstrapSwitch();
+});
 
 // Load our JSON file
 var myJson = {};
@@ -108,7 +114,7 @@ function returnTitle(text) {
 function returnRequirementKey(text) {
   switch (text) {
     case "applicantMinimumAge":
-      return "How old are you?";
+      return "What age range are you in?";
     case "yearsInNzSince20":
       return "Years applicant should have spent in NZ since turning 20";
     case "yearsInNzSince50":
@@ -140,7 +146,7 @@ function returnRequirementKey(text) {
     case "InGoodHealth?":
       return "Applicant is in good health?"
     case "OfGoodCharachter?":
-      return "Applicant is of good charachter?"
+      return "Applicant is of good character?"
     case "IntendToMeetVisaConditions?":
       return "Applicant intends to meet visa conditions?"
     case "SponsorIsChildOrParent?":
@@ -221,7 +227,8 @@ var lifeEventClicked = function() {
         count: $(card).find('.requirement-panel > .requirement').length
       }
       var template = $('#requirementsNumTpl').html();
-      $(card).find('.card-preview').append(Mustache.to_html(template, view_data));
+      if ($(card).find('.requirement-count').length == 0)
+        $(card).find('.card-preview').append(Mustache.to_html(template, view_data));
     });
   } else {
     $('[data-event-type="' + eventType + '"].biz-rule-card').remove();

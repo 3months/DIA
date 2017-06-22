@@ -1,16 +1,47 @@
-$light-blue: #e0f8ff;
-$light-green:  #D9ED96;
-$light-grey: #b2b5b0;
-$grey: #D9ED96;
+$primary-color-dark:   #455A64;
+$primary-color:        #607D8B;
+$primary-color-light:  #CFD8DC;
+$primary-color-text:   #FFFFFF;
+$accent-color:         #FFC107;
+$primary-text-color:   #212121;
+$secondary-text-color: #757575;
+$divider-color:        #BDBDBD;
+
+$dark-text-color: $primary-text-color;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 body {
-  background-color: $light-blue;
+  background-color: $primary-color-dark;
+  color: $primary-color-text;
+  font-family: 'Open Sans', sans-serif;
+
+  .panel {
+    color: $dark-text-color;
+  }
   .panel-success>.panel-heading {
-    background-color: #D9ED96;
+    background-color: $primary-color;
   }
   .panel-success {
-    border-color: $light-grey;
+    border-color: $divider-color;
   }
+}
+
+h1.hero {
+  padding-top: 50px;
+  padding-bottom: 25px;
+}
+
+#criteria1 {
+  padding-top: 40px;
 }
 
 input {
@@ -21,17 +52,45 @@ input {
   padding: 0;
 }
 
+/* Business Card rules */
+
+.biz-rule-card .panel-heading {
+  cursor: pointer;
+}
+
+.biz-rule-card .panel-title {
+  color: $primary-color-text;
+}
+
+.expando-thingy {
+  position: absolute;
+  top: 9px;
+  right: 15px;
+  color: $primary-color-text;
+}
+
+/* End Business Card rules */
+
+.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+  height: 18px !important;
+}
+
 /* Override Bootstrap CSS */
 
 .form-group {
   margin-bottom: 0;
 }
 
-.btn-default:hover {
-  color: #333;
-  background-color: $light-grey;
-  border-color: $light-grey;
+/*.btn-primary {
+  color: $dark-text-color;
+  background-color: $primary-color-light;
 }
+
+.btn-default:hover {
+  color: $dark-text-color;
+  background-color: $divider-color;
+  border-color: $divider-color;
+}*/
 
 /* End Overrides */
 
@@ -40,14 +99,26 @@ input {
 }
 
 #input {
-  background-color: $light-green;
+  @include border-radius(4px);
+  background-color: $primary-color;
   padding-bottom: 20px;
+  color: $dark-text-color;
 }
 
 #list {
   margin-top: 5%;
 }
 
+.page-button-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 9999;
+}
+
+.biz-rule-card {
+  padding: 0 10px 0 10px;
+}
 
 .form-group input[type="checkbox"] {
     display: none;
