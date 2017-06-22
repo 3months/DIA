@@ -18,7 +18,7 @@
 			<div class="row">
 				<div class="col-lg-6 col-sm-6 question1">
 					<div class="[ form-group ]">
-						<input type="checkbox" name="fancy-checkbox-question1_1" id="fancy-checkbox-question1_1" autocomplete="off" />
+						<input type="checkbox" name="fancy-checkbox-{{key}}1_1" id="fancy-checkbox-question1_1" autocomplete="off" />
 							<div class="[ btn-group ]">
 								<label for="fancy-checkbox-question1_1" class="[ btn btn-default ]">
 									<span class="[ glyphicon glyphicon-ok ]"></span>
@@ -28,7 +28,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6 col-sm-6 question1_2">
+					<div class="col-lg-6 col-sm-6 question-{{key}}1_2">
 						<div class="[ form-group ]">
 							<input type="checkbox" name="fancy-checkbox-question1_2" id="fancy-checkbox-question1_2" autocomplete="off" />
 							<div class="[ btn-group ]">
@@ -73,7 +73,7 @@
 	</script>
 
 	<script id="requirementTpl" type="text/template">
-		<p class="requirement">{{requirement_name}} :<strong>{{requirement_value}}</strong></p>
+		<p class="requirement" data-requirement="{{requirement_data_attr}}">{{requirement_name}} :<strong>{{requirement_value}}</strong></p>
 	</script>
 
 </head>

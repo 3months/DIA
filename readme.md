@@ -8,10 +8,13 @@ This project is templated using [moustache](https://mustache.github.io/) bundled
 
 1. `npm install`
 2. `npm run build`
-  - this will run a webpack server that imports assets from the `src` file and bundles them together into `dist/bundle.js`
+  - this will run a webpack dev server that imports assets from the `src` file and bundles them together into `dist/bundle.js` temporarily
+
+3. `npm run bundle`
+  - this will generate a new `dist/bundle.js` file permanently
 
 ### Production
-- `npm start` 
+- `npm start`
  - this runs our stock express server which grabs compiled assets from the `dist` folder
 
 
