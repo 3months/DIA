@@ -16,9 +16,13 @@ $dark-text-color: $primary-text-color;
   border-radius: $radius;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
 body {
   background-color: $primary-color-dark;
   color: $primary-color-text;
+  font-family: 'Open Sans', sans-serif;
 
   .panel {
     color: $dark-text-color;
@@ -31,12 +35,44 @@ body {
   }
 }
 
+h1.hero {
+  padding-top: 50px;
+  padding-bottom: 25px;
+}
+
+#criteria1 {
+  padding-top: 40px;
+}
+
 input {
   width: 30%;
 }
 
 .col-lg-3{
   padding: 0;
+}
+
+/* Business Card rules */
+
+.biz-rule-card .panel-heading {
+  cursor: pointer;
+}
+
+.biz-rule-card .panel-title {
+  color: $primary-color-text;
+}
+
+.expando-thingy {
+  position: absolute;
+  top: 9px;
+  right: 15px;
+  color: $primary-color-text;
+}
+
+/* End Business Card rules */
+
+.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+  height: 18px !important;
 }
 
 /* Override Bootstrap CSS */
@@ -73,6 +109,16 @@ input {
   margin-top: 5%;
 }
 
+.page-button-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 9999;
+}
+
+.biz-rule-card {
+  padding: 0 10px 0 10px;
+}
 
 .form-group input[type="checkbox"] {
     display: none;

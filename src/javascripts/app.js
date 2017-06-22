@@ -3,6 +3,12 @@
 var $ = require("jquery");
 require('bootstrap-loader');
 require('../../src/stylesheets/styles.scss');
+require('../../src/javascripts/bootstrap-switch.min.js')
+require('../../src/stylesheets/bootstrap-switch.min.scss')
+
+$(document).ready(function() {
+  $("[name='setting-anonymous']").bootstrapSwitch();
+});
 
 // Load our JSON file
 var myJson = {};
@@ -113,7 +119,7 @@ function returnTitle(text) {
 function returnRequirementKey(text) {
   switch (text) {
     case "applicantMinimumAge":
-      return "How old are you?";
+      return "What age range are you in?";
     case "yearsInNzSince20":
       return "Years applicant should have spent in NZ since turning 20";
     case "yearsInNzSince50":
