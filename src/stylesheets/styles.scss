@@ -67,6 +67,14 @@ input {
   top: 9px;
   right: 15px;
   color: $primary-color-text;
+
+  transform: rotate(0deg);
+  transition: transform 0.5s linear;
+}
+
+.collapsed .expando-thingy {
+  transform: rotate(180deg);
+  transition: transform 0.5s linear;
 }
 
 /* End Business Card rules */
