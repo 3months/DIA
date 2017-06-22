@@ -299,7 +299,7 @@ function askQuestion(top_result) {
         value1: result_options[1],
         value2: result_options[2],
       }
-      var template = $('#questionTpl1').html();
+      var template = $('#questionTpl').html();
       $("#criteria1").html(Mustache.to_html(template, view_data));
       addListeners($('#criteria1'), top_result)
     }
