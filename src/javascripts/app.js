@@ -260,6 +260,7 @@ function findMostCommonRequirement(array){
   array.forEach(function(x) {
     ranked_values_object[x] = (ranked_values_object[x] || 0) + 1;
   });
+  console.log(ranked_values_object)
 
   // If user has no object filtered_result_keys = ranked_values_object
   var filtered_result_keys = ranked_values_object
@@ -285,7 +286,6 @@ function findMostCommonRequirement(array){
   var top_result = Object.keys(ranked_values_object).reduce(function(a, b){
     return ranked_values_object[a] > ranked_values_object[b] ? a : b
   })
-  console.log(top_result)
   return top_result
 }
 
@@ -329,6 +329,10 @@ function addListeners(string, question){
 function determineResultOptions(top_result) {
   switch (top_result) {
     case "QualifyingOperationService":
+      return ['binary', "Yes", "No"]
+    case "Before1April1974?":
+      return ['binary', "Yes", "No"]
+    case "citizenOrResident?":
       return ['binary', "Yes", "No"]
     default:
       return top_result
