@@ -229,13 +229,16 @@ var lifeEventClicked = function() {
         count: $(card).find('.requirement-panel > .requirement').length
       }
       var template = $('#requirementsNumTpl').html();
-      if ($(card).find('.requirement-count').length == 0)
+      if ($(card).find('.requirement-count').length == 0) {
         $(card).find('.card-preview').append(Mustache.to_html(template, view_data));
+      }
     });
   } else {
     $('[data-event-type="' + eventType + '"].biz-rule-card').remove();
     askQuestion(returnTopRequirement());
+
   }
+  tickRequirements()
 };
 
 $("#fancy-checkbox-immigration, #fancy-checkbox-retired, #fancy-checkbox-health, #fancy-checkbox-childcare").change(lifeEventClicked);
@@ -289,13 +292,13 @@ function findMostCommonRequirement(array){
 }
 
 function askQuestion(top_result) {
-    if ($("#input input:checkbox:checked").length > 0) {
+  if ($("#input input:checkbox:checked").length > 0) {
     var divRow = $(document.createElement("div")).addClass("row");
     result_options = determineResultOptions(top_result)
     if (result_options[0] == 'binary') {
       var view_data = {
         value: returnRequirementKey(top_result),
-        key: top_result,
+        key: getValidId(top_result),
         value1: result_options[1],
         value2: result_options[2],
       }
@@ -316,12 +319,21 @@ function addListeners(string, question){
       $('#'+element.id).change(function(){
         if(this.checked) {
           var value = $(this).data('value')
-          user_obj = {
-            [question]: value
-          }
+          user_obj[question] = value
         }
       }
     )
+    })
+  }
+}
+
+function tickRequirements(){
+  for (var user_answers in user_obj) {
+    $("[data-requirement='"+user_answers+"']").each(function() {
+      if (!$(this).hasClass( "material-icons" )) {
+        $(this).append('<i class="material-icons">&#xE876;</i>')
+        $(this).css('background-color', 'green')
+      }
     })
   }
 }
