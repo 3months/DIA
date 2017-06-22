@@ -18,25 +18,25 @@
 			<div class="row">
 				<div class="col-lg-6 col-sm-6 question1">
 					<div class="[ form-group ]">
-						<input type="checkbox" name="fancy-checkbox-{{key}}1_1" id="fancy-checkbox-question1_1" autocomplete="off" />
-							<div class="[ btn-group ]">
-								<label for="fancy-checkbox-question1_1" class="[ btn btn-default ]">
+						<input type="checkbox" name="fancy-checkbox-{{key}}" id="fancy-checkbox-question{{key}}{{value1}}" autocomplete="off" data-value={{value1}} >
+							<div class="[ btn-group ]" >
+								<label for="fancy-checkbox-question{{key}}{{value1}}" class="[ btn btn-default ]">
 									<span class="[ glyphicon glyphicon-ok ]"></span>
 									<span> </span>
 								</label>
-								<label for="fancy-checkbox-question1_1" class="[ btn btn-default active ]">65 and over</label>
+								<label for="fancy-checkbox-question{{key}}{{value1}}" class="[ btn btn-default active ]">{{value1}}</label>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6 col-sm-6 question-{{key}}1_2">
+					<div class="col-lg-6 col-sm-6 question-{{key}}">
 						<div class="[ form-group ]">
-							<input type="checkbox" name="fancy-checkbox-question1_2" id="fancy-checkbox-question1_2" autocomplete="off" />
+							<input type="checkbox"  name="fancy-checkbox-{{key}}" id="fancy-checkbox-question{{key}}{{value2}}" autocomplete="off" data-value={{value2}}>
 							<div class="[ btn-group ]">
-								<label for="fancy-checkbox-question1_2" class="[ btn btn-default ]">
+								<label for="fancy-checkbox-question{{key}}{{value2}}" class="[ btn btn-default ]">
 									<span class="[ glyphicon glyphicon-ok ]"></span>
 									<span> </span>
 								</label>
-								<label for="fancy-checkbox-question1_2" class="[ btn btn-default active ]">under 65</label>
+								<label for="fancy-checkbox-question{{key}}{{value2}}" class="[ btn btn-default active ]">{{value2}}</label>
 							</div>
 						</div>
 					</div>

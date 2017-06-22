@@ -1,3 +1,6 @@
+// The user object where we store results
+var user_obj = {}
+
 // Import all JS here
 // This file serves as the entry point for our webpack config
 var $ = require("jquery");
@@ -17,7 +20,6 @@ $.ajax({
   dataType: "json",
   success: function(json) {
     myJson = json;
-    console.log(myJson)
   }
 });
 
@@ -252,34 +254,83 @@ function returnTopRequirement() {
 }
 
 function findMostCommonRequirement(array){
-  var ranked__values_object = {};
+  var ranked_values_object = {};
   // Loop through array to determine how often a value is repeated
+  // Then rank them
   array.forEach(function(x) {
-    ranked__values_object[x] = (ranked__values_object[x] || 0) + 1;
+    ranked_values_object[x] = (ranked_values_object[x] || 0) + 1;
   });
 
+  // If user has no object filtered_result_keys = ranked_values_object
+  var filtered_result_keys = ranked_values_object
+
+  // If user has object, initialise two objects to compare and filter matches
+  var unique_questions_keys = Object.keys(ranked_values_object)
+  var user_answers_keys = Object.keys(user_obj)
+
+  // we compare the ranked benefits with the user_obj
+  // If we find a match (user has already answered that question)
+  // We delete that value from ranked_values_object
+  if (user_answers_keys.length){
+    unique_questions_keys.forEach(function(key) {
+      user_answers_keys.forEach(function(key2){
+        if (key === key2){
+          delete ranked_values_object[key2]
+        }
+      })
+    })
+  }
+
   // loop through and return the value that is repeated most
-  var top_result = Object.keys(ranked__values_object).reduce(function(a, b){
-    return ranked__values_object[a] > ranked__values_object[b] ? a : b
+  var top_result = Object.keys(ranked_values_object).reduce(function(a, b){
+    return ranked_values_object[a] > ranked_values_object[b] ? a : b
   })
+  console.log(top_result)
   return top_result
 }
 
 function askQuestion(top_result) {
     if ($("#input input:checkbox:checked").length > 0) {
     var divRow = $(document.createElement("div")).addClass("row");
-    var h2 = $(document.createElement("h2")).text("First Question");
-    divRow.append(h2.append());
-    var view_data = {
-      value: returnRequirementKey(top_result),
-      key: top_result
+    result_options = determineResultOptions(top_result)
+    if (result_options[0] == 'binary') {
+      var view_data = {
+        value: returnRequirementKey(top_result),
+        key: top_result,
+        value1: result_options[1],
+        value2: result_options[2],
+      }
+      var template = $('#questionTpl1').html();
+      $("#criteria1").html(Mustache.to_html(template, view_data));
+      addListeners($('#criteria1'), top_result)
     }
-    var template = $('#questionTpl').html();
-    $("#criteria1").html(Mustache.to_html(template, view_data));
   } else {
     $("#criteria1").html('')
   }
 }
 
+function addListeners(string, question){
+  if (string.length > 0){
+    string.find('input').each(function(index, element){
+      $('#'+element.id).change(function(){
+        if(this.checked) {
+          var value = $(this).data('value')
+          user_obj = {
+            [question]: value
+          }
+          console.log(user_obj)
+        }
+      }
+    )
+    })
+  }
+}
 
-var user = {}
+function determineResultOptions(top_result) {
+  switch (top_result) {
+    case "QualifyingOperationService":
+      return ['binary', "Yes", "No"]
+    default:
+      return top_result
+  }
+}
