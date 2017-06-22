@@ -5,10 +5,10 @@
   "main": "app.js",
   "scripts": {
     "test": "test",
-    "start": "node server.js",
+    "start": "webpack --progress",
     "bundle": "webpack",
     "build": "webpack-dev-server --progress --colors --watch --content-base ./dist --open",
-    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
+    "heroku-postbuild": "node server.js"
   },
   "author": "",
   "license": "ISC",
