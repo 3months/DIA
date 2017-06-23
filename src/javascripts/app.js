@@ -320,6 +320,7 @@ function addListeners(string, question){
         if(this.checked) {
           var value = $(this).data('value')
           user_obj[question] = value
+          tickRequirements()
         }
       }
     )
@@ -328,13 +329,41 @@ function addListeners(string, question){
 }
 
 function tickRequirements(){
-  for (var user_answers in user_obj) {
-    $("[data-requirement='"+user_answers+"']").each(function() {
-      if (!$(this).hasClass( "material-icons" )) {
-        $(this).append('<i class="material-icons">&#xE876;</i>')
-        $(this).css('background-color', 'green')
+  for (var user_question in user_obj) {
+    // Find each element that matches user question
+    $("[data-requirement='"+user_question+"']").each(function() {
+      var user_answer = user_obj[user_question]
+      var question_answer = $(this).children().text()
+      // If user answer matches question requirement
+      if (answerToBool(user_answer) == answerToBool(question_answer)){
+        if (!$(this).hasClass( "material-icons" )) {
+          $(this).append('<i class="material-icons">&#xE876;</i>')
+          $(this).css('background-color', 'green')
+        }
+      } else {
+        if (!$(this).hasClass( "material-icons" )) {
+          $(this).append('<i class="material-icons">&#xE14C;</i>')
+          $(this).css('background-color', 'red')
+        }
+
       }
     })
+  }
+}
+
+// Used to convert 'truthy' values to an actual boolean
+function answerToBool(string) {
+  switch (string.toLowerCase()) {
+    case "yes":
+    case "true":
+    case true:
+      return true
+    case "no":
+    case "false":
+    case false:
+      return false
+    default:
+      return false
   }
 }
 
