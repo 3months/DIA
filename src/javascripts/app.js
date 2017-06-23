@@ -197,6 +197,8 @@ function returnRequirementKey(text) {
     // Retirement
     case "QualifyingOperationService":
       return "Participated in Operational Services?"
+    case "NeedsAssessmentCompleted":
+      return "Have you completed a needs assessment?"
 
     // healthcare
     case "numberOfChildren":
@@ -321,6 +323,7 @@ function addListeners(string, question){
           var value = $(this).data('value')
           user_obj[question] = value
           tickRequirements()
+          askQuestion(returnTopRequirement());
         }
       }
     )
@@ -336,16 +339,17 @@ function tickRequirements(){
       var question_answer = $(this).children().text()
       // If user answer matches question requirement
       if (answerToBool(user_answer) == answerToBool(question_answer)){
-        if (!$(this).hasClass( "material-icons" )) {
+        if ($(this).find( ".material-icons" ).length === 0) {
+          console.log('does not have class so append tick')
           $(this).append('<i class="material-icons">&#xE876;</i>')
           $(this).css('background-color', 'green')
         }
-      } else {
-        if (!$(this).hasClass( "material-icons" )) {
+      }
+      if (answerToBool(user_answer) != answerToBool(question_answer)){
+        if ($(this).find( ".material-icons" ).length === 0) {
           $(this).append('<i class="material-icons">&#xE14C;</i>')
           $(this).css('background-color', 'red')
         }
-
       }
     })
   }
@@ -374,6 +378,8 @@ function determineResultOptions(top_result) {
     case "Before1April1974?":
       return ['binary', "Yes", "No"]
     case "citizenOrResident?":
+      return ['binary', "Yes", "No"]
+    case "NeedsAssessmentCompleted?":
       return ['binary', "Yes", "No"]
     default:
       return top_result
