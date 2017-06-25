@@ -297,20 +297,27 @@ function askQuestion(top_result) {
   if ($("#input input:checkbox:checked").length > 0) {
     var divRow = $(document.createElement("div")).addClass("row");
     result_options = determineResultOptions(top_result)
-    if (result_options[0] == 'binary') {
-      var view_data = {
-        value: returnRequirementKey(top_result),
-        key: getValidId(top_result),
-        value1: result_options[1],
-        value2: result_options[2],
-      }
-      var template = $('#questionTpl').html();
-      $("#criteria1").html(Mustache.to_html(template, view_data));
-      addListeners($('#criteria1'), top_result)
-    }
+    renderQuestion(result_options[0], getValidId(top_result), returnRequirementKey(top_result), result_options.slice(1));
   } else {
     $("#criteria1").html('')
   }
+}
+
+function renderQuestion(question_type, question_id, question_text, question_values) {
+  var view_data = {
+    question_text: question_text,
+    question_id: question_id,
+  }
+  if (question_type == "binary") {
+    view_data['true_text'] = question_values[0];
+    view_data['false_text'] = question_values[1];
+    var template = $('#questionBinaryTpl').html();
+  } else {
+    var template = $('#questionMysteryTpl').html();
+  }
+  $("#criteria1").html(Mustache.to_html(template, view_data));
+  $("[name='"+ question_id +"']").bootstrapSwitch();
+  addListeners($('#criteria1'), question_id)
 }
 
 // This assigns click events to questions

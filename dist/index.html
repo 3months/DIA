@@ -9,7 +9,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js">
 	</script>
 
-	<!-- Templates -->
+	<!-- ==================== TEMPLATES ==================== -->
+
 	<script id="questionTpl" type="text/template">
 		<div class="row">
 			<h4>{{key}} (required in {{num_requirements}} business rules)</h4>
@@ -75,6 +76,23 @@
 	<script id="requirementTpl" type="text/template">
 		<p class="requirement" data-requirement="{{requirement_data_attr}}">{{requirement_name}} :<strong>{{requirement_value}}</strong></p>
 	</script>
+
+	<script id="questionMysteryTpl" type="text/template">
+		<div class="row question-row">
+			<h4>There should probably be a question here right?</h4>
+		</div>
+	</script>
+
+	<script id="questionBinaryTpl" type="text/template">
+		<div class="row question-row">
+			<h4 class="question-text">{{question_text}}</h4>
+			<div class="form-group question-group">
+				<input type="checkbox" name="{{question_id}}" id="{{question_id}}" data-on-text="{{true_text}}" data-off-text="{{false_text}}" data-on-color="success" data-off-color="info">
+			</div>
+		</div>
+	</script>
+
+	<!-- ==================== TEMPLATES END ==================== -->
 
 </head>
 
