@@ -216,7 +216,7 @@ function returnRequirementKey(text) {
     case "refugeeOrProtectionStatus?":
       return "XXX";
     case "singleCaregiver":
-      return "XXX";
+      return "Are you a single caregiver?";
     case "dependentChildMaxAge":
       return "XXX";
     case "applicantStatus":
@@ -224,9 +224,9 @@ function returnRequirementKey(text) {
     case "applicantInsufficientFinances?":
       return "XXX";
     case "livingInNzMinimumYears":
-      return "XXX";
+      return "How long have you lived in NZ?";
     case "contactWorkandIncome":
-      return "XXX";
+      return "Have you contacted work and income?";
     case "alreadyReceiving":
       return "XXX";
     case "OrphansBenefit":
@@ -246,105 +246,103 @@ function returnRequirementKey(text) {
     case "incomeAssesment":
       return "XXX";
     case "familyBreakdownHasOccurred?":
-      return "XXX";
+      return "Has a family breakdown occurred?";
     case "childFinanciallyDependent?":
-      return "XXX";
+      return "Is your child financially dependent?";
     case "childNeedsAssistance?":
-      return "XXX";
+      return "Does your child need assistance?";
     case "MainCaregiverMinimumTimeInMonths":
       return "XXX";
     case "applicantNotNormalCaregiver?":
       return "XXX";
-    case "OfGoodCharachter?":
-      return "XXX";
     case "CompleteGuardianshipForm?":
-      return "XXX";
+      return "Have you completed a Guardianship form?";
     case "CompleteDeclarationOfParentOfChildForm?":
-      return "XXX";
+      return "Have you completed a Declaration of Parent of Child form?";
     case "IncludeCopyOfCriminalRecord?":
-      return "XXX";
+      return "Do you have a copy of your criminal record?";
     case "FileApplicationInPerson?":
       return "XXX";
     case "BeingInMilitaryService":
-      return "XXX";
+      return "Have you been in Military Service?";
     case "Before1April1974?":
-      return "XXX";
+      return "Was your military service before 1 April 1974?";
     case "RequireSupportToStayIndependent?":
       return "XXX";
     case "CurrentlyLivingAtHome?":
-      return "XXX";
+      return "Are you currently living at home?";
     case "ServiceRelatedHearingLoss?":
-      return "XXX";
+      return "Do you have hearing loss related to your service?";
     case "ReceivingIncomeCompensationDueToHearingLoss?":
       return "XXX";
     case "ConditionRelatedToQualifyingService":
       return "XXX";
     case "HasTreatmentCard?":
-      return "XXX";
+      return "Do you have a treatment card?";
     case "DisablementPension?":
-      return "XXX";
+      return "Do you receive disablement pension?";
     case "WarDisablementPension?":
-      return "XXX";
+      return "Do you receive a War Disablement Pension?";
     case "WeeklyCompensation?":
-      return "XXX";
+      return "Do you receive Weekly compensation?";
     case "PermanentImpairmentCompensation?":
-      return "XXX";
+      return "Do you receive permanent impairment compensation?";
     case "65AfterDec2014?":
-      return "XXX";
+      return "Did you turn 65 after December 2014?";
     case "Beforeturning65":
       return "XXX";
     case "VeteransIncomeSupportFor10YearsVia":
       return "XXX";
     case "VeteransPension":
-      return "XXX";
+      return "Do you receive a veterans pension?";
     case "WeeklyIncomeCompensation":
-      return "XXX";
+      return "Do you receive weekly income compensation?";
     case "EconomicPension":
-      return "XXX";
+      return "Do you receive an economic pension?";
     case "WarServicePension":
-      return "XXX";
+      return "Do you receive a war service pension?";
     case "WarVeteransAllowance":
-      return "XXX";
+      return "Do you receive a war veterans allowance?";
     case "WhenTurning65":
       return "XXX";
     case "AssetsBelowAssetTestThreshold":
       return "XXX";
     case "eligableForPublicHealthOrDisabilityServices?":
-      return "XXX";
+      return "Are you eligable for public health or disability services?";
     case "aged15OrYounger":
-      return "XXX";
+      return "Is your dependant child 15 or younger?";
     case "low/MediumIncomeBracket?":
       return "XXX";
     case "aged16to17":
       return "XXX";
     case "financiallyIndependent?":
-      return "XXX";
+      return "Are you financially indepedent?";
     case "aged18":
-      return "XXX";
+      return "Is your dependent child aged 18 or above?";
     case "attendingSecondaryOrTertiaryInstitution?":
       return "XXX";
     case "notInMarriageCivilUnionorDeFactoRelationship":
       return "XXX";
     case "principalCaregiver?":
-      return "XXX";
+      return "Are you the principal caregiver?";
     case "aged16orOver?":
-      return "XXX";
+      return "Is your dependent child 16 or older?";
     case "applicantOrChildMeetsResidencyRequirement?":
-      return "XXX";
+      return "Do you or your child meet the NZ Residency requirement?";
     case "australianPassportHolder?":
-      return "XXX";
+      return "Do you hold an Australian Passport mate?";
     case "residentVisaHolder":
       return "XXX";
     case "studentOrWorkVisa":
-      return "XXX";
+      return "Do you have a student or work visa?";
     case "havepassportDetails?":
       return "XXX";
     case "haveMostRecentOverseasTaxNumber?":
-      return "XXX";
+      return "Do you have your most recent overseas tax number?";
     case "haveImmigrationNZApplicationNumber?":
-      return "XXX";
+      return "Do you have an Immigration NZ Application number?";
     case "haveNzBankAccount?":
-      return "XXX";
+      return "Do you have an NZ bank account?";
     case "RseVisaHolder":
       return "XXX";
     case "willBeDoneForApplicantByServices":
