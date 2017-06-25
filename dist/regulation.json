@@ -5,9 +5,9 @@
       {"name": "SuperAnnuation",
         "category": "retirement",
         "requirements": {
-          "applicantMinimumAge": "65",
-          "yearsInNzSince20": "10",
-          "yearsInNzSince50": "5",
+          "applicantMinimumAge65?": "true",
+          "10yearsInNzSince20": "true",
+          "5yearsInNzSince50": "true",
           "citizenOrResident?": "true",
           "livingInNZ?": "true"
         }
@@ -16,7 +16,7 @@
         "category": "hardship",
         "requirements": {
           "ongoingCosts?": "true",
-          "applicantMinimumAge": "16",
+          "applicantMinimumAge16?": "true",
           "citizenOrResident?": "true",
           "livingInNZ?": "true",
           "SocialHousingBenefit?": "true"
@@ -25,7 +25,7 @@
         "name": "DisabilityAllowance",
         "category": "hardship",
         "requirements": {
-          "disabilityMinimum": "6",
+          "disabilityMinimumTime6?": "true",
           "ongoingCosts?": "true",
           "citizenOrResident?": "true",
           "livingInNZ?": "true"
@@ -34,7 +34,7 @@
         "name": "TemporaryAdditionalSupport",
         "category": "hardship",
         "requirements": {
-          "applicantMinimumAge": "16",
+          "applicantMinimumAge16?": "true",
           "citizenOrResident?": "true",
           "hasExistingBenefit?": "false"
         }
@@ -64,9 +64,9 @@
         "name": "CommunityServicesCard",
         "category": "childCare",
         "requirements": {
-          "applicantMinimumAge": "16",
+          "applicantMinimumAge16?": "true",
           "dependentChild?": "false",
-          "incomeLessThan": "45800",
+          "incomeLessThan45800?": "true",
           "citizenOrResident?": "true",
           "livingInNZ?": "true",
           "refugeeOrProtectionStatus?": "true"
@@ -77,13 +77,13 @@
         "requirements": {
           "singleCaregiver": "true",
           "dependentChild?": "true",
-          "dependentChildMaxAge": "14",
-          "applicantMinimumAge": "20",
+          "dependentChildMaxAge14?": "true",
+          "applicantMinimumAge20?": "true",
           "applicantStatus": "single",
           "applicantInsufficientFinances?": "true",
           "citizenOrResident?": "true",
           "livingInNZ?": "true",
-          "livingInNzMinimumYears": "2"
+          "livingInNzMinimum2Years?": "true"
         }
       },{
         "name": "EmergencyBenefit",
@@ -119,7 +119,7 @@
           "ServedInMilitaryOrEmergency?": "true",
           "citizenOrResident?": "true",
           "livingInNZ?": "true",
-          "applicantMinimumAge": "65"
+          "applicantMinimumAgeIs65?": "true"
         }
       },{
         "name": "ChildDisabilityAllowance",
@@ -129,8 +129,8 @@
           "citizenOrResident?": "true",
           "childAssessment?": "true",
           "livingInNZ?": "true",
-          "applicantMinimumAge": "65",
-          "dependentChildMaxAge": "18"
+          "applicantMinimumAgeIs65?": "true",
+          "dependentChildMaxAgeIs18?": "true"
         }
       },{
         "name": "ChildCareSubsidy",
@@ -138,7 +138,7 @@
         "requirements": {
           "mainCaregiver?": "true",
           "citizenOrResident?": "true",
-          "incomeLessThan": "45800",
+          "incomeLessThan45800?": "true",
           "livingInNZ?": "true",
           "incomeAssesment": "true"
         }
@@ -147,12 +147,12 @@
         "category": "childCare",
         "requirements": {
           "familyBreakdownHasOccurred?": "true",
-          "dependentChildMaxAge": "18",
+          "dependentChildMaxAge18?": "true",
           "childFinanciallyDependent?": "true",
           "childNeedsAssistance?": "true",
-          "applicantMinimumAge": "65",
+          "applicantMinimumAge65?": "true",
           "mainCaregiver?": "true",
-          "MainCaregiverMinimumTimeInMonths": "12",
+          "MainCaregiverMinimumTimeInMonthsIs12?": "true",
           "citizenOrResident?": "true",
           "applicantNotNormalCaregiver?": "true"
         }

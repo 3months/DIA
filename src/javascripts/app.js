@@ -297,7 +297,15 @@ function askQuestion(top_result) {
   if ($("#input input:checkbox:checked").length > 0) {
     var divRow = $(document.createElement("div")).addClass("row");
     result_options = determineResultOptions(top_result)
-    renderQuestion(result_options[0], getValidId(top_result), returnRequirementKey(top_result), result_options.slice(1));
+    var view_data = {
+      value: returnRequirementKey(top_result),
+      key: getValidId(top_result),
+      value1: result_options[0],
+      value2: result_options[1],
+    }
+    var template = $('#questionTpl').html();
+    $("#criteria1").html(Mustache.to_html(template, view_data));
+    addListeners($('#criteria1'), top_result)
   } else {
     $("#criteria1").html('')
   }
@@ -347,19 +355,67 @@ function tickRequirements(){
       // If user answer matches question requirement
       if (answerToBool(user_answer) == answerToBool(question_answer)){
         if ($(this).find( ".material-icons" ).length === 0) {
-          console.log('does not have class so append tick')
-          $(this).append('<i class="material-icons">&#xE876;</i>')
+          $(this).append('<i class="material-icons checked">&#xE876;</i>')
           $(this).css('background-color', 'green')
         }
       }
       if (answerToBool(user_answer) != answerToBool(question_answer)){
         if ($(this).find( ".material-icons" ).length === 0) {
-          $(this).append('<i class="material-icons">&#xE14C;</i>')
+          $(this).append('<i class="material-icons unchecked">&#xE14C;</i>')
           $(this).css('background-color', 'red')
         }
       }
+      tickIfAllChildrenTicked($(this))
+      tickTopLevelRequirements($(this))
     })
   }
+}
+
+function tickIfAllChildrenTicked(item) {
+  var all_criteria = item.closest('.panel').find("p").length
+  var checked_criteria = item.closest('.panel').find("i.checked").length
+  var failed_criteria = item.closest('.panel').find("i.unchecked").length
+
+  var parent_panel_header = item.closest('.panel').find(".panel-heading")
+  if (checked_criteria == all_criteria) {
+    console.log(checked_criteria)
+    console.log(all_criteria)
+
+    if (parent_panel_header.find( ".checked" ).length === 0) {
+      console.log(parent_panel_header)
+      parent_panel_header.append('<i class="material-icons checked">&#xE876;</i>')
+      parent_panel_header.css('background-color', 'green')
+    }
+  }
+
+  if (failed_criteria > 0) {
+    if (parent_panel_header.find( ".unchecked" ).length === 0) {
+      parent_panel_header.append('<i class="material-icons unchecked">&#xE14C;</i>')
+      parent_panel_header.css('background-color', 'red')
+    }
+  }
+}
+
+function tickTopLevelRequirements(item){
+  $('.biz-rule-card').each(function() {
+    var children = $(this).find('.panel-body').children()
+    var checked_children = children.find(".checked").length
+    var failed_children = children.find(".unchecked").length
+    var all_children = children.length
+    var parent_panel_BizRule = $(this).find('.panel-heading-bizRule')
+    if (checked_children == all_children){
+      if (parent_panel_BizRule.find( ".checked" ).length === 0) {
+        parent_panel_BizRule.append('<i class="material-icons checked">&#xE876;</i>')
+        parent_panel_BizRule.css('background-color', 'green')
+      }
+    }
+    if (failed_children > 0) {
+      if (parent_panel_BizRule.find( ".unchecked" ).length === 0) {
+        parent_panel_BizRule.append('<i class="material-icons unchecked">&#xE14C;</i>')
+        parent_panel_BizRule.css('background-color', 'red')
+      }
+    }
+  })
 }
 
 // Used to convert 'truthy' values to an actual boolean
@@ -379,16 +435,5 @@ function answerToBool(string) {
 }
 
 function determineResultOptions(top_result) {
-  switch (top_result) {
-    case "QualifyingOperationService":
-      return ['binary', "Yes", "No"]
-    case "Before1April1974?":
-      return ['binary', "Yes", "No"]
-    case "citizenOrResident?":
-      return ['binary', "Yes", "No"]
-    case "NeedsAssessmentCompleted?":
-      return ['binary', "Yes", "No"]
-    default:
-      return top_result
-  }
+  return ["Yes", "No"]
 }
