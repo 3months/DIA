@@ -304,8 +304,6 @@ function askQuestion(top_result) {
 }
 
 function renderQuestion(question_type, question_id, question_text, question_values) {
-  console.log("question type", question_type);
-  console.log('top result', question_id);
   var view_data = {
     question_text: question_text,
     question_id: question_id,
