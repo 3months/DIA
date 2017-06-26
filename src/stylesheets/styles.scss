@@ -67,6 +67,9 @@ input {
 
 .biz-rule-card .panel-heading {
   cursor: pointer;
+  .unchecked {
+    display: none;
+  }
 }
 
 .biz-rule-card .panel-title {
@@ -99,17 +102,6 @@ input {
 .form-group {
   margin-bottom: 0;
 }
-
-/*.btn-primary {
-  color: $dark-text-color;
-  background-color: $primary-color-light;
-}
-
-.btn-default:hover {
-  color: $dark-text-color;
-  background-color: $divider-color;
-  border-color: $divider-color;
-}*/
 
 /* End Overrides */
 
