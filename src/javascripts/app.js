@@ -456,7 +456,7 @@ function tickRequirements(){
       if (answerToBool(user_answer) == answerToBool(question_answer)){
         if ($(this).find( ".material-icons" ).length === 0) {
           $(this).append('<i class="material-icons checked">&#xE876;</i>')
-          $(this).css('background-color', 'green')
+          $(this).css('background-color', '#5cb85c')
         }
       }
       if (answerToBool(user_answer) != answerToBool(question_answer)){
@@ -482,7 +482,7 @@ function tickIfAllChildrenTicked(item) {
   if (checked_criteria  == all_criteria) {
     if (parent_panel_header.find( ".checked" ).length === 0) {
       parent_panel_header.append('<i class="material-icons checked">&#xE876;</i>')
-      parent_panel_header.css('background-color', 'green')
+      parent_panel_header.css('background-color', '#5cb85c')
     }
   }
 
@@ -503,7 +503,7 @@ function tickTopLevelRequirements(item){
     var parent_panel_BizRule = $(this).find('.panel-heading-bizRule')
     if (checked_children == all_children){
       if (parent_panel_BizRule.find( ".checked" ).length === 0) {
-        parent_panel_BizRule.css('background-color', 'green')
+        parent_panel_BizRule.css('background-color', '#5cb85c')
       }
     }
     if (failed_children > 0) {
