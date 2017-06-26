@@ -303,23 +303,6 @@ function askQuestion(top_result) {
   }
 }
 
-<<<<<<< HEAD
-function renderQuestion(question_type, question_id, question_text, question_values) {
-  var view_data = {
-    question_text: question_text,
-    question_id: question_id,
-  }
-  if (question_type == "binary") {
-    view_data['true_text'] = question_values[0];
-    view_data['false_text'] = question_values[1];
-    var template = $('#questionBinaryTpl').html();
-  } else {
-    var template = $('#questionMysteryTpl').html();
-  }
-  $("#criteria1").html(Mustache.to_html(template, view_data));
-  $("[name='"+ question_id +"']").bootstrapSwitch();
-  addListeners($('#criteria1'), question_id)
-=======
 function renderQuestion(value, key, options, question){
   var view_data = {
     value: value,
@@ -330,7 +313,6 @@ function renderQuestion(value, key, options, question){
   var template = $('#questionTpl').html();
   $("#criteria1").html(Mustache.to_html(template, view_data));
   addListeners($('#criteria1'), question)
->>>>>>> abstracting template method
 }
 
 // This assigns click events to questions
@@ -383,11 +365,7 @@ function tickIfAllChildrenTicked(item) {
 
   var parent_panel_header = item.closest('.panel').find(".panel-heading")
   if (checked_criteria == all_criteria) {
-    console.log(checked_criteria)
-    console.log(all_criteria)
-
     if (parent_panel_header.find( ".checked" ).length === 0) {
-      console.log(parent_panel_header)
       parent_panel_header.append('<i class="material-icons checked">&#xE876;</i>')
       parent_panel_header.css('background-color', 'green')
     }
