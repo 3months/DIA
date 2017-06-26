@@ -42,6 +42,10 @@ body {
   }
 }
 
+strong {
+  visibility: hidden;
+}
+
 h1.hero {
   padding-top: 50px;
   padding-bottom: 25px;

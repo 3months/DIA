@@ -86,12 +86,6 @@
           "livingInNzMinimum2Years?": "true"
         }
       },{
-        "name": "EmergencyBenefit",
-        "category": "hardship",
-        "requirements": {
-          "contactWorkandIncome": "true"
-        }
-      },{
         "name": "SchoolAndYearStartupFund",
         "category": "childCare",
         "requirements": {
@@ -188,21 +182,6 @@
         "requirements": {
           "proofOfIdentity?": "true"
         }
-      },{
-        "name": "Pets",
-        "category": "immigration",
-        "requirements": {
-          "approvedCountry": {
-            "permitToImport?": "true"
-          },
-          "arrivingFromAustralia": {
-            "postArrivalInspection": "true"
-          },
-          "otherCountry": {
-            "petSpent6MonthsInApprovedCountry?": "true",
-            "vetCertificateProvided?": "true"
-          }
-        }
       }
     ]
   },{
@@ -237,28 +216,6 @@
           "ServiceRelatedHearingLoss?": "true",
           "ReceivingIncomeCompensationDueToHearingLoss?": "true"
         }
-      },{"name": "RetirementLumpSum",
-        "category": "retirement",
-        "requirements": {
-          "65AfterDec2014?": "true",
-          "BeingInMilitaryService": {
-            "Before1April1974?": "true",
-            "QualifyingOperationService": "true"
-          },
-          "BeforeTurning65": {
-            "VeteransIncomeSupportFor10YearsVia": {
-              "VeteransPension": "true",
-              "WeeklyCompensation": "true",
-              "WeeklyIncomeCompensation": "true",
-              "EconomicPension": "true",
-              "WarServicePension": "true",
-              "WarVeteransAllowance": "true"
-            }
-          },
-          "WhenTurning65": {
-            "AssetsBelowAssetTestThreshold": "true"
-          }
-        }
       }
     ]
   },{
@@ -279,40 +236,5 @@
         }
       }
     ]
-  },{
-    "title": "InlandRevenueDepartment",
-    "businessRules": [
-      {"name": "GettingAnIrdNumber",
-        "category": "immigration",
-        "requirements": {
-          "alreadyInNZ?": {
-            "migrantOrVisaHolder": {
-              "australianPassportHolder?": {
-                "applyOnline": "true"
-              },
-              "residentVisaHolder": {
-                "applyOnline": "true"
-              },
-              "studentOrWorkVisa": {
-                "havepassportDetails?": "true",
-                "haveMostRecentOverseasTaxNumber?": "true",
-                "haveImmigrationNZApplicationNumber?": "true",
-                "haveNzBankAccount?": "true"
-              },
-              "RseVisaHolder": {
-                "willBeDoneForApplicantByServices": "true"
-              }
-            },
-            "nzCitizen":{
-              "haveCompletedIrdApplicationForm?": "true"
-            }
-          },
-          "notInNzYet?": {
-            "haveCompletedOffshoreForm?": "true"
-          }
-        }
-      }
-    ]
-    }
-  ]
+  }]
 }

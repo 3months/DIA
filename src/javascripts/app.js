@@ -196,7 +196,7 @@ function returnRequirementKey(text) {
 
     // Retirement
     case "QualifyingOperationService":
-      return "Participated in Operational Services?"
+      return "Has the applicant participated in Operational Services?"
     case "NeedsAssessmentCompleted?":
       return "Have you completed a needs assessment?"
     case "Before1April1974?":
@@ -233,12 +233,14 @@ function returnRequirementKey(text) {
       return "Has the applicant spent 5 or more years in NZ since turning 50?"
     case "10yearsInNzSince20":
       return "Has the applicant spent 10 or more years in NZ since turning 20?"
+    case "applicantMinimumAge65?":
+      return "Is the applicant 65 or older?"
 
     // healthcare
     case "numberOfChildren":
       return "Do you have any children?"
     default:
-      return 'That is all the questions we have for the current life event';
+      return text;
   }
 }
 
@@ -305,7 +307,7 @@ function findMostCommonRequirement(array){
   // loop through and return the value that is repeated most
   var top_result = Object.keys(ranked_values_object).reduce(function(a, b){
     return ranked_values_object[a] > ranked_values_object[b] ? a : b
-  })
+  }, 0)
   return top_result
 }
 
@@ -313,7 +315,12 @@ function askQuestion(top_result) {
   if ($("#input input:checkbox:checked").length > 0) {
     var divRow = $(document.createElement("div")).addClass("row");
     result_options = determineResultOptions(top_result)
-    renderQuestion(returnRequirementKey(top_result), getValidId(top_result), result_options, top_result)
+    console.log(top_result)
+    if (top_result === 0) {
+      $("#criteria1").html('')
+    } else {
+      renderQuestion(returnRequirementKey(top_result), getValidId(top_result), result_options, top_result)
+    }
   } else {
     $("#criteria1").html('')
   }
@@ -326,7 +333,6 @@ function renderQuestion(value, key, options, question){
     value1: options[0],
     value2: options[1]
   }
-  console.log(view_data.value)
   var template = $('#questionTpl').html();
   $("#criteria1").html(Mustache.to_html(template, view_data));
   addListeners($('#criteria1'), question)
@@ -353,7 +359,6 @@ function addListeners(string, question){
 
 function countRequirements() {
   $(".biz-rule-card").each(function showRequirementCount(i, card) {
-    console.log($(card).find('.requirement-panel > .requirement > .checked').length)
     var count_direct_children = $(card).find('.requirement-panel > .requirement > .checked').length
     var count_nested_panels = $(card).find('.requirement-panel > .requirement > .panel-heading > .checked').length
     var view_data = {
@@ -398,10 +403,12 @@ function tickRequirements(){
 function tickIfAllChildrenTicked(item) {
   var all_criteria = item.closest('.panel').find("p").length
   var checked_criteria = item.closest('.panel').find("i.checked").length
-  var failed_criteria = item.closest('.panel').find("i.unchecked").length
+  var checked_inner_panels = item.find('.panel > .panel-heading > .checked').length
 
+  var failed_criteria = item.closest('.panel').find("i.unchecked").length
   var parent_panel_header = item.closest('.panel').find(".panel-heading")
-  if (checked_criteria == all_criteria) {
+
+  if (checked_criteria  == all_criteria) {
     if (parent_panel_header.find( ".checked" ).length === 0) {
       parent_panel_header.append('<i class="material-icons checked">&#xE876;</i>')
       parent_panel_header.css('background-color', 'green')
