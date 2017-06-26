@@ -31,7 +31,6 @@ $(document).ready(function() {
   });
 
   $('#applyModal').on('show.bs.modal', function (event) {
-    console.log('oew')
     $('.panel-heading-bizRule').each(function(){
       if($(this).hasClass('green')) {
         var view_data = {
