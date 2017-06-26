@@ -297,20 +297,13 @@ function askQuestion(top_result) {
   if ($("#input input:checkbox:checked").length > 0) {
     var divRow = $(document.createElement("div")).addClass("row");
     result_options = determineResultOptions(top_result)
-    var view_data = {
-      value: returnRequirementKey(top_result),
-      key: getValidId(top_result),
-      value1: result_options[0],
-      value2: result_options[1],
-    }
-    var template = $('#questionTpl').html();
-    $("#criteria1").html(Mustache.to_html(template, view_data));
-    addListeners($('#criteria1'), top_result)
+    renderQuestion(returnRequirementKey(top_result), getValidId(top_result), result_options, top_result)
   } else {
     $("#criteria1").html('')
   }
 }
 
+<<<<<<< HEAD
 function renderQuestion(question_type, question_id, question_text, question_values) {
   var view_data = {
     question_text: question_text,
@@ -326,6 +319,18 @@ function renderQuestion(question_type, question_id, question_text, question_valu
   $("#criteria1").html(Mustache.to_html(template, view_data));
   $("[name='"+ question_id +"']").bootstrapSwitch();
   addListeners($('#criteria1'), question_id)
+=======
+function renderQuestion(value, key, options, question){
+  var view_data = {
+    value: value,
+    key: key,
+    value1: options[0],
+    value2: options[1]
+  }
+  var template = $('#questionTpl').html();
+  $("#criteria1").html(Mustache.to_html(template, view_data));
+  addListeners($('#criteria1'), question)
+>>>>>>> abstracting template method
 }
 
 // This assigns click events to questions
