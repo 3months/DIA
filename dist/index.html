@@ -13,7 +13,7 @@
 
 	<script id="questionTpl" type="text/template">
 		<div class="row">
-			<h4>{{key}} (required in {{num_requirements}} business rules)</h4>
+			<h4>{{value}}</h4>
 		</div>
 		<div class="text-center event-container" id="input">
 			<div class="row">
@@ -74,7 +74,7 @@
 	</script>
 
 	<script id="requirementTpl" type="text/template">
-		<p class="requirement" data-requirement="{{requirement_data_attr}}">{{requirement_name}} :<strong>{{requirement_value}}</strong></p>
+		<p class="requirement" data-requirement="{{requirement_data_attr}}">{{requirement_name}} <strong>{{requirement_value}}</strong></p>
 	</script>
 
 	<script id="questionMysteryTpl" type="text/template">
