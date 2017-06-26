@@ -315,7 +315,6 @@ function askQuestion(top_result) {
   if ($("#input input:checkbox:checked").length > 0) {
     var divRow = $(document.createElement("div")).addClass("row");
     result_options = determineResultOptions(top_result)
-    console.log(top_result)
     if (top_result === 0) {
       $("#criteria1").html('')
     } else {
@@ -432,13 +431,11 @@ function tickTopLevelRequirements(item){
     var parent_panel_BizRule = $(this).find('.panel-heading-bizRule')
     if (checked_children == all_children){
       if (parent_panel_BizRule.find( ".checked" ).length === 0) {
-        parent_panel_BizRule.append('<i class="material-icons checked">&#xE876;</i>')
         parent_panel_BizRule.css('background-color', 'green')
       }
     }
     if (failed_children > 0) {
       if (parent_panel_BizRule.find( ".unchecked" ).length === 0) {
-        parent_panel_BizRule.append('<i class="material-icons unchecked">&#xE14C;</i>')
         parent_panel_BizRule.css('background-color', 'red')
       }
     }
