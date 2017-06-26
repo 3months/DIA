@@ -11,6 +11,24 @@ require('../../src/stylesheets/bootstrap-switch.min.scss')
 
 $(document).ready(function() {
   $("[name='setting-anonymous']").bootstrapSwitch();
+
+  $('#debugModal').on('show.bs.modal', function (event) {
+    $('.user-obj tbody').html('');
+    $.each(user_obj, function(key, value) {
+      var view_data = {
+        requirement_name: returnRequirementKey(key),
+        requirement_value: value,
+        id: key
+      }
+      var row = Mustache.to_html($('#userObjRowTpl').html(), view_data);
+      $('.user-obj tbody').append(row);
+    });
+  });
+
+  $('.user-obj').on('click', '.user-obj-delete', function() {
+    delete user_obj[$(this).attr('data-req-id')];
+    $(this).closest('tr').remove();
+  });
 });
 
 // Load our JSON file

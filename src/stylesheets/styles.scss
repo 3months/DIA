@@ -124,6 +124,18 @@ input {
   z-index: 9999;
 }
 
+.debug-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 9999;
+}
+
+#debugModal {
+  top: 100px;
+  color: $primary-text-color;
+}
+
 .biz-rule-card {
   padding: 0 10px 0 10px;
 }
