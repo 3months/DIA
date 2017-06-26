@@ -63,18 +63,21 @@ input {
   padding: 0;
 }
 
+
 /* Business Card rules */
 
 .biz-rule-card .panel-heading {
   cursor: pointer;
-  .unchecked {
-    display: none;
-  }
 }
 
 .biz-rule-card .panel-title {
   color: $primary-color-text;
 }
+
+.green {
+  background-color: green !important;
+}
+
 
 .expando-thingy {
   position: absolute;
@@ -137,6 +140,24 @@ input {
 #debugModal {
   top: 100px;
   color: $primary-text-color;
+}
+
+#applyModal {
+  color: $primary-text-color;
+}
+
+@keyframes apply {
+    0%   {background-color: #455A64}
+    25%  {background-color: rgb(0, 80, 0)}
+    50%  {background-color: rgb(0, 128, 0);}
+    50%  {background-color: rgb(0, 80, 0);}
+    100% {background-color: #455A64;}
+}
+
+.animate {
+  animation-duration: 3s;
+  animation-name: apply;
+  animation-iteration-count: 99;
 }
 
 .biz-rule-card {
