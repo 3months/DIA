@@ -197,15 +197,48 @@ function returnRequirementKey(text) {
     // Retirement
     case "QualifyingOperationService":
       return "Participated in Operational Services?"
-    case "NeedsAssessmentCompleted":
+    case "NeedsAssessmentCompleted?":
       return "Have you completed a needs assessment?"
+    case "Before1April1974?":
+      return "Did the applicant participate in Military service before 1 April 1974?"
+    case "eligableForPublicHealthOrDisabilityServices?":
+      return "Is the application eligable for public health or disability services?"
+    case "WarVeteransAllowance":
+      return "Is the applicant receiving a war veterans allowance?"
+    case "WarServicePension":
+      return "Is the applicant receiving a war service pension?"
+    case "EconomicPension":
+      return "Is the applicant receiving an economic pension?"
+    case "AssetsBelowAssetTestThreshold":
+      return "Is the applicants assets below the threshold specified by the asset test?"
+    case "WeeklyIncomeCompensation":
+      return "Is the applicant receiving weekly income compensation?"
+    case "VeteransPension":
+      return "Is the applicant currently receiving a veterans pension?"
+    case "WeeklyCompensation":
+      return "Is the applicant currently receiving a weekly compensation?"
+    case "65AfterDec2014?":
+      return "Did the applicant turn 65 after Dec 2014?"
+    case "ServiceRelatedHearingLoss?":
+      return "Does the applicant have hearing loss related to their military service?"
+    case "ReceivingIncomeCompensationDueToHearingLoss?":
+      return "Is the applicant receiving income compensation due to hearing loss?"
+    case "RequireSupportToStayIndependent?":
+      return "Does the application require support to stay independent?"
+    case "CurrentlyLivingAtHome?":
+      return "Is the applicant currently living at home?"
+    case "applicantMinimumAgeIs65?":
+      return "Is the applicant currently 65 or over?"
+    case "5yearsInNzSince50":
+      return "Has the applicant spent 5 or more years in NZ since turning 50?"
+    case "10yearsInNzSince20":
+      return "Has the applicant spent 10 or more years in NZ since turning 20?"
 
     // healthcare
     case "numberOfChildren":
       return "Do you have any children?"
-
     default:
-      return text;
+      return 'That is all the questions we have for the current life event';
   }
 }
 
@@ -293,6 +326,7 @@ function renderQuestion(value, key, options, question){
     value1: options[0],
     value2: options[1]
   }
+  console.log(view_data.value)
   var template = $('#questionTpl').html();
   $("#criteria1").html(Mustache.to_html(template, view_data));
   addListeners($('#criteria1'), question)
