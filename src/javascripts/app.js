@@ -65,11 +65,11 @@ function recursiveLoop(obj) {
 
     for (var requirement_name in business_rule['requirements']) {
       if (business_rule['requirements'].hasOwnProperty(requirement_name)) {
-        var requirement = business_rule['requirements'][requirement_name];
-        createChildren(requirement_name, requirement, rule_id);
+        var requirement = business_rule['requirements'][requirement_name]
+        createChildren(requirement_name, requirement, rule_id)
       }
     }
-    counter++;
+    counter++
   }
 }
 
@@ -227,12 +227,6 @@ function returnRequirementKey(text) {
   }
 }
 
-// Count the amount of requirements in a business rule
-function countRequirements(div) {
-  var count = document.getElementById(div.id).childElementCount;
-  return count;
-}
-
 // Render business rules specific to life event clicked
 var lifeEventClicked = function() {
   var eventType = $(this).attr('data-event-type');
@@ -241,22 +235,11 @@ var lifeEventClicked = function() {
     // Find most common requirement
     // Ask question related to most common requirement
     askQuestion(returnTopRequirement());
-
-    $(".biz-rule-card").each(function showRequirementCount(i, card) {
-      var view_data = {
-        id: $(card).attr('id'),
-        // Count top level requirements
-        count: $(card).find('.requirement-panel > .requirement').length
-      }
-      var template = $('#requirementsNumTpl').html();
-      if ($(card).find('.requirement-count').length == 0) {
-        $(card).find('.card-preview').append(Mustache.to_html(template, view_data));
-      }
-    });
+    tickRequirements()
+    countRequirements()
   } else {
     $('[data-event-type="' + eventType + '"].biz-rule-card').remove();
     askQuestion(returnTopRequirement());
-
   }
   tickRequirements()
 };
@@ -344,12 +327,32 @@ function addListeners(string, question){
           user_obj[question] = value
           tickRequirements()
           askQuestion(returnTopRequirement());
+          countRequirements()
         }
       }
     )
     })
   }
 }
+
+function countRequirements() {
+  $(".biz-rule-card").each(function showRequirementCount(i, card) {
+    console.log($(card).find('.requirement-panel > .requirement > .checked').length)
+    var count_direct_children = $(card).find('.requirement-panel > .requirement > .checked').length
+    var count_nested_panels = $(card).find('.requirement-panel > .requirement > .panel-heading > .checked').length
+    var view_data = {
+      id: $(card).attr('id'),
+      // Count top level requirements
+      count: $(card).find('.requirement-panel > .requirement').length,
+      checked: count_direct_children+count_nested_panels
+
+    }
+    var template = $('#requirementsNumTpl').html();
+    $(card).find('.card-preview').html('');
+    $(card).find('.card-preview').append(Mustache.to_html(template, view_data));
+  });
+}
+
 
 function tickRequirements(){
   for (var user_question in user_obj) {
