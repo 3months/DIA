@@ -133,6 +133,60 @@ function returnTitle(text) {
 // Grab json text and use them as a key to render text blocks
 function returnRequirementKey(text) {
   switch (text) {
+    case "refugeeOrProtectionStatus?":
+      return "Does the applicant have refugee or protection status?";
+    case "singleCaregiver":
+      return "Is the applicant a single caregiver?";
+    case "applicantStatus":
+      return "Is the applicant single?";
+    case "applicantInsufficientFinances?":
+      return "Does the applicant have insufficient finances?";
+    case "livingInNzMinimum2Years?":
+      return "Has the applicant been living in NZ for 2 years or more?";
+    case "appliedBetweenMidJanEndFeb":
+      return "Have the applicant applied between mid January and the end of February?";
+    case "childAssessment?":
+      return "Has the applicants childs disability been assessed?";
+    case "incomeAssesment":
+      return "Have you completed an income assesment?";
+    case "familyBreakdownHasOccurred?":
+      return "Has family breakdown occurred?";
+    case "dependentChildMaxAge18?":
+      return "Is the applicants dependent child less than 18 years old?";
+    case "dependentChildMaxAge14?":
+      return "Is the applicants dependent child less than 14 years old?";
+    case "childFinanciallyDependent?":
+      return "Is the applicants child financially dependent?";
+    case "childNeedsAssistance?":
+      return "Does the applicants child need assistance?";
+    case "CompleteGuardianshipForm?":
+      return "Has the applicant completed a guardianship form?";
+    case "MainCaregiverMinimumTimeInMonthsIs12?":
+      return "Has the applicant been the main caregiver for 12 months or more?";
+    case "applicantNotNormalCaregiver?":
+      return "Is the applicant not the normal caregiver?";
+    case "FileApplicationInPerson?":
+      return "Will you file an application in person?";
+    case "IncludeCopyOfCriminalRecord?":
+      return "Do you have a copy of your criminal record?";
+    case "dependentChild?":
+      return "Does the applicant have dependent children?";
+    case "incomeLessThan45800?":
+      return "Is the applicants income less than 45800?";
+    case "OrphansBenefit":
+      return "Is the applicant receiving an orphans benefit?";
+    case "UnsupportedChildsBenefit":
+      return "Is the applicant receiving an unsupported childs benefit?";
+    case "mainCaregiver?":
+      return "Is the applicant the main caregiver?";
+    case "urgent?":
+      return "Is this urgent?";
+    case "disabilityMinimumTime6?":
+      return "Will the disability last 6 months or more?";
+    case "applicantMinimumAge16?":
+      return "Is the applicant currently 16 or older?";
+    case "applicantMinimumAge20?":
+      return "Is the applicant currently 20 or older?";
     case "applicantMinimumAge":
       return "What age range are you in?";
     case "yearsInNzSince20":
