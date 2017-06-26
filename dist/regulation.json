@@ -237,21 +237,6 @@
           "ServiceRelatedHearingLoss?": "true",
           "ReceivingIncomeCompensationDueToHearingLoss?": "true"
         }
-      },{"name": "Treatment",
-        "category": "retirement",
-        "requirements": {
-          "ConditionRelatedToQualifyingService": {
-            "HasTreatmentCard?": "true",
-            "DisablementPension?": "true",
-            "WarDisablementPension?": "true",
-            "WeeklyCompensation?": "true",
-            "PermanentImpairmentCompensation?": "true"
-          },
-          "BeingInMilitaryService": {
-            "Before1April1974?": "true",
-            "QualifyingOperationService": "true"
-          }
-        }
       },{"name": "RetirementLumpSum",
         "category": "retirement",
         "requirements": {
@@ -297,35 +282,6 @@
   },{
     "title": "InlandRevenueDepartment",
     "businessRules": [
-      {"name": "WorkingForFamiliesTaxCredits",
-        "category": "hardship",
-        "requirements": {
-          "dependentChild?": {
-            "aged15OrYounger": {
-              "low/MediumIncomeBracket?": "true",
-              "numberOfChildren": "undefined"
-            },
-            "aged16to17": {
-              "financiallyIndependent?": "false",
-              "low/MediumIncomeBracket?": "true",
-              "numberOfChildren": "undefined"
-            },
-            "aged18": {
-              "attendingSecondaryOrTertiaryInstitution?": "true",
-              "financiallyIndependent?": "false",
-              "low/MediumIncomeBracket?": "true",
-              "numberOfChildren": "undefined"
-            },
-            "notInMarriageCivilUnionorDeFactoRelationship": {
-              "low/MediumIncomeBracket?": "true",
-              "numberOfChildren": "undefined"
-            }
-          },
-        "principalCaregiver?" : "true",
-        "aged16orOver?": "true",
-        "applicantOrChildMeetsResidencyRequirement?" : "true"
-        }
-      },
       {"name": "GettingAnIrdNumber",
         "category": "immigration",
         "requirements": {
