@@ -19,6 +19,13 @@ $dark-text-color: $primary-text-color;
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
+* {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition:    all 0.5s ease;
+  -ms-transition:     all 0.5s ease;
+  -o-transition:      all 0.5s ease;
+}
+
 body {
   background-color: $primary-color-dark;
   color: $primary-color-text;
