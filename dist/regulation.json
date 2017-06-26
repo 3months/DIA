@@ -96,24 +96,13 @@
           "appliedBetweenMidJanEndFeb": "true"
         }
       },{
-        "name": "ExtraodinaryCareFund",
-        "category": "childCare",
-        "requirements": {
-          "alreadyReceiving": {
-            "OrphansBenefit": "true",
-            "UnsupportedChildsBenefit": "true"
-          },
-          "promisingChild?": "true",
-          "difficultChild?": "true"
-        }
-      },{
         "name": "VeteransPension",
         "category": "retirement",
         "requirements": {
           "ServedInMilitaryOrEmergency?": "true",
           "citizenOrResident?": "true",
           "livingInNZ?": "true",
-          "applicantMinimumAgeIs65?": "true"
+          "applicantMinimumAge65?": "true"
         }
       },{
         "name": "ChildDisabilityAllowance",
@@ -123,8 +112,8 @@
           "citizenOrResident?": "true",
           "childAssessment?": "true",
           "livingInNZ?": "true",
-          "applicantMinimumAgeIs65?": "true",
-          "dependentChildMaxAgeIs18?": "true"
+          "applicantMinimumAge65?": "true",
+          "dependentChildMaxAge18?": "true"
         }
       },{
         "name": "ChildCareSubsidy",
