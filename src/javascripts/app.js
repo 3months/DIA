@@ -29,6 +29,23 @@ $(document).ready(function() {
     delete user_obj[$(this).attr('data-req-id')];
     $(this).closest('tr').remove();
   });
+
+  $('#applyModal').on('show.bs.modal', function (event) {
+    $('.panel-heading-bizRule').each(function(){
+      if($(this).hasClass('green')) {
+        var view_data = {
+          bizRuleName: $(this).find('.panel-title').text()
+        }
+        var row = Mustache.to_html($('#applyRowTpl').html(), view_data);
+        $('.user-apply tbody').append(row)
+      }
+    })
+  })
+  $('.user-apply').on('click', '.user-obj-apply', function() {
+    $(this).addClass('animate');
+  });
+
+
 });
 
 // Load our JSON file
@@ -389,6 +406,7 @@ function askQuestion(top_result) {
     result_options = determineResultOptions(top_result)
     if (top_result === 0) {
       $("#criteria1").html('')
+      renderApplyAll()
     } else {
       renderQuestion(returnRequirementKey(top_result), getValidId(top_result), result_options, top_result)
     }
@@ -408,6 +426,16 @@ function renderQuestion(value, key, options, question){
   $("#criteria1").html(Mustache.to_html(template, view_data));
   addListeners($('#criteria1'), question)
 }
+
+function renderApplyAll(){
+  var count_success_benefits = $(".panel-heading-bizRule").find('.checked')
+  var view_data = {
+    apply_count : count_success_benefits.prevObject.length
+  }
+  var template = $('#applyAllTpl').html()
+  $('#criteria1').html(Mustache.to_html(template, view_data));
+}
+
 
 // This assigns click events to questions
 // on click they pop the selected value and the question asked into the user object
@@ -503,7 +531,7 @@ function tickTopLevelRequirements(item){
     var parent_panel_BizRule = $(this).find('.panel-heading-bizRule')
     if (checked_children == all_children){
       if (parent_panel_BizRule.find( ".checked" ).length === 0) {
-        parent_panel_BizRule.css('background-color', '#5cb85c')
+        parent_panel_BizRule.addClass("green")
       }
     }
     if (failed_children > 0) {
