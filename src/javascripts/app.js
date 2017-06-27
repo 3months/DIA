@@ -13,6 +13,10 @@ require('../../src/stylesheets/bootstrap-switch.min.scss')
 $(document).ready(function() {
   $("[name='setting-anonymous']").bootstrapSwitch();
 
+  $('#debugModal').on('hidden.bs.modal', function (event) {
+    updateCards();
+  });
+
   $('#debugModal').on('show.bs.modal', function (event) {
     $('.user-obj tbody').html('');
     $.each(user_obj, function(key, value) {
@@ -61,11 +65,11 @@ $(document).ready(function() {
     $(this).toggleClass('animate')
   });
 
+  // This event is fired when you click Yes/No for any question
   $('#criteria1').on('click', '#question_buttons button', function() {
     var question_id = $(this).closest('.question').attr('data-question-id');
     var answer_chosen = $(this).text();
     user_obj[question_id] = answer_chosen;
-    tickRequirements()
     askQuestion(returnTopRequirement());
     countRequirements()
     sortDivs()
@@ -119,7 +123,7 @@ function getObjects(obj, key, val) {
 }
 
 // Recursively loop through JSON file
-function recursiveLoop(obj) {
+function createBizRuleCards(obj) {
   var counter = 0;
   for (var rule_num in obj) {
     business_rule = obj[rule_num];
@@ -161,6 +165,7 @@ function createRulePanel(rule, id) {
   $("#list").append(Mustache.to_html(template, view_data));
 }
 
+// Get an ID which could be a valid HTML ID
 function getValidId(id) {
   return id.replace(/\?/, '');
 }
@@ -194,21 +199,18 @@ function returnTitle(text) {
   return text.replace(/([a-z])([A-Z])/g, "$1 $2");
 }
 
+function updateCards() {
+  countRequirements();
+  tickRequirements();
 }
 
 // Render business rules specific to life event clicked
 var lifeEventClicked = function() {
   var eventType = $(this).attr('data-event-type');
   if ($(this).is(":checked")) {
-    recursiveLoop(getObjects(myJson, "category", eventType));
-    // Find most common requirement
-    // Ask question related to most common requirement
-    askQuestion(returnTopRequirement());
-    tickRequirements()
-    countRequirements()
+    createBizRuleCards(getObjects(myJson, "category", eventType));
   } else {
     $('[data-event-type="' + eventType + '"].biz-rule-card').remove();
-    askQuestion(returnTopRequirement());
   }
   tickRequirements()
   sortDivs()
@@ -265,8 +267,9 @@ function findMostCommonRequirement(array){
 }
 
 function askQuestion(top_result) {
-  if ($("#input input:checkbox:checked").length > 0) {
+  if ($(".life-events input:checkbox:checked").length > 0) {
     result_options = determineResultOptions(top_result)
+    // top_result == 0 if there are no more questions
     if (top_result === 0) {
       $("#criteria1").html('')
       renderApplyAll()
