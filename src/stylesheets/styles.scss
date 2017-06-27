@@ -74,10 +74,15 @@ input {
   color: $primary-color-text;
 }
 
+$pleasant-green: #5cb85c;
+
 .green {
-  background-color: #5cb85c !important;
+  background-color: $pleasant-green !important;
 }
 
+.requirement_row button.selected {
+  background-color: $pleasant-green
+}
 
 .expando-thingy {
   position: absolute;

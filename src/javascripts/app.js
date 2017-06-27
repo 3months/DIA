@@ -17,12 +17,21 @@ $(document).ready(function() {
     $.each(user_obj, function(key, value) {
       var view_data = {
         requirement_name: returnRequirementKey(key),
-        requirement_value: value,
-        id: key
+        requirement_id: key,
+        value1_class: (value == "Yes") ? "selected" : "",
+        value2_class: (value == "No") ? "selected" : ""
       }
       var row = Mustache.to_html($('#userObjRowTpl').html(), view_data);
       $('.user-obj tbody').append(row);
     });
+  });
+
+  $('#debugModal').on('click', '.requirement_row button', function() {
+    var requirement_id = $(this).closest('.requirement_row').attr('data-requirement-id');
+    var answer_chosen = $(this).text();
+    user_obj[requirement_id] = answer_chosen;
+    $(this).toggleClass('selected');
+    $(this).siblings('button').toggleClass('selected');
   });
 
   $('.user-obj').on('click', '.user-obj-delete', function() {
