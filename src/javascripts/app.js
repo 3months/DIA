@@ -48,11 +48,7 @@ $(document).ready(function() {
   })
 
   $('.user-apply').on('click', '.user-obj-apply', function() {
-    if ($(this).hasClass('animate')){
-      $(this).removeClass('animate')
-    } else {
-      $(this).addClass('animate')
-    }
+    $(this).toggleClass('animate')
   });
 
   $('#criteria1').on('click', '#question_buttons button', function() {
