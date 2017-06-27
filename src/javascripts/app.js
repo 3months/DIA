@@ -41,11 +41,19 @@ $(document).ready(function() {
       }
     })
   })
+
   $('.user-apply').on('click', '.user-obj-apply', function() {
     $(this).addClass('animate');
   });
 
-
+  $('#criteria1').on('click', '#question_buttons button', function() {
+    var question_id = $(this).closest('.question').attr('data-question-id');
+    var answer_chosen = $(this).text();
+    user_obj[question_id] = answer_chosen;
+    tickRequirements()
+    askQuestion(returnTopRequirement());
+    countRequirements()
+  });
 });
 
 // Load our JSON file
@@ -402,29 +410,27 @@ function findMostCommonRequirement(array){
 
 function askQuestion(top_result) {
   if ($("#input input:checkbox:checked").length > 0) {
-    var divRow = $(document.createElement("div")).addClass("row");
     result_options = determineResultOptions(top_result)
     if (top_result === 0) {
       $("#criteria1").html('')
       renderApplyAll()
     } else {
-      renderQuestion(returnRequirementKey(top_result), getValidId(top_result), result_options, top_result)
+      renderQuestion(returnRequirementKey(top_result), top_result, result_options)
     }
   } else {
     $("#criteria1").html('')
   }
 }
 
-function renderQuestion(value, key, options, question){
+function renderQuestion(question_text, key, options){
   var view_data = {
-    value: value,
-    key: key,
+    question_text: question_text,
+    question_id: key,
     value1: options[0],
     value2: options[1]
   }
   var template = $('#questionTpl').html();
   $("#criteria1").html(Mustache.to_html(template, view_data));
-  addListeners($('#criteria1'), question)
 }
 
 function renderApplyAll(){
@@ -434,26 +440,6 @@ function renderApplyAll(){
   }
   var template = $('#applyAllTpl').html()
   $('#criteria1').html(Mustache.to_html(template, view_data));
-}
-
-
-// This assigns click events to questions
-// on click they pop the selected value and the question asked into the user object
-function addListeners(string, question){
-  if (string.length > 0){
-    string.find('input').each(function(index, element){
-      $('#'+element.id).change(function(){
-        if(this.checked) {
-          var value = $(this).data('value')
-          user_obj[question] = value
-          tickRequirements()
-          askQuestion(returnTopRequirement());
-          countRequirements()
-        }
-      }
-    )
-    })
-  }
 }
 
 function countRequirements() {
