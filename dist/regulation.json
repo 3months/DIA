@@ -2,7 +2,7 @@
   {
     "title": "WorkAndIncome",
     "businessRules": [
-      {"name": "SuperAnnuation",
+      {"name": "Superannuation",
         "category": "retirement",
         "requirements": {
           "applicantMinimumAge65?": "true",

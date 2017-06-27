@@ -12,37 +12,17 @@
 	<!-- ==================== TEMPLATES ==================== -->
 
 	<script id="questionTpl" type="text/template">
-		<div class="row">
-			<h4>{{value}}</h4>
-		</div>
-		<div class="text-center event-container" id="input">
-			<div class="row">
-				<div class="col-lg-6 col-sm-6 question1">
-					<div class="[ form-group ]">
-						<input type="checkbox" name="fancy-checkbox-{{key}}" id="fancy-checkbox-question{{key}}{{value1}}" autocomplete="off" data-value={{value1}} >
-							<div class="[ btn-group ]" >
-								<label for="fancy-checkbox-question{{key}}{{value1}}" class="[ btn btn-default ]">
-									<span class="[ glyphicon glyphicon-ok ]"></span>
-									<span> </span>
-								</label>
-								<label for="fancy-checkbox-question{{key}}{{value1}}" class="[ btn btn-default active ]">{{value1}}</label>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 col-sm-6 question-{{key}}">
-						<div class="[ form-group ]">
-							<input type="checkbox"  name="fancy-checkbox-{{key}}" id="fancy-checkbox-question{{key}}{{value2}}" autocomplete="off" data-value={{value2}}>
-							<div class="[ btn-group ]">
-								<label for="fancy-checkbox-question{{key}}{{value2}}" class="[ btn btn-default ]">
-									<span class="[ glyphicon glyphicon-ok ]"></span>
-									<span> </span>
-								</label>
-								<label for="fancy-checkbox-question{{key}}{{value2}}" class="[ btn btn-default active ]">{{value2}}</label>
-							</div>
-						</div>
-					</div>
+		<h4>{{question_text}}</h4>
+		<div class="event-container" id="question_buttons">
+			<div class="row question" data-question-id="{{question_id}}">
+				<div class="col-lg-2 col-sm-2 col-md-offset-4 col-sm-offset-4 answer1">
+					<button type="button" class="btn btn-success">{{value1}}</button>
+				</div>
+				<div class="col-lg-2 col-sm-2 answer2">
+					<button type="button" class="btn btn-danger">{{value2}}</button>
 				</div>
 			</div>
+		</div>
 	</script>
 
 	<script id="bizRuleCardTpl" type="text/template">
