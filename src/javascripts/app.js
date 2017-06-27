@@ -4,6 +4,7 @@ var user_obj = {}
 // Import all JS here
 // This file serves as the entry point for our webpack config
 var $ = require("jquery");
+var requirement_names = require('../../dist/requirements.json');
 require('bootstrap-loader');
 require('../../src/stylesheets/styles.scss');
 require('../../src/javascripts/bootstrap-switch.min.js')
@@ -16,7 +17,7 @@ $(document).ready(function() {
     $('.user-obj tbody').html('');
     $.each(user_obj, function(key, value) {
       var view_data = {
-        requirement_name: returnRequirementKey(key),
+        requirement_name: requirement_names[key],
         requirement_id: key,
         value1_class: (value == "Yes") ? "selected" : "",
         value2_class: (value == "No") ? "selected" : ""
@@ -161,7 +162,7 @@ function createRequirementPanel(requirement_name, requirement_value, rule_id) {
 
   if (typeof requirement_value !== "object" && requirement_value !== null) {
     var view_data = {
-      requirement_name: returnRequirementKey(requirement_name),
+      requirement_name: requirement_names[requirement_name],
       requirement_value: requirement_value,
       requirement_data_attr: requirement_name
     }
@@ -171,7 +172,7 @@ function createRequirementPanel(requirement_name, requirement_value, rule_id) {
   } else {
     var view_data = {
       id: getValidId(rule_id + requirement_name),
-      requirement_name: returnRequirementKey(requirement_name),
+      requirement_name: requirement_names[requirement_name],
     }
     var template = $('#benefitPanelTpl').html();
     $(parent_panel).append(Mustache.to_html(template, view_data));
@@ -183,190 +184,6 @@ function returnTitle(text) {
   return text.replace(/([a-z])([A-Z])/g, "$1 $2");
 }
 
-// Grab json text and use them as a key to render text blocks
-function returnRequirementKey(text) {
-  switch (text) {
-    case "refugeeOrProtectionStatus?":
-      return "Does the applicant have refugee or protection status?";
-    case "singleCaregiver":
-      return "Is the applicant a single caregiver?";
-    case "applicantStatus":
-      return "Is the applicant single?";
-    case "applicantInsufficientFinances?":
-      return "Does the applicant have insufficient finances?";
-    case "livingInNzMinimum2Years?":
-      return "Has the applicant been living in NZ for 2 years or more?";
-    case "appliedBetweenMidJanEndFeb":
-      return "Have the applicant applied between mid January and the end of February?";
-    case "childAssessment?":
-      return "Has the applicants childs disability been assessed?";
-    case "incomeAssesment":
-      return "Have you completed an income assesment?";
-    case "familyBreakdownHasOccurred?":
-      return "Has family breakdown occurred?";
-    case "dependentChildMaxAge18?":
-      return "Is the applicants dependent child less than 18 years old?";
-    case "dependentChildMaxAge14?":
-      return "Is the applicants dependent child less than 14 years old?";
-    case "childFinanciallyDependent?":
-      return "Is the applicants child financially dependent?";
-    case "childNeedsAssistance?":
-      return "Does the applicants child need assistance?";
-    case "CompleteGuardianshipForm?":
-      return "Has the applicant completed a guardianship form?";
-    case "MainCaregiverMinimumTimeInMonthsIs12?":
-      return "Has the applicant been the main caregiver for 12 months or more?";
-    case "applicantNotNormalCaregiver?":
-      return "Is the applicant not the normal caregiver?";
-    case "FileApplicationInPerson?":
-      return "Will you file an application in person?";
-    case "IncludeCopyOfCriminalRecord?":
-      return "Do you have a copy of your criminal record?";
-    case "dependentChild?":
-      return "Does the applicant have dependent children?";
-    case "incomeLessThan45800?":
-      return "Is the applicants income less than 45800?";
-    case "OrphansBenefit":
-      return "Is the applicant receiving an orphans benefit?";
-    case "UnsupportedChildsBenefit":
-      return "Is the applicant receiving an unsupported childs benefit?";
-    case "mainCaregiver?":
-      return "Is the applicant the main caregiver?";
-    case "urgent?":
-      return "Is this urgent?";
-    case "disabilityMinimumTime6?":
-      return "Will the disability last 6 months or more?";
-    case "applicantMinimumAge16?":
-      return "Is the applicant currently 16 or older?";
-    case "applicantMinimumAge20?":
-      return "Is the applicant currently 20 or older?";
-    case "applicantMinimumAge":
-      return "What age range are you in?";
-    case "yearsInNzSince20":
-      return "Years applicant should have spent in NZ since turning 20";
-    case "yearsInNzSince50":
-      return "Years applicant should have spent in NZ since turning 50";
-    case "citizenOrResident?":
-      return "Is the applicant a citizen or Resident of NZ?";
-    case "livingInNZ?":
-      return "Is the applicant currently living in NZ";
-    case "ServedInMilitaryOrEmergency?":
-      return "Applicant Served in Military or in emergency?";
-    case "relatedOrGuardian?":
-      return "Applicant is family or guardian?";
-    case "completedIncomeAndAssetTest?":
-      return "Have you completed an income and asset test?";
-    case "hasExistingBenefit?":
-      return "Are you currently on another benefit?";
-    case "organiser?":
-      return "Are you the organiser of the event?"
-    case "pension?":
-      return "Are you currently receiving a pension?"
-    case "ongoingCosts?":
-      return "Do you have ongoing costs that you cannot currently cover?"
-    case "SocialHousingBenefit?":
-      return "Are you currently in receivership of a housing benefit?"
-
-    // Parent or Grandparent Visitor Visa
-    case "ProofOfIdentity?":
-      return "Applicant has supplied proof of identity?"
-    case "InGoodHealth?":
-      return "Applicant is in good health?"
-    case "OfGoodCharachter?":
-      return "Applicant is of good character?"
-    case "IntendToMeetVisaConditions?":
-      return "Applicant intends to meet visa conditions?"
-    case "SponsorIsChildOrParent?":
-      return "Applicant sponsor is a child or Parent?"
-    case "SponsorIsResidentOrCitizen?":
-      return "Applicant sponsor is a resident or citizen of NZ?"
-    case "SponsorIsRelative?":
-      return "Applicant sponsor is a relative?"
-    case "CoverOwnHealthcareCosts?":
-      return "Applicant can afford to cover their own healthcare costs?"
-    case "proofOfIdentity?":
-      return "Applicant has supplied proof of identity?"
-
-    // Immigration Pet visa
-    case "approvedCountry":
-      return "If pet is arriving from an approved country"
-    case "permitToImport?":
-      return "must have permit to import?"
-    case "arrivingFromAustralia":
-      return "If pet is arriving from Australia"
-    case "postArrivalInspection":
-      return "Must complete post arrival inspection"
-    case "otherCountry":
-      return "Other countries"
-    case "petSpent6MonthsInApprovedCountry?":
-      return "Pet must spend 6 months in an approved country?"
-    case "vetCertificateProvided":
-      return "Vet certicate provided?"
-
-    // GettingAnIrdNumber
-    case "alreadyInNZ?":
-      return "Already in New Zealand?"
-    case "notInNzYet?":
-      return "Not yet in New Zealand?"
-    case "migrantOrVisaHolder":
-      return "Migrant or Visa holder?"
-    case "nzCitizen":
-      return "A New Zealand Citizen?"
-    case "haveCompletedOffshoreForm?":
-      return "Have completed offshore form?"
-    case "migrantOrVisaHolder":
-      return "Migrant or Visa holder?"
-    case "applyOnline":
-      return "Please apply online"
-
-    // Retirement
-    case "QualifyingOperationService":
-      return "Has the applicant participated in Operational Services?"
-    case "NeedsAssessmentCompleted?":
-      return "Have you completed a needs assessment?"
-    case "Before1April1974?":
-      return "Did the applicant participate in Military service before 1 April 1974?"
-    case "eligableForPublicHealthOrDisabilityServices?":
-      return "Is the application eligable for public health or disability services?"
-    case "WarVeteransAllowance":
-      return "Is the applicant receiving a war veterans allowance?"
-    case "WarServicePension":
-      return "Is the applicant receiving a war service pension?"
-    case "EconomicPension":
-      return "Is the applicant receiving an economic pension?"
-    case "AssetsBelowAssetTestThreshold":
-      return "Is the applicants assets below the threshold specified by the asset test?"
-    case "WeeklyIncomeCompensation":
-      return "Is the applicant receiving weekly income compensation?"
-    case "VeteransPension":
-      return "Is the applicant currently receiving a veterans pension?"
-    case "WeeklyCompensation":
-      return "Is the applicant currently receiving a weekly compensation?"
-    case "65AfterDec2014?":
-      return "Did the applicant turn 65 after Dec 2014?"
-    case "ServiceRelatedHearingLoss?":
-      return "Does the applicant have hearing loss related to their military service?"
-    case "ReceivingIncomeCompensationDueToHearingLoss?":
-      return "Is the applicant receiving income compensation due to hearing loss?"
-    case "RequireSupportToStayIndependent?":
-      return "Does the application require support to stay independent?"
-    case "CurrentlyLivingAtHome?":
-      return "Is the applicant currently living at home?"
-    case "applicantMinimumAgeIs65?":
-      return "Is the applicant currently 65 or over?"
-    case "5yearsInNzSince50":
-      return "Has the applicant spent 5 or more years in NZ since turning 50?"
-    case "10yearsInNzSince20":
-      return "Has the applicant spent 10 or more years in NZ since turning 20?"
-    case "applicantMinimumAge65?":
-      return "Is the applicant 65 or older?"
-
-    // healthcare
-    case "numberOfChildren":
-      return "Do you have any children?"
-    default:
-      return text;
-  }
 }
 
 // Render business rules specific to life event clicked
@@ -443,7 +260,7 @@ function askQuestion(top_result) {
       $("#criteria1").html('')
       renderApplyAll()
     } else {
-      renderQuestion(returnRequirementKey(top_result), top_result, result_options)
+      renderQuestion(requirement_names[top_result], top_result, result_options)
     }
   } else {
     $("#criteria1").html('')
