@@ -30,7 +30,7 @@ $(document).ready(function() {
     $(this).closest('tr').remove();
   });
 
-  $('#applyModal').on('show.bs.modal', function (event) {
+  $('#applyModal').on('show.bs.modal', function(event) {
     $('.panel-heading-bizRule').each(function(){
       if($(this).hasClass('green')) {
         var view_data = {
@@ -42,8 +42,13 @@ $(document).ready(function() {
     })
   })
 
+
+  $('#applyModal').on('hidden.bs.modal', function(event) {
+    $('.user-apply tbody').html('')
+  })
+
   $('.user-apply').on('click', '.user-obj-apply', function() {
-    $(this).addClass('animate');
+    $(this).toggleClass('animate')
   });
 
   $('#criteria1').on('click', '#question_buttons button', function() {
@@ -54,6 +59,20 @@ $(document).ready(function() {
     askQuestion(returnTopRequirement());
     countRequirements()
   });
+
+  $('.user-apply-all').on('click', function(){
+    if ($(this).hasClass('animate')){
+      $(this).removeClass('animate')
+      $('.user-obj-apply').each(function(){
+        $(this).removeClass('animate')
+      })
+    } else {
+      $(this).addClass('animate');
+      $('.user-obj-apply').each(function(){
+        $(this).addClass('animate')
+      })
+    }
+  })
 });
 
 // Load our JSON file
@@ -434,9 +453,14 @@ function renderQuestion(question_text, key, options){
 }
 
 function renderApplyAll(){
-  var count_success_benefits = $(".panel-heading-bizRule").find('.checked')
+  var count_success_benefits = 0
+  $('.panel-heading-bizRule').each(function(){
+    if($(this).hasClass('green')) {
+      count_success_benefits++
+    }
+  })
   var view_data = {
-    apply_count : count_success_benefits.prevObject.length
+    apply_count : count_success_benefits
   }
   var template = $('#applyAllTpl').html()
   $('#criteria1').html(Mustache.to_html(template, view_data));
