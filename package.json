@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "test",
-    "start": "node server.js",
+    "start": "webpack",
     "bundle": "webpack",
     "build": "webpack-dev-server --progress --colors --watch --content-base ./dist --open",
     "heroku-postbuild": "node server.js"
@@ -16,7 +16,8 @@
     "bootstrap-loader": "^2.1.0",
     "expose-loader": "^0.7.3",
     "jquery": "^3.2.1",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "mustache-loader": "^0.4.1"
   },
   "devDependencies": {
     "bootstrap-sass": "^3.3.7",
