@@ -516,7 +516,6 @@ function tickIfAllChildrenTicked(item) {
 
   if (failed_criteria > 0) {
     if (parent_panel_header.find( ".unchecked" ).length === 0) {
-      parent_panel_header.append('<i class="material-icons unchecked">&#xE14C;</i>')
       parent_panel_header.css('background-color', 'red')
     }
   }
