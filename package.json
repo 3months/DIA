@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "test",
-    "start": "webpack --progress",
+    "start": "node server.js",
     "bundle": "webpack",
     "build": "webpack-dev-server --progress --colors --watch --content-base ./dist --open",
     "heroku-postbuild": "node server.js"
