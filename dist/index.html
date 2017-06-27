@@ -12,8 +12,8 @@
 	<!-- ==================== TEMPLATES ==================== -->
 
 	<script id="questionTpl" type="text/template">
-		<h4>{{question_text}}</h4>
 		<div class="event-container" id="question_buttons">
+			<h4>{{question_text}}</h4>
 			<div class="row question" data-question-id="{{question_id}}">
 				<div class="col-lg-2 col-sm-2 col-md-offset-4 col-sm-offset-4 answer1">
 					<button type="button" class="btn btn-success">{{value1}}</button>
@@ -21,6 +21,8 @@
 				<div class="col-lg-2 col-sm-2 answer2">
 					<button type="button" class="btn btn-danger">{{value2}}</button>
 				</div>
+				<div class="col-lg-6 col-sm-6">
+				<h4>  </h4></div>
 			</div>
 		</div>
 	</script>
@@ -73,10 +75,12 @@
 	</script>
 
 	<script id="applyAllTpl" type="text/template">
-		<div class="row question-row">
-			<h4 class="question-text">Would you like to apply for all {{apply_count}} avaialble benefits?</h4>
-			<div class="form-group question-group text-center">
-				<button type="button" data-toggle="modal" data-target="#applyModal" class="btn btn-info" id="apply-btn">Apply Now</button>
+		<div class="text-center event-container" id="input">
+			<div class="row">
+				<h4 class="question-text">Would you like to apply for benefits ({{apply_count}} available)</h4>
+				<div class="form-group question-group text-center">
+					<button type="button" data-toggle="modal" data-target="#applyModal" class="btn btn-info" id="apply-btn">Apply Now</button>
+				</div>
 			</div>
 		</div>
 	</script>
@@ -106,26 +110,7 @@
 
 		<!-- Top left corner -->
 		<div class="pull-left debug-container">
-			<button type="button" data-toggle="modal" data-target="#debugModal" class="btn btn-info" id="user-obj-btn">My Answers</button>
-
-			<div class="modal fade" id="debugModal" role="dialog" tabindex="-1">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-body">
-							<table class="table user-obj">
-								<thead>
-									<tr>
-										<td>Requirement</td>
-										<td></td>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
+			<button type="button" href="google.com" class="btn btn-info" id="user-obj-btn">What is this?</button>
 		</div>
 		<!-- END Top left corner -->
 
@@ -139,7 +124,7 @@
 								<thead>
 									<tr>
 										<td>Benefits</td>
-										<td></td>
+										<td><button class="btn user-apply-all" type="button">Apply for All</button></td>
 									</tr>
 								</thead>
 								<tbody>
@@ -153,12 +138,18 @@
 
 		<!-- Top right corner buttons -->
 		<div class="pull-right page-button-container">
-			<input type="checkbox" name="setting-anonymous" data-on-text="Anonymous" data-off-text="Public" data-on-color="success" data-off-color="info">
-			<button class="btn btn-info">Download Snapshot</button>
+			<div class="text-right answers-container">
+				<input type="checkbox" name="setting-anonymous" data-on-text="Anonymous" data-off-text="John Smith" data-on-color="success" data-off-color="info" data-label-width="auto">
+				<button type="button" data-toggle="modal" data-target="#debugModal" class="btn btn-info text-left" id="user-obj-btn">My Answers</button>
+			</div>
+			<div class="answers-container">
+				<button class="btn btn-info">Upload Snapshot</button>
+				<button class="btn btn-info">Download Snapshot</button>
+			</div>
 		</div>
 		<!-- END Top right corner buttons -->
 
-		<div class="col-lg-12 text-center">
+		<div class="col-lg-6 text-center">
 			<div class="text-center">
 				<h1 class="hero">What can I help you with?</h1>
 			</div>
@@ -227,8 +218,15 @@
 					</div>
 				</div>
 			</div>
-			<div class="row text-center" id="criteria1"></div>
+		</div>
+		<div class="col-lg-6 text-center">
+			<div class="text-center">
+				<h1 class="hero">Tell us About your circumstances</h1>
+			</div>
+			<div class="row text-center background" id="criteria1"></div>
 			<div class="row text-center" id="criteria2"></div>
+		</div>
+		<div class="col-lg-12 text-center">
 			<div class="row text-center" id="results"></div>
 			<div class="row" id="list"></div>
 		</div>

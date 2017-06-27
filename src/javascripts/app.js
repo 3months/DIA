@@ -30,7 +30,7 @@ $(document).ready(function() {
     $(this).closest('tr').remove();
   });
 
-  $('#applyModal').on('show.bs.modal', function (event) {
+  $('#applyModal').on('show.bs.modal', function(event) {
     $('.panel-heading-bizRule').each(function(){
       if($(this).hasClass('green')) {
         var view_data = {
@@ -42,8 +42,17 @@ $(document).ready(function() {
     })
   })
 
+
+  $('#applyModal').on('hidden.bs.modal', function(event) {
+    $('.user-apply tbody').html('')
+  })
+
   $('.user-apply').on('click', '.user-obj-apply', function() {
-    $(this).addClass('animate');
+    if ($(this).hasClass('animate')){
+      $(this).removeClass('animate')
+    } else {
+      $(this).addClass('animate')
+    }
   });
 
   $('#criteria1').on('click', '#question_buttons button', function() {
@@ -54,6 +63,20 @@ $(document).ready(function() {
     askQuestion(returnTopRequirement());
     countRequirements()
   });
+
+  $('.user-apply-all').on('click', function(){
+    if ($(this).hasClass('animate')){
+      $(this).removeClass('animate')
+      $('.user-obj-apply').each(function(){
+        $(this).removeClass('animate')
+      })
+    } else {
+      $(this).addClass('animate');
+      $('.user-obj-apply').each(function(){
+        $(this).addClass('animate')
+      })
+    }
+  })
 });
 
 // Load our JSON file
