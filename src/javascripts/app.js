@@ -68,6 +68,7 @@ $(document).ready(function() {
     tickRequirements()
     askQuestion(returnTopRequirement());
     countRequirements()
+    sortDivs()
   });
 
   $('.user-apply-all').on('click', function(){
@@ -84,6 +85,15 @@ $(document).ready(function() {
     }
   })
 });
+
+function sortDivs(){
+  $('.biz-rule-card').each(function(){
+    var bizCard = $(this)
+    if (bizCard.find('.red').length > 0){
+      $("#fails").append(bizCard)
+    }
+  })
+}
 
 // Load our JSON file
 var myJson = {};
@@ -201,6 +211,7 @@ var lifeEventClicked = function() {
     askQuestion(returnTopRequirement());
   }
   tickRequirements()
+  sortDivs()
 };
 
 $("#fancy-checkbox-immigration, #fancy-checkbox-retired, #fancy-checkbox-health, #fancy-checkbox-childcare").change(lifeEventClicked);
@@ -319,14 +330,14 @@ function tickRequirements(){
       // If user answer matches question requirement
       if (answerToBool(user_answer) == answerToBool(question_answer)){
         if ($(this).find( ".material-icons" ).length === 0) {
-          $(this).append('<i class="material-icons checked">&#xE876;</i>')
-          $(this).css('background-color', '#5cb85c')
+          $(this).append('<i class="material-icons checked"></i>')
+          $(this).addClass("green")
         }
       }
       if (answerToBool(user_answer) != answerToBool(question_answer)){
         if ($(this).find( ".material-icons" ).length === 0) {
-          $(this).append('<i class="material-icons unchecked">&#xE14C;</i>')
-          $(this).css('background-color', 'red')
+          $(this).append('<i class="material-icons unchecked"></i>')
+          $(this).addClass("red")
         }
       }
       tickIfAllChildrenTicked($(this))
@@ -345,14 +356,14 @@ function tickIfAllChildrenTicked(item) {
 
   if (checked_criteria  == all_criteria) {
     if (parent_panel_header.find( ".checked" ).length === 0) {
-      parent_panel_header.append('<i class="material-icons checked">&#xE876;</i>')
-      parent_panel_header.css('background-color', '#5cb85c')
+      parent_panel_header.append('<i class="material-icons checked"></i>')
+      parent_panel_header.addClass("green")
     }
   }
 
   if (failed_criteria > 0) {
     if (parent_panel_header.find( ".unchecked" ).length === 0) {
-      parent_panel_header.css('background-color', 'red')
+      parent_panel_header.addClass("red")
     }
   }
 }
@@ -371,7 +382,7 @@ function tickTopLevelRequirements(item){
     }
     if (failed_children > 0) {
       if (parent_panel_BizRule.find( ".unchecked" ).length === 0) {
-        parent_panel_BizRule.css('background-color', 'red')
+        parent_panel_BizRule.addClass("red")
       }
     }
   })
