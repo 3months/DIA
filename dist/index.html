@@ -108,12 +108,13 @@
 		</tr>
 	</script>
 
-
 	<script id="userObjRowTpl" type="text/template">
-		<tr>
+		<tr class="requirement_row" data-requirement-id="{{requirement_id}}">
 			<td>{{requirement_name}}</td>
-			<td>{{requirement_value}}</td>
-			<td><button data-req-id="{{id}}" class="user-obj-delete" type="button"><i class="material-icons">delete</i></button></td>
+			<td>
+				<button class="btn {{value1_class}}" type="button">Yes</button>
+				<button class="btn {{value2_class}}" type="button">No</button>
+			</td>
 		</tr>
 	</script>
 
