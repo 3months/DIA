@@ -67,6 +67,7 @@ $(document).ready(function() {
     tickRequirements()
     askQuestion(returnTopRequirement());
     countRequirements()
+    sortDivs()
   });
 
   $('.user-apply-all').on('click', function(){
@@ -83,6 +84,15 @@ $(document).ready(function() {
     }
   })
 });
+
+function sortDivs(){
+  $('.biz-rule-card').each(function(){
+    var bizCard = $(this)
+    if (bizCard.find('.red').length > 0){
+      $("#fails").append(bizCard)
+    }
+  })
+}
 
 // Load our JSON file
 var myJson = {};
@@ -384,6 +394,7 @@ var lifeEventClicked = function() {
     askQuestion(returnTopRequirement());
   }
   tickRequirements()
+  sortDivs()
 };
 
 $("#fancy-checkbox-immigration, #fancy-checkbox-retired, #fancy-checkbox-health, #fancy-checkbox-childcare").change(lifeEventClicked);
@@ -554,7 +565,7 @@ function tickTopLevelRequirements(item){
     }
     if (failed_children > 0) {
       if (parent_panel_BizRule.find( ".unchecked" ).length === 0) {
-        parent_panel_BizRule.css('background-color', 'red')
+        parent_panel_BizRule.addClass("red")
       }
     }
   })
