@@ -152,9 +152,9 @@ input {
 
 @keyframes apply {
     0%   {background-color: #455A64}
-    25%  {background-color: rgb(0, 80, 0)}
-    50%  {background-color: #5cb85c;}
+    25%  {background-color: #5cb85c;}
     50%  {background-color: rgb(0, 80, 0);}
+    50%  {background-color: #5cb85c;}
     100% {background-color: #455A64;}
 }
 
@@ -162,6 +162,9 @@ input {
   animation-duration: 3s;
   animation-name: apply;
   animation-iteration-count: 99;
+  :focus {
+    outline: none;
+  }
 }
 
 .biz-rule-card {
