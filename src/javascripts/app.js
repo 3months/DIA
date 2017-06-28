@@ -51,9 +51,8 @@ function userObjectModalInit() {
 function benefitApplyModalInit() {
   $("#applyModal").on("show.bs.modal", function(event) {
     var all_benefits = $(".panel-heading-bizRule.green").length;
-    var counter = 0;
     var random = Math.floor(Math.random() * 3);
-    $(".panel-heading-bizRule").each(function() {
+    $(".panel-heading-bizRule").each(function(counter, val) {
       if ($(this).hasClass("green")) {
         // We grab a random requirement from the business rule
         var random_requirement = $(this).parent().find(".requirement").eq(random).text();
@@ -70,7 +69,6 @@ function benefitApplyModalInit() {
         }
         $(".user-apply tbody").append(row);
       }
-      counter++;
     });
   });
 
@@ -361,14 +359,11 @@ function tickRequirements() {
       var user_answer = user_obj[user_question];
       var question_answer = $(this).children().text();
       // If user answer matches question requirement
-      if (answerToBool(user_answer) == answerToBool(question_answer)) {
-        if ($(this).find(".material-icons").length === 0) {
+      if ($(this).find(".material-icons").length === 0) {
+        if (answerToBool(user_answer) == answerToBool(question_answer)) {
           $(this).append('<i class="material-icons checked"></i>');
           $(this).addClass("green");
-        }
-      }
-      if (answerToBool(user_answer) != answerToBool(question_answer)) {
-        if ($(this).find(".material-icons").length === 0) {
+        } else {
           $(this).append('<i class="material-icons unchecked"></i>');
           $(this).addClass("red");
         }
