@@ -70,9 +70,8 @@ $(document).ready(function() {
     var question_id = $(this).closest('.question').attr('data-question-id');
     var answer_chosen = $(this).text();
     user_obj[question_id] = answer_chosen;
-    askQuestion(returnTopRequirement());
-    countRequirements()
-    sortDivs()
+    askQuestion();
+    updateCards();
   });
 
   $('.user-apply-all').on('click', function(){
@@ -202,6 +201,7 @@ function returnTitle(text) {
 function updateCards() {
   countRequirements();
   tickRequirements();
+  sortDivs();
 }
 
 // Render business rules specific to life event clicked
@@ -212,8 +212,8 @@ var lifeEventClicked = function() {
   } else {
     $('[data-event-type="' + eventType + '"].biz-rule-card').remove();
   }
-  tickRequirements()
-  sortDivs()
+  askQuestion();
+  updateCards();
 };
 
 $("#fancy-checkbox-immigration, #fancy-checkbox-retired, #fancy-checkbox-health, #fancy-checkbox-childcare").change(lifeEventClicked);
@@ -266,7 +266,8 @@ function findMostCommonRequirement(array){
   return top_result
 }
 
-function askQuestion(top_result) {
+function askQuestion() {
+  top_result = returnTopRequirement();
   if ($(".life-events input:checkbox:checked").length > 0) {
     result_options = determineResultOptions(top_result)
     // top_result == 0 if there are no more questions
