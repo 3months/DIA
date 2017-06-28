@@ -196,19 +196,16 @@ function getValidId(id) {
 function createRequirementPanel(requirement_name, requirement_value, rule_id) {
   var parent_panel = document.getElementById(rule_id);
 
+  var view_data = {};
+  view_data['requirement_name'] = requirement_names[requirement_name];
   if (typeof requirement_value !== "object" && requirement_value !== null) {
-    var view_data = {
-      requirement_value: requirement_value,
-      requirement_data_attr: requirement_name
-    };
+    view_data['requirement_value'] = requirement_value;
+    view_data['requirement_data_attr'] = requirement_name;
     var template = $("#requirementTpl").html();
   } else {
-    var view_data = {
-      id: getValidId(rule_id + requirement_name)
-    };
+    view_data['id'] = getValidId(rule_id + requirement_name);
     var template = $("#benefitPanelTpl").html();
   }
-  view_data[requirement_name] = requirement_names[requirement_name];
   $(parent_panel).append(Mustache.to_html(template, view_data));
 }
 
