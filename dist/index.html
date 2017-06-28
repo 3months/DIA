@@ -77,7 +77,7 @@
 	<script id="applyAllTpl" type="text/template">
 		<div class="text-center event-container" id="input">
 			<div class="row">
-				<h4 class="question-text">Would you like to apply for benefits ({{apply_count}} available)</h4>
+				<h4 class="question-text">Would you like to apply for available services ({{apply_count}} available)</h4>
 				<div class="form-group question-group text-center">
 					<button type="button" data-toggle="modal" data-target="#applyModal" class="btn btn-info" id="apply-btn">Apply Now</button>
 				</div>
@@ -88,7 +88,21 @@
 	<script id="applyRowTpl" type="text/template">
 		<tr>
 			<td>{{bizRuleName}}</td>
-			<td><button class="btn user-obj-apply" type="button"><i class="material-icons"> &#xE86C;</i></button></td>
+			<td></td>
+			<td class="text-right"><button class="btn user-obj-apply" type="button"><i class="material-icons"> &#xE86C;</i></button></td>
+		</tr>
+	</script>
+
+	<script id="applyRowErrorTpl" type="text/template">
+		<tr>
+			<td colspan="3" class="red-font">
+				<h4>Info doesn't match gov records, please click to correct it.</h4>
+			</td>
+		</tr>
+		<tr>
+			<td>{{bizRuleName}}</td>
+			<td class="red-font">{{requirement}}</td>
+			<td class="text-right"><button class="btn user-obj-correct" type="button"><i class="material-icons">&#xE881;</i></button></td>
 		</tr>
 	</script>
 
@@ -144,8 +158,8 @@
 							<table class="table user-apply">
 								<thead>
 									<tr>
-										<td>Benefits</td>
-										<td><button class="btn user-apply-all" type="button">Apply for All</button></td>
+										<td colspan="2"><h4>Benefits</h4></td>
+										<td class="text-right"><button class="btn user-apply-all" type="button">Apply for All</button></td>
 									</tr>
 								</thead>
 								<tbody>
@@ -242,7 +256,7 @@
 		</div>
 		<div class="col-lg-6 text-center">
 			<div class="text-center">
-				<h1 class="hero">Tell us About your circumstances</h1>
+				<h1 class="hero">Tell us about your circumstances</h1>
 			</div>
 			<div class="row text-center background" id="criteria1"></div>
 			<div class="row text-center" id="criteria2"></div>

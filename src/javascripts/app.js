@@ -45,14 +45,27 @@ $(document).ready(function() {
   });
 
   $('#applyModal').on('show.bs.modal', function(event) {
+    var all_benefits = $('.panel-heading-bizRule.green').length
+    var counter = 0
+    var random = Math.floor(Math.random()*3);
     $('.panel-heading-bizRule').each(function(){
       if($(this).hasClass('green')) {
+        // We grab a random requirement from the business rule
+        var random_requirement = $(this).parent().find('.requirement').eq(random).text()
         var view_data = {
-          bizRuleName: $(this).find('.panel-title').text()
+          bizRuleName: $(this).find('.panel-title').text(),
+          requirement: random_requirement
         }
-        var row = Mustache.to_html($('#applyRowTpl').html(), view_data);
+        // If there is more than one benefit displayed
+        // We append it to the error div to mock a data mismatch
+        if (counter == all_benefits-1 && all_benefits > 2){
+          var row = Mustache.to_html($('#applyRowErrorTpl').html(), view_data)
+        } else {
+          var row = Mustache.to_html($('#applyRowTpl').html(), view_data);
+        }
         $('.user-apply tbody').append(row)
       }
+      counter++
     })
   })
 
@@ -62,7 +75,11 @@ $(document).ready(function() {
   })
 
   $('.user-apply').on('click', '.user-obj-apply', function() {
-    $(this).toggleClass('animate')
+    $(this).toggleClass('animate-apply')
+  });
+
+  $('.user-apply').on('click', '.user-obj-correct', function() {
+    $(this).toggleClass('animate-correct')
   });
 
   // This event is fired when you click Yes/No for any question
@@ -80,15 +97,15 @@ $(document).ready(function() {
   });
 
   $('.user-apply-all').on('click', function(){
-    if ($(this).hasClass('animate')){
-      $(this).removeClass('animate')
+    if ($(this).hasClass('animate-apply')){
+      $(this).removeClass('animate-apply')
       $('.user-obj-apply').each(function(){
-        $(this).removeClass('animate')
+        $(this).removeClass('animate-apply')
       })
     } else {
-      $(this).addClass('animate');
+      $(this).addClass('animate-apply');
       $('.user-obj-apply').each(function(){
-        $(this).addClass('animate')
+        $(this).addClass('animate-apply')
       })
     }
   })
@@ -222,8 +239,12 @@ var lifeEventClicked = function() {
   var eventType = $(this).attr('data-event-type');
   if ($(this).is(":checked")) {
     createBizRuleCards(getObjects(myJson, "category", eventType));
+    askQuestion(returnTopRequirement())
+    tickRequirements()
+    countRequirements()
   } else {
     $('[data-event-type="' + eventType + '"].biz-rule-card').remove();
+    askQuestion(returnTopRequirement())
   }
   askQuestion();
   updateCards();
