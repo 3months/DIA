@@ -8,129 +8,129 @@ Author: Matt Lough & Tinus Wagner
 */
 
 // The user object where we store results
-var user_obj = {}
+var user_obj = {};
 
 // Import all JS here
 // This file serves as the entry point for our webpack config
 var $ = require("jquery");
-var requirement_names = require('../../dist/requirements.json');
-var myJson = require('../../dist/regulation.json');
-require('bootstrap-loader');
-require('../../src/stylesheets/styles.scss');
-require('../../src/javascripts/bootstrap-switch.min.js')
-require('../../src/stylesheets/bootstrap-switch.min.scss')
+var requirement_names = require("../../dist/requirements.json");
+var myJson = require("../../dist/regulation.json");
+require("bootstrap-loader");
+require("../../src/stylesheets/styles.scss");
+require("../../src/javascripts/bootstrap-switch.min.js");
+require("../../src/stylesheets/bootstrap-switch.min.scss");
 
 function userObjectModalInit() {
-  $('#debugModal').on('hidden.bs.modal', function (event) {
+  $("#debugModal").on("hidden.bs.modal", function(event) {
     updateCards();
   });
 
-  $('#debugModal').on('show.bs.modal', function (event) {
-    $('.user-obj tbody').html('');
+  $("#debugModal").on("show.bs.modal", function(event) {
+    $(".user-obj tbody").html("");
     $.each(user_obj, function(key, value) {
       var view_data = {
         requirement_name: requirement_names[key],
         requirement_id: key,
-        value1_class: (value == "Yes") ? "selected" : "",
-        value2_class: (value == "No") ? "selected" : ""
-      }
-      var row = Mustache.to_html($('#userObjRowTpl').html(), view_data);
-      $('.user-obj tbody').append(row);
+        value1_class: value == "Yes" ? "selected" : "",
+        value2_class: value == "No" ? "selected" : ""
+      };
+      var row = Mustache.to_html($("#userObjRowTpl").html(), view_data);
+      $(".user-obj tbody").append(row);
     });
   });
 
-  $('#debugModal').on('click', '.requirement_row button', function() {
-    var requirement_id = $(this).closest('.requirement_row').attr('data-requirement-id');
+  $("#debugModal").on("click", ".requirement_row button", function() {
+    var requirement_id = $(this).closest(".requirement_row").attr("data-requirement-id");
     var answer_chosen = $(this).text();
     user_obj[requirement_id] = answer_chosen;
-    $(this).closest('.requirement_row').find('button').removeClass('selected');
-    $(this).addClass('selected');
+    $(this).closest(".requirement_row").find("button").removeClass("selected");
+    $(this).addClass("selected");
   });
 }
 
 function benefitApplyModalInit() {
-  $('#applyModal').on('show.bs.modal', function(event) {
-    var all_benefits = $('.panel-heading-bizRule.green').length
-    var counter = 0
-    var random = Math.floor(Math.random()*3);
-    $('.panel-heading-bizRule').each(function(){
-      if($(this).hasClass('green')) {
+  $("#applyModal").on("show.bs.modal", function(event) {
+    var all_benefits = $(".panel-heading-bizRule.green").length;
+    var counter = 0;
+    var random = Math.floor(Math.random() * 3);
+    $(".panel-heading-bizRule").each(function() {
+      if ($(this).hasClass("green")) {
         // We grab a random requirement from the business rule
-        var random_requirement = $(this).parent().find('.requirement').eq(random).text()
+        var random_requirement = $(this).parent().find(".requirement").eq(random).text();
         var view_data = {
-          bizRuleName: $(this).find('.panel-title').text(),
+          bizRuleName: $(this).find(".panel-title").text(),
           requirement: random_requirement
-        }
+        };
         // If there is more than one benefit displayed
         // We append it to the error div to mock a data mismatch
-        if (counter == all_benefits-1 && all_benefits > 2){
-          var row = Mustache.to_html($('#applyRowErrorTpl').html(), view_data)
+        if (counter == all_benefits - 1 && all_benefits > 2) {
+          var row = Mustache.to_html($("#applyRowErrorTpl").html(), view_data);
         } else {
-          var row = Mustache.to_html($('#applyRowTpl').html(), view_data);
+          var row = Mustache.to_html($("#applyRowTpl").html(), view_data);
         }
-        $('.user-apply tbody').append(row)
+        $(".user-apply tbody").append(row);
       }
-      counter++
-    })
+      counter++;
+    });
   });
 
-
-  $('#applyModal').on('hidden.bs.modal', function(event) {
-    $('.user-apply tbody').html('')
+  $("#applyModal").on("hidden.bs.modal", function(event) {
+    $(".user-apply tbody").html("");
   });
 
-  $('.user-apply').on('click', '.user-obj-apply', function() {
-    $(this).toggleClass('animate-apply')
+  $(".user-apply").on("click", ".user-obj-apply", function() {
+    $(this).toggleClass("animate-apply");
   });
 
-  $('.user-apply').on('click', '.user-obj-correct', function() {
-    $(this).toggleClass('animate-correct')
+  $(".user-apply").on("click", ".user-obj-correct", function() {
+    $(this).toggleClass("animate-correct");
   });
 
-  $('.user-apply-all').on('click', function(){
-    if ($(this).hasClass('animate-apply')){
-      $(this).removeClass('animate-apply')
-      $('.user-obj-apply').each(function(){
-        $(this).removeClass('animate-apply')
-      })
+  $(".user-apply-all").on("click", function() {
+    if ($(this).hasClass("animate-apply")) {
+      $(this).removeClass("animate-apply");
+      $(".user-obj-apply").each(function() {
+        $(this).removeClass("animate-apply");
+      });
     } else {
-      $(this).addClass('animate-apply');
-      $('.user-obj-apply').each(function(){
-        $(this).addClass('animate-apply')
-      })
+      $(this).addClass("animate-apply");
+      $(".user-obj-apply").each(function() {
+        $(this).addClass("animate-apply");
+      });
     }
   });
-
 }
 
-$(document).ready(function() {
-  $("[name='setting-anonymous']").bootstrapSwitch();
-
-  userObjectModalInit();
-  benefitApplyModalInit();
-
+function questionsInit() {
   // This event is fired when you click Yes/No for any question
-  $('#criteria1').on('click', '#question_buttons button', function() {
-    var question_id = $(this).closest('.question').attr('data-question-id');
+  $("#criteria1").on("click", "#question_buttons button", function() {
+    var question_id = $(this).closest(".question").attr("data-question-id");
     var answer_chosen = $(this).text();
     user_obj[question_id] = answer_chosen;
-    $('#question_buttons').removeClass('fade-in');
-    $('#question_buttons').addClass('slide-out');
+    $("#question_buttons").removeClass("fade-in");
+    $("#question_buttons").addClass("slide-out");
     $("#question_buttons").on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(e) {
       askQuestion();
       updateCards();
       $(this).off(e);
     });
   });
+}
+
+$(document).ready(function() {
+  $("[name='setting-anonymous']").bootstrapSwitch();
+  userObjectModalInit();
+  benefitApplyModalInit();
+  questionsInit();
 });
 
-function sortDivs(){
-  $('.biz-rule-card').each(function(){
-    var bizCard = $(this)
-    if (bizCard.find('.red').length > 0){
-      $("#fails").append(bizCard)
+function sortDivs() {
+  $(".biz-rule-card").each(function() {
+    var bizCard = $(this);
+    if (bizCard.find(".red").length > 0) {
+      $("#fails").append(bizCard);
     }
-  })
+  });
 }
 
 function getObjects(obj, key, val) {
@@ -155,13 +155,13 @@ function createBizRuleCards(obj) {
     var rule_id = business_rule.name + counter;
     createRulePanel(business_rule, rule_id);
 
-    for (var requirement_name in business_rule['requirements']) {
-      if (business_rule['requirements'].hasOwnProperty(requirement_name)) {
-        var requirement = business_rule['requirements'][requirement_name]
-        createChildren(requirement_name, requirement, rule_id)
+    for (var requirement_name in business_rule["requirements"]) {
+      if (business_rule["requirements"].hasOwnProperty(requirement_name)) {
+        var requirement = business_rule["requirements"][requirement_name];
+        createChildren(requirement_name, requirement, rule_id);
       }
     }
-    counter++
+    counter++;
   }
 }
 
@@ -184,38 +184,34 @@ function createRulePanel(rule, id) {
     id: id,
     title: returnTitle(text),
     type: rule.category
-  }
-  var template = $('#bizRuleCardTpl').html();
+  };
+  var template = $("#bizRuleCardTpl").html();
   $("#list").append(Mustache.to_html(template, view_data));
 }
 
 // Get an ID which could be a valid HTML ID
 function getValidId(id) {
-  return id.replace(/\?/, '');
+  return id.replace(/\?/, "");
 }
 
 // Create a new panel for each requirement
 function createRequirementPanel(requirement_name, requirement_value, rule_id) {
-  var value = '';
   var parent_panel = document.getElementById(rule_id);
 
   if (typeof requirement_value !== "object" && requirement_value !== null) {
     var view_data = {
-      requirement_name: requirement_names[requirement_name],
       requirement_value: requirement_value,
       requirement_data_attr: requirement_name
-    }
-    var template = $('#requirementTpl').html();
-    $(parent_panel).append(Mustache.to_html(template, view_data));
-    value = requirement_value
+    };
+    var template = $("#requirementTpl").html();
   } else {
     var view_data = {
-      id: getValidId(rule_id + requirement_name),
-      requirement_name: requirement_names[requirement_name],
-    }
-    var template = $('#benefitPanelTpl').html();
-    $(parent_panel).append(Mustache.to_html(template, view_data));
+      id: getValidId(rule_id + requirement_name)
+    };
+    var template = $("#benefitPanelTpl").html();
   }
+  view_data[requirement_name] = requirement_names[requirement_name];
+  $(parent_panel).append(Mustache.to_html(template, view_data));
 }
 
 // Split our json titles into individual words
@@ -231,44 +227,42 @@ function updateCards() {
 }
 
 function removeChecks() {
-  $('.checked').remove();
-  $('.unchecked').remove();
-  $('.green').removeClass('green');
-  $('.red').removeClass('red');
+  $(".checked").remove();
+  $(".unchecked").remove();
+  $(".green").removeClass("green");
+  $(".red").removeClass("red");
 }
 
 // Render business rules specific to life event clicked
 var lifeEventClicked = function() {
-  var eventType = $(this).attr('data-event-type');
+  var eventType = $(this).attr("data-event-type");
   if ($(this).is(":checked")) {
     createBizRuleCards(getObjects(myJson, "category", eventType));
-    askQuestion(returnTopRequirement())
-    tickRequirements()
-    countRequirements()
   } else {
     $('[data-event-type="' + eventType + '"].biz-rule-card').remove();
-    askQuestion(returnTopRequirement())
   }
   askQuestion();
   updateCards();
 };
 
-$("#fancy-checkbox-immigration, #fancy-checkbox-retired, #fancy-checkbox-health, #fancy-checkbox-childcare").change(lifeEventClicked);
+$("#fancy-checkbox-immigration, #fancy-checkbox-retired, #fancy-checkbox-health, #fancy-checkbox-childcare").change(
+  lifeEventClicked
+);
 
 function returnTopRequirement() {
-  var requirements_array = []
+  var requirements_array = [];
   // Gather all visible requirements text from DOM and push to array
-  var requirements = $('p.requirement').each(function(i, obj) {
-    requirements_array.push($(this).data( "requirement" ))
+  $("p.requirement").each(function(i, obj) {
+    requirements_array.push($(this).data("requirement"));
   });
-  if (requirements_array.length){
-    return findMostCommonRequirement(requirements_array)
+  if (requirements_array.length) {
+    return findMostCommonRequirement(requirements_array);
   } else {
-    return 'error'
+    return "error";
   }
 }
 
-function findMostCommonRequirement(array){
+function findMostCommonRequirement(array) {
   var ranked_values_object = {};
   // Loop through array to determine how often a value is repeated
   // Then rank them
@@ -277,156 +271,154 @@ function findMostCommonRequirement(array){
   });
 
   // If user has no object filtered_result_keys = ranked_values_object
-  var filtered_result_keys = ranked_values_object
+  var filtered_result_keys = ranked_values_object;
 
   // If user has object, initialise two objects to compare and filter matches
-  var unique_questions_keys = Object.keys(ranked_values_object)
-  var user_answers_keys = Object.keys(user_obj)
+  var unique_questions_keys = Object.keys(ranked_values_object);
+  var user_answers_keys = Object.keys(user_obj);
 
   // we compare the ranked benefits with the user_obj
   // If we find a match (user has already answered that question)
   // We delete that value from ranked_values_object
-  if (user_answers_keys.length){
+  if (user_answers_keys.length) {
     unique_questions_keys.forEach(function(key) {
-      user_answers_keys.forEach(function(key2){
-        if (key === key2){
-          delete ranked_values_object[key2]
+      user_answers_keys.forEach(function(key2) {
+        if (key === key2) {
+          delete ranked_values_object[key2];
         }
-      })
-    })
+      });
+    });
   }
 
   // loop through and return the value that is repeated most
-  var top_result = Object.keys(ranked_values_object).reduce(function(a, b){
-    return ranked_values_object[a] > ranked_values_object[b] ? a : b
-  }, 0)
-  return top_result
+  var top_result = Object.keys(ranked_values_object).reduce(function(a, b) {
+    return ranked_values_object[a] > ranked_values_object[b] ? a : b;
+  }, 0);
+  return top_result;
 }
 
 function askQuestion() {
   top_result = returnTopRequirement();
   if ($(".life-events input:checkbox:checked").length > 0) {
-    result_options = determineResultOptions(top_result)
+    result_options = determineResultOptions(top_result);
     // top_result == 0 if there are no more questions
     if (top_result === 0) {
-      $("#criteria1").html('')
-      renderApplyAll()
+      $("#criteria1").html("");
+      renderApplyAll();
     } else {
-      renderQuestion(requirement_names[top_result], top_result, result_options)
+      renderQuestion(requirement_names[top_result], top_result, result_options);
     }
   } else {
-    $("#criteria1").html('')
+    $("#criteria1").html("");
   }
 }
 
-function renderQuestion(question_text, key, options){
+function renderQuestion(question_text, key, options) {
   var view_data = {
     question_text: question_text,
     question_id: key,
     value1: options[0],
     value2: options[1]
-  }
-  var template = $('#questionTpl').html();
+  };
+  var template = $("#questionTpl").html();
   $("#criteria1").html(Mustache.to_html(template, view_data));
 }
 
-function renderApplyAll(){
-  var count_success_benefits = 0
-  $('.panel-heading-bizRule').each(function(){
-    if($(this).hasClass('green')) {
-      count_success_benefits++
+function renderApplyAll() {
+  var count_success_benefits = 0;
+  $(".panel-heading-bizRule").each(function() {
+    if ($(this).hasClass("green")) {
+      count_success_benefits++;
     }
-  })
+  });
   var view_data = {
-    apply_count : count_success_benefits
-  }
-  var template = $('#applyAllTpl').html()
-  $('#criteria1').html(Mustache.to_html(template, view_data));
+    apply_count: count_success_benefits
+  };
+  var template = $("#applyAllTpl").html();
+  $("#criteria1").html(Mustache.to_html(template, view_data));
 }
 
 function countRequirements() {
   $(".biz-rule-card").each(function showRequirementCount(i, card) {
-    var count_direct_children = $(card).find('.requirement-panel > .requirement > .checked').length
-    var count_nested_panels = $(card).find('.requirement-panel > .requirement > .panel-heading > .checked').length
+    var count_direct_children = $(card).find(".requirement-panel > .requirement > .checked").length;
+    var count_nested_panels = $(card).find(".requirement-panel > .requirement > .panel-heading > .checked").length;
     var view_data = {
-      id: $(card).attr('id'),
+      id: $(card).attr("id"),
       // Count top level requirements
-      count: $(card).find('.requirement-panel > .requirement').length,
-      checked: count_direct_children+count_nested_panels
-
-    }
-    var template = $('#requirementsNumTpl').html();
-    $(card).find('.card-preview').html('');
-    $(card).find('.card-preview').append(Mustache.to_html(template, view_data));
+      count: $(card).find(".requirement-panel > .requirement").length,
+      checked: count_direct_children + count_nested_panels
+    };
+    var template = $("#requirementsNumTpl").html();
+    $(card).find(".card-preview").html("");
+    $(card).find(".card-preview").append(Mustache.to_html(template, view_data));
   });
 }
 
-
-function tickRequirements(){
+function tickRequirements() {
   for (var user_question in user_obj) {
     // Find each element that matches user question
-    $("[data-requirement='"+user_question+"']").each(function() {
-      var user_answer = user_obj[user_question]
-      var question_answer = $(this).children().text()
+    $("[data-requirement='" + user_question + "']").each(function() {
+      var user_answer = user_obj[user_question];
+      var question_answer = $(this).children().text();
       // If user answer matches question requirement
-      if (answerToBool(user_answer) == answerToBool(question_answer)){
-        if ($(this).find( ".material-icons" ).length === 0) {
-          $(this).append('<i class="material-icons checked"></i>')
-          $(this).addClass("green")
+      if (answerToBool(user_answer) == answerToBool(question_answer)) {
+        if ($(this).find(".material-icons").length === 0) {
+          $(this).append('<i class="material-icons checked"></i>');
+          $(this).addClass("green");
         }
       }
-      if (answerToBool(user_answer) != answerToBool(question_answer)){
-        if ($(this).find( ".material-icons" ).length === 0) {
-          $(this).append('<i class="material-icons unchecked"></i>')
-          $(this).addClass("red")
+      if (answerToBool(user_answer) != answerToBool(question_answer)) {
+        if ($(this).find(".material-icons").length === 0) {
+          $(this).append('<i class="material-icons unchecked"></i>');
+          $(this).addClass("red");
         }
       }
-      tickIfAllChildrenTicked($(this))
-      tickTopLevelRequirements($(this))
-    })
+      tickIfAllChildrenTicked($(this));
+      tickTopLevelRequirements($(this));
+    });
   }
 }
 
 function tickIfAllChildrenTicked(item) {
-  var all_criteria = item.closest('.panel').find("p").length
-  var checked_criteria = item.closest('.panel').find("i.checked").length
-  var checked_inner_panels = item.find('.panel > .panel-heading > .checked').length
+  var all_criteria = item.closest(".panel").find("p").length;
+  var checked_criteria = item.closest(".panel").find("i.checked").length;
+  var checked_inner_panels = item.find(".panel > .panel-heading > .checked").length;
 
-  var failed_criteria = item.closest('.panel').find("i.unchecked").length
-  var parent_panel_header = item.closest('.panel').find(".panel-heading")
+  var failed_criteria = item.closest(".panel").find("i.unchecked").length;
+  var parent_panel_header = item.closest(".panel").find(".panel-heading");
 
-  if (checked_criteria  == all_criteria) {
-    if (parent_panel_header.find( ".checked" ).length === 0) {
-      parent_panel_header.append('<i class="material-icons checked"></i>')
-      parent_panel_header.addClass("green")
+  if (checked_criteria == all_criteria) {
+    if (parent_panel_header.find(".checked").length === 0) {
+      parent_panel_header.append('<i class="material-icons checked"></i>');
+      parent_panel_header.addClass("green");
     }
   }
 
   if (failed_criteria > 0) {
-    if (parent_panel_header.find( ".unchecked" ).length === 0) {
-      parent_panel_header.addClass("red")
+    if (parent_panel_header.find(".unchecked").length === 0) {
+      parent_panel_header.addClass("red");
     }
   }
 }
 
-function tickTopLevelRequirements(item){
-  $('.biz-rule-card').each(function() {
-    var children = $(this).find('.panel-body').children()
-    var checked_children = children.find(".checked").length
-    var failed_children = children.find(".unchecked").length
-    var all_children = children.length
-    var parent_panel_BizRule = $(this).find('.panel-heading-bizRule')
-    if (checked_children == all_children){
-      if (parent_panel_BizRule.find( ".checked" ).length === 0) {
-        parent_panel_BizRule.addClass("green")
+function tickTopLevelRequirements(item) {
+  $(".biz-rule-card").each(function() {
+    var children = $(this).find(".panel-body").children();
+    var checked_children = children.find(".checked").length;
+    var failed_children = children.find(".unchecked").length;
+    var all_children = children.length;
+    var parent_panel_BizRule = $(this).find(".panel-heading-bizRule");
+    if (checked_children == all_children) {
+      if (parent_panel_BizRule.find(".checked").length === 0) {
+        parent_panel_BizRule.addClass("green");
       }
     }
     if (failed_children > 0) {
-      if (parent_panel_BizRule.find( ".unchecked" ).length === 0) {
-        parent_panel_BizRule.addClass("red")
+      if (parent_panel_BizRule.find(".unchecked").length === 0) {
+        parent_panel_BizRule.addClass("red");
       }
     }
-  })
+  });
 }
 
 // Used to convert 'truthy' values to an actual boolean
@@ -435,16 +427,16 @@ function answerToBool(string) {
     case "yes":
     case "true":
     case true:
-      return true
+      return true;
     case "no":
     case "false":
     case false:
-      return false
+      return false;
     default:
-      return false
+      return false;
   }
 }
 
 function determineResultOptions(top_result) {
-  return ["Yes", "No"]
+  return ["Yes", "No"];
 }
