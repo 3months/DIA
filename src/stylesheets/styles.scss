@@ -84,6 +84,10 @@ $pleasant-green: #5cb85c;
   background-color: red !important;
 }
 
+.red-font {
+  color: red !important;
+}
+
 .requirement_row button.selected {
   background-color: $pleasant-green
 }
@@ -174,18 +178,39 @@ $pleasant-green: #5cb85c;
 @keyframes apply {
     0%   {background-color: #455A64}
     25%  {background-color: #5cb85c;}
-    50%  {background-color: rgb(0, 80, 0);}
-    50%  {background-color: #5cb85c;}
+    50%  {background-color: #005000;}
+    75%  {background-color: #5cb85c;}
     100% {background-color: #455A64;}
 }
 
-.animate {
+.user-obj-correct {
+  background-color: #ac2925;
+}
+
+@keyframes correct {
+    0%   {background-color: #ac2925;}
+    50%  {background-color: rgba(255, 100, 0, 1)}
+    100% {background-color: #ac2925;}
+}
+
+
+.animate-apply {
   animation-duration: 3s;
   animation-name: apply;
   animation-iteration-count: 99;
   :focus {
     outline: none;
   }
+}
+
+.animate-correct {
+  animation-duration: 1.5s;
+  animation-name: correct;
+  animation-iteration-count: 99;
+  :focus {
+    outline: none;
+  }
+
 }
 
 .biz-rule-card {

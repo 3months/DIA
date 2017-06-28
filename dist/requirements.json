@@ -82,5 +82,6 @@
   "5yearsInNzSince50": "Has the applicant spent 5 or more years in NZ since turning 50?",
   "10yearsInNzSince20": "Has the applicant spent 10 or more years in NZ since turning 20?",
   "applicantMinimumAge65?": "Is the applicant 65 or older?",
-  "numberOfChildren": "Do you have any children?"
+  "numberOfChildren": "Do you have any children?",
+  "CompleteDeclarationOfParentOfChildForm?": "Has the applicant completed the parent declaration form?"
 }
