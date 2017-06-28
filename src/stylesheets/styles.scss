@@ -42,6 +42,11 @@ body {
   }
 }
 
+#question_buttons {
+  transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+}
+
 #question_buttons button {
   width: 100%;
 }
@@ -181,6 +186,34 @@ $pleasant-green: #5cb85c;
     50%  {background-color: #005000;}
     75%  {background-color: #5cb85c;}
     100% {background-color: #455A64;}
+}
+
+.slide-in {
+  animation: slide-in 0.5s forwards;
+  -webkit-animation: slide-in 0.5s forwards;
+}
+
+.slide-out {
+  animation: slide-out 0.5s forwards;
+  -webkit-animation: slide-out 0.5s forwards;
+}
+
+@keyframes slide-in {
+  100% { transform: translateX(0%); }
+}
+
+@-webkit-keyframes slide-in {
+  100% { -webkit-transform: translateX(0%); }
+}
+
+@keyframes slide-out {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(100%); }
+}
+
+@-webkit-keyframes slide-out {
+  0% { -webkit-transform: translateX(0%); }
+  100% { -webkit-transform: translateX(100%); }
 }
 
 .user-obj-correct {

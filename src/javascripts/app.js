@@ -35,8 +35,8 @@ $(document).ready(function() {
     var requirement_id = $(this).closest('.requirement_row').attr('data-requirement-id');
     var answer_chosen = $(this).text();
     user_obj[requirement_id] = answer_chosen;
-    $(this).toggleClass('selected');
-    $(this).siblings('button').toggleClass('selected');
+    $(this).closest('.requirement_row').find('button').removeClass('selected');
+    $(this).addClass('selected');
   });
 
   $('.user-obj').on('click', '.user-obj-delete', function() {
@@ -87,8 +87,13 @@ $(document).ready(function() {
     var question_id = $(this).closest('.question').attr('data-question-id');
     var answer_chosen = $(this).text();
     user_obj[question_id] = answer_chosen;
-    askQuestion();
-    updateCards();
+    $('#question_buttons').removeClass('slide-in');
+    $('#question_buttons').addClass('slide-out');
+    $("#question_buttons").on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(e) {
+      askQuestion();
+      updateCards();
+      $(this).off(e);
+    });
   });
 
   $('.user-apply-all').on('click', function(){
@@ -216,9 +221,17 @@ function returnTitle(text) {
 }
 
 function updateCards() {
-  countRequirements();
+  removeChecks();
   tickRequirements();
+  countRequirements();
   sortDivs();
+}
+
+function removeChecks() {
+  $('.checked').remove();
+  $('.unchecked').remove();
+  $('.green').removeClass('green');
+  $('.red').removeClass('red');
 }
 
 // Render business rules specific to life event clicked
