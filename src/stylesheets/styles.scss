@@ -42,11 +42,6 @@ body {
   }
 }
 
-#question_buttons {
-  transform: translateX(-100%);
-  -webkit-transform: translateX(-100%);
-}
-
 #question_buttons button {
   width: 100%;
 }
@@ -188,9 +183,9 @@ $pleasant-green: #5cb85c;
     100% {background-color: #455A64;}
 }
 
-.slide-in {
-  animation: slide-in 0.5s forwards;
-  -webkit-animation: slide-in 0.5s forwards;
+.fade-in {
+  animation: fade-in 0.5s forwards;
+  -webkit-animation: fade-in 0.5s forwards;
 }
 
 .slide-out {
@@ -198,11 +193,22 @@ $pleasant-green: #5cb85c;
   -webkit-animation: slide-out 0.5s forwards;
 }
 
-@keyframes slide-in {
-  100% { transform: translateX(0%); }
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@-webkit-keyframes slide-in {
+@-moz-keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@-webkit-keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@-webkit-keyframes fade-in {
   100% { -webkit-transform: translateX(0%); }
 }
 

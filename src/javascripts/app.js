@@ -1,3 +1,12 @@
+/*
+app.js
+
+This code was created for prototyping purposes, it is not suitable for a production release.
+
+Author: Matt Lough & Tinus Wagner
+3months.com
+*/
+
 // The user object where we store results
 var user_obj = {}
 
@@ -5,14 +14,13 @@ var user_obj = {}
 // This file serves as the entry point for our webpack config
 var $ = require("jquery");
 var requirement_names = require('../../dist/requirements.json');
+var myJson = require('../../dist/regulation.json');
 require('bootstrap-loader');
 require('../../src/stylesheets/styles.scss');
 require('../../src/javascripts/bootstrap-switch.min.js')
 require('../../src/stylesheets/bootstrap-switch.min.scss')
 
-$(document).ready(function() {
-  $("[name='setting-anonymous']").bootstrapSwitch();
-
+function userObjectModalInit() {
   $('#debugModal').on('hidden.bs.modal', function (event) {
     updateCards();
   });
@@ -38,12 +46,9 @@ $(document).ready(function() {
     $(this).closest('.requirement_row').find('button').removeClass('selected');
     $(this).addClass('selected');
   });
+}
 
-  $('.user-obj').on('click', '.user-obj-delete', function() {
-    delete user_obj[$(this).attr('data-req-id')];
-    $(this).closest('tr').remove();
-  });
-
+function benefitApplyModalInit() {
   $('#applyModal').on('show.bs.modal', function(event) {
     var all_benefits = $('.panel-heading-bizRule.green').length
     var counter = 0
@@ -67,12 +72,12 @@ $(document).ready(function() {
       }
       counter++
     })
-  })
+  });
 
 
   $('#applyModal').on('hidden.bs.modal', function(event) {
     $('.user-apply tbody').html('')
-  })
+  });
 
   $('.user-apply').on('click', '.user-obj-apply', function() {
     $(this).toggleClass('animate-apply')
@@ -80,20 +85,6 @@ $(document).ready(function() {
 
   $('.user-apply').on('click', '.user-obj-correct', function() {
     $(this).toggleClass('animate-correct')
-  });
-
-  // This event is fired when you click Yes/No for any question
-  $('#criteria1').on('click', '#question_buttons button', function() {
-    var question_id = $(this).closest('.question').attr('data-question-id');
-    var answer_chosen = $(this).text();
-    user_obj[question_id] = answer_chosen;
-    $('#question_buttons').removeClass('slide-in');
-    $('#question_buttons').addClass('slide-out');
-    $("#question_buttons").on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(e) {
-      askQuestion();
-      updateCards();
-      $(this).off(e);
-    });
   });
 
   $('.user-apply-all').on('click', function(){
@@ -108,7 +99,29 @@ $(document).ready(function() {
         $(this).addClass('animate-apply')
       })
     }
-  })
+  });
+
+}
+
+$(document).ready(function() {
+  $("[name='setting-anonymous']").bootstrapSwitch();
+
+  userObjectModalInit();
+  benefitApplyModalInit();
+
+  // This event is fired when you click Yes/No for any question
+  $('#criteria1').on('click', '#question_buttons button', function() {
+    var question_id = $(this).closest('.question').attr('data-question-id');
+    var answer_chosen = $(this).text();
+    user_obj[question_id] = answer_chosen;
+    $('#question_buttons').removeClass('fade-in');
+    $('#question_buttons').addClass('slide-out');
+    $("#question_buttons").on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(e) {
+      askQuestion();
+      updateCards();
+      $(this).off(e);
+    });
+  });
 });
 
 function sortDivs(){
@@ -119,16 +132,6 @@ function sortDivs(){
     }
   })
 }
-
-// Load our JSON file
-var myJson = {};
-$.ajax({
-  url: "regulation.json",
-  dataType: "json",
-  success: function(json) {
-    myJson = json;
-  }
-});
 
 function getObjects(obj, key, val) {
   var objects = [];
