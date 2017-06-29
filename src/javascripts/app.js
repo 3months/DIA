@@ -101,17 +101,24 @@ function benefitApplyModalInit() {
 
 function questionsInit() {
   // This event is fired when you click Yes/No for any question
-  $("#criteria1").on("click", "#question_buttons button", function() {
-    var question_id = $(this).closest(".question").attr("data-question-id");
-    var answer_chosen = $(this).text();
-    user_obj[question_id] = answer_chosen;
-    $("#question_buttons").removeClass("fade-in");
-    $("#question_buttons").addClass("slide-out");
-    $("#question_buttons").on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(e) {
-      askQuestion();
-      updateCards();
-      $(this).off(e);
-    });
+  $('#criteria1').on('click', '#question_buttons button', function() {
+    var question_id = $(this).closest('.question').attr('data-question-id');
+    if ($('.event-container-binary').length){
+      setValue(question_id, $(this))
+    } else {
+     if ($(this).hasClass('btn-warning')){
+      //  If user selects contact ird button we select yes button after a delay
+      // fake API call
+      var default_button = $('.btn-success')
+       $(this).addClass('animate-correct')
+       $(this).find('button').addClass('animate-correct')
+       window.setTimeout(function() {
+         setValue(question_id, default_button)
+       }, 4000);
+     } else {
+       setValue(question_id, $(this))
+     }
+    }
   });
 }
 
@@ -122,11 +129,24 @@ $(document).ready(function() {
   questionsInit();
 });
 
-function sortDivs() {
-  $(".biz-rule-card").each(function() {
-    var bizCard = $(this);
-    if (bizCard.find(".red").length > 0) {
-      $("#fails").append(bizCard);
+function setValue(question_id, button){
+  var answer_chosen = $(button).text();
+  user_obj[question_id] = answer_chosen;
+  $('#question_buttons').removeClass('slide-in');
+  $('#question_buttons').addClass('slide-out');
+  $("#question_buttons").on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(e) {
+    askQuestion();
+    updateCards();
+    $(this).off(e);
+  })
+}
+
+
+function sortDivs(){
+  $('.biz-rule-card').each(function(){
+    var bizCard = $(this)
+    if (bizCard.find('.red').length > 0){
+      $("#fails").append(bizCard)
     }
   });
 }
@@ -313,9 +333,15 @@ function renderQuestion(question_text, key, options) {
     question_text: question_text,
     question_id: key,
     value1: options[0],
-    value2: options[1]
-  };
-  var template = $("#questionTpl").html();
+    value2: options[1],
+    value3: 'Validate with respective agency'
+  }
+  var accept_test = "assessment"
+  if (question_text.indexOf(accept_test) >= 0){
+    var template = $('#questionMultiTpl').html()
+  } else {
+    var template = $('#questionTpl').html();
+  }
   $("#criteria1").html(Mustache.to_html(template, view_data));
 }
 
