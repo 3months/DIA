@@ -12,7 +12,11 @@
 	<!-- ==================== TEMPLATES ==================== -->
 
 	<script id="questionTpl" type="text/template">
+<<<<<<< HEAD
 		<div class="event-container fade-in" id="question_buttons">
+=======
+		<div class="event-container slide-in event-container-binary" id="question_buttons">
+>>>>>>> secondary template up and running
 			<h4>{{question_text}}</h4>
 			<div class="row question" data-question-id="{{question_id}}">
 				<div class="col-lg-2 col-sm-2 col-md-offset-4 col-sm-offset-4 answer1">
@@ -20,6 +24,25 @@
 				</div>
 				<div class="col-lg-2 col-sm-2 answer2">
 					<button type="button" class="btn btn-danger">{{value2}}</button>
+				</div>
+				<div class="col-lg-6 col-sm-6">
+				<h4>  </h4></div>
+			</div>
+		</div>
+	</script>
+
+	<script id="questionMultiTpl" type="text/template">
+		<div class="event-container slide-in event-container-multi" id="question_buttons">
+			<h4>{{question_text}}</h4>
+			<div class="row question" data-question-id="{{question_id}}">
+				<div class="col-lg-2 col-sm-2 col-md-offset-3 col-sm-offset-3 answer1">
+					<button type="button" class="btn btn-success">{{value1}}</button>
+				</div>
+				<div class="col-lg-2 col-sm-2 answer2">
+					<button type="button" class="btn btn-danger">{{value2}}</button>
+				</div>
+				<div class="col-lg-3 col-sm-3 answer3">
+					<button type="button" class="btn btn-warning" id="btn-contact-gov">{{value3}}</button>
 				</div>
 				<div class="col-lg-6 col-sm-6">
 				<h4>  </h4></div>
@@ -59,6 +82,33 @@
 		<p class="requirement" data-requirement="{{requirement_data_attr}}">{{requirement_name}} <strong>{{requirement_value}}</strong></p>
 	</script>
 
+<<<<<<< HEAD
+=======
+	<script id="questionMysteryTpl" type="text/template">
+		<div class="row question-row">
+			<h4>There should probably be a question here right?</h4>
+		</div>
+	</script>
+
+	<script id="questionBinaryTpl" type="text/template">
+		<div class="row question-row">
+			<h4 class="question-text">{{question_text}}</h4>
+			<div class="form-group question-group">
+				<input type="checkbox" name="{{question_id}}" id="{{question_id}}" data-on-text="{{true_text}}" data-off-text="{{false_text}}" data-on-color="success" data-off-color="info">
+			</div>
+		</div>
+	</script>
+
+	<script id="questionBinaryTpl" type="text/template">
+		<div class="row question-row">
+			<h4 class="question-text">{{question_text}}</h4>
+			<div class="form-group question-group">
+				<input type="checkbox" name="{{question_id}}" id="{{question_id}}" data-on-text="{{true_text}}" data-off-text="{{false_text}}" data-on-color="success" data-off-color="info">
+			</div>
+		</div>
+	</script>
+
+>>>>>>> secondary template up and running
 	<script id="applyAllTpl" type="text/template">
 		<div class="text-center event-container" id="input">
 			<div class="row">

@@ -110,7 +110,7 @@
         "requirements": {
           "mainCaregiver?": "true",
           "citizenOrResident?": "true",
-          "childAssessment?": "true",
+          "childAssessed?": "true",
           "livingInNZ?": "true",
           "applicantMinimumAge65?": "true",
           "dependentChildMaxAge18?": "true"
@@ -123,7 +123,7 @@
           "citizenOrResident?": "true",
           "incomeLessThan45800?": "true",
           "livingInNZ?": "true",
-          "incomeAssesment": "true"
+          "incomeAssessment": "true"
         }
       },{
         "name": "UnsupportedChildBenefit",
