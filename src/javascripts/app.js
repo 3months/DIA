@@ -346,17 +346,8 @@ function renderQuestion(question_text, key, options) {
 }
 
 function renderApplyAll() {
-  var count_success_benefits = 0;
-  $(".panel-heading-bizRule").each(function() {
-    if ($(this).hasClass("green")) {
-      count_success_benefits++;
-    }
-  });
-  var view_data = {
-    apply_count: count_success_benefits
-  };
   var template = $("#applyAllTpl").html();
-  $("#criteria1").html(Mustache.to_html(template, view_data));
+  $("#criteria1").html(Mustache.to_html(template));
 }
 
 function countRequirements() {
