@@ -74,6 +74,7 @@ input {
 
 .biz-rule-card .panel-heading {
   cursor: pointer;
+  background-color: $primary-color;
 }
 
 .biz-rule-card .panel-title {
@@ -101,9 +102,6 @@ $pleasant-green: #5cb85c;
 }
 
 .expando-thingy {
-  position: absolute;
-  top: 9px;
-  right: 15px;
   color: $primary-color-text;
 
   transform: rotate(0deg);
