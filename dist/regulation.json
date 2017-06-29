@@ -79,7 +79,7 @@
           "dependentChild?": "true",
           "dependentChildMaxAge14?": "true",
           "applicantMinimumAge20?": "true",
-          "applicantStatus": "single",
+          "applicantStatus": "true",
           "applicantInsufficientFinances?": "true",
           "citizenOrResident?": "true",
           "livingInNZ?": "true",
