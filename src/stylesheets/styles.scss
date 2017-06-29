@@ -72,12 +72,17 @@ input {
 
 /* Business Card rules */
 
-.biz-rule-card .panel-heading {
-  cursor: pointer;
-}
-
-.biz-rule-card .panel-title {
-  color: $primary-color-text;
+.biz-rule-card {
+  .panel-heading {
+    cursor: pointer;
+    background-color: $primary-color;
+  }
+  .panel-title {
+    color: $primary-color-text;
+  }
+  .checked {
+    display: none;
+  }
 }
 
 $pleasant-green: #5cb85c;
@@ -101,9 +106,6 @@ $pleasant-green: #5cb85c;
 }
 
 .expando-thingy {
-  position: absolute;
-  top: 9px;
-  right: 15px;
   color: $primary-color-text;
 
   transform: rotate(0deg);

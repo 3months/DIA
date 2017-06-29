@@ -2,7 +2,7 @@
 
 <html>
 <head>
-	<title>DIA test</title>
+	<title>Lab+ Prototype</title>
 	<meta charset="utf-8">
 	<meta content="IE=edge" http-equiv="X-UA-Compatible">
 	<meta content="width=device-width, initial-scale=1" name="viewport">
@@ -50,8 +50,14 @@
 		<div class='col-lg-3 biz-rule-card' data-event-type="{{type}}">
 			<div class='panel panel-success' id="{{text}}">
 				<div class='panel-heading collapsed panel-heading-bizRule' data-target='#{{id}}' data-toggle="collapse">
-					<div class='panel-title'>{{title}}</div>
-					<i class="material-icons expando-thingy">add</i>
+					<div class="row">
+						<div class="col-lg-10">
+							<div class='panel-title'>{{title}}</div>
+						</div>
+						<div class="col-lg-2">
+							<i class="material-icons expando-thingy">add</i>
+						</div>
+					</div>
 				</div>
 				<div class='panel-body requirement-panel collapse' id={{id}}>
 				</div>
@@ -67,15 +73,22 @@
 
 	<script id="benefitPanelTpl" type="text/template">
 			<div class='panel panel-default panel-collapse requirement text-left'>
-				<div class='panel-heading'>
-					<button class="btn btn-primary" data-toggle="collapse" href="#{{id}}">{{requirement_name}}</button>
+				<div class='panel-heading' data-toggle='collapse' href='#{{id}}'>
+					<div class="row">
+						<div class="col-lg-10 text-center">
+							<div class='panel-title'>{{requirement_name}}</div>
+						</div>
+						<div class="col-lg-2">
+							<i class="material-icons expando-thingy">add</i>
+						</div>
+					</div>
 				</div>
 				<div class='panel-body panel-collapse collapse' id='{{id}}'></div>
 			</div>
 	</script>
 
 	<script id="requirementTpl" type="text/template">
-		<p class="requirement" data-requirement="{{requirement_data_attr}}">{{requirement_name}} <strong>{{requirement_value}}</strong></p>
+		<p class="requirement text-center" data-requirement="{{requirement_data_attr}}">{{requirement_name}} <strong>{{requirement_value}}</strong></p>
 	</script>
 
 	<script id="applyAllTpl" type="text/template">
