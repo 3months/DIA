@@ -12,7 +12,7 @@
 	<!-- ==================== TEMPLATES ==================== -->
 
 	<script id="questionTpl" type="text/template">
-		<div class="event-container slide-in" id="question_buttons">
+		<div class="event-container fade-in" id="question_buttons">
 			<h4>{{question_text}}</h4>
 			<div class="row question" data-question-id="{{question_id}}">
 				<div class="col-lg-2 col-sm-2 col-md-offset-4 col-sm-offset-4 answer1">
@@ -57,21 +57,6 @@
 
 	<script id="requirementTpl" type="text/template">
 		<p class="requirement" data-requirement="{{requirement_data_attr}}">{{requirement_name}} <strong>{{requirement_value}}</strong></p>
-	</script>
-
-	<script id="questionMysteryTpl" type="text/template">
-		<div class="row question-row">
-			<h4>There should probably be a question here right?</h4>
-		</div>
-	</script>
-
-	<script id="questionBinaryTpl" type="text/template">
-		<div class="row question-row">
-			<h4 class="question-text">{{question_text}}</h4>
-			<div class="form-group question-group">
-				<input type="checkbox" name="{{question_id}}" id="{{question_id}}" data-on-text="{{true_text}}" data-off-text="{{false_text}}" data-on-color="success" data-off-color="info">
-			</div>
-		</div>
 	</script>
 
 	<script id="applyAllTpl" type="text/template">
@@ -125,7 +110,7 @@
 <body>
 	<div class="container-fluid">
 
-		<!-- Top left corner -->
+		<!-- User Answers Modal -->
 		<div class="pull-left debug-container">
 			<button type="button" href="google.com" class="btn btn-info" id="user-obj-btn">What is this?</button>
 			<div class="modal fade" id="debugModal" role="dialog" tabindex="-1">
@@ -147,7 +132,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- END Top left corner -->
+		<!-- END User Answers Modal -->
 
 		<!-- Apply Modal -->
 		<div class="pull-left apply-container">
@@ -170,6 +155,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- END Apply Modal -->
 
 		<!-- Top right corner buttons -->
 		<div class="pull-right page-button-container">
