@@ -52,7 +52,8 @@ body {
 }
 
 strong {
-  visibility: hidden;
+  visibility: none;
+  display: none;
 }
 
 h1.hero {
@@ -83,10 +84,12 @@ $pleasant-green: #5cb85c;
 
 .green {
   background-color: $pleasant-green !important;
+  color: white;
 }
 
 .red {
   background-color: red !important;
+  color: white;
 }
 
 .red-font {
