@@ -20,6 +20,98 @@ require("../../src/stylesheets/styles.scss");
 require("../../src/javascripts/bootstrap-switch.min.js");
 require("../../src/stylesheets/bootstrap-switch.min.scss");
 
+// require('../../node_modules/web3/dist/web3.js');
+require("web3");
+require('../../src/javascripts/uport-connect.js');
+require('../../src/javascripts/uport.js');
+
+import { Connect, SimpleSigner } from 'uport-connect'
+
+function uportError(msg) {
+  $('#uportError').text(msg)
+  $('#uportError').removeClass("hidden")
+}
+
+const uportConnect = function() {
+  if ($(this).hasClass('btn-success')) {
+    return false;
+  }
+  const uport = new Connect('Lab+ Prototype', {
+    clientId: '2oTAKoi7wviLZdHYX3wqks5HuXeF4qBigQA',
+    signer: SimpleSigner('15903750fb6f17ff2569542ca5646b2b065f47d7d4d7cb1a6549423a2da48f33'),
+    network: 'ropsten'
+    //public key 0x040951f3c3f6919b3238768ad12fd24bff02b75d66c42632a377ff7f9553847dc6837e9e09625ad137b5fd6732331cd4ab9a4bd26d929a3e6a8170227975a0cdf8
+  })
+
+  // Request credentials to login
+  uport.requestCredentials({
+    requested: ['name', 'phone', 'country', 'nz_resident'],
+    notifications: true // We want this if we want to recieve credentials
+  })
+  .then(function(credentials) {
+    // Do something
+    console.log("Received credentials", credentials);
+    // Attest specific credentials
+    if (typeof credentials['nz_resident'] == 'undefined') {
+      $('#uportModal').modal('show');
+      $('#uportModal').on('click', 'button.save', function() {
+        var nz_resident = $('#uport_resident').val()
+        if (nz_resident == '') {
+          uportError('You need to provide an answer for every question')
+        } else {
+          uport.attestCredentials({
+            sub: credentials['address'],
+            claim: {
+              nz_resident: nz_resident,
+            },
+            exp: new Date().getTime() + 30 * 24 * 60 * 60 * 1000, // 30 days from now
+          })
+          uportConnected(nz_resident, credentials);
+        }
+      });
+    } else {
+      uportConnected(credentials['nz_resident'], credentials);
+    }
+  },
+  function(error) {
+    console.log(error);
+    $('#debugPanel').text(error);
+    $('#uportError').removeClass('hidden');
+  })
+}
+
+function uportConnected(nz_resident, credentials) {
+  $('#uportModal').modal('hide');
+  $('#uport-connect').text('uPort Connected')
+  $('#uport-connect').removeClass('btn-info')
+  $('#uport-connect').addClass('btn-success')
+
+  // Load User Image
+  var image_url = "https://ipfs.io" + credentials['image']['contentUrl']
+  $('#uport_img').attr('src', image_url)
+  $('#uport_img').removeClass("hidden")
+
+  // Load user object
+  var nz_resident_answer = 'No';
+  if (['yes', 'y', '1', 'true'].includes(nz_resident.toLowerCase()))
+    nz_resident_answer = 'Yes'
+  user_obj['citizenOrResident?'] = nz_resident_answer;
+  user_obj['proofOfIdentity?'] = "Yes";
+  user_obj['livingInNZ?'] = (credentials['country'] == 'NZ') ? "Yes" : "No";
+
+  // Change hero text
+  $('h1.hero').first().text('What can I help you with, '+credentials['name'].substr(0,5)+'?')
+
+  // Change anonymous toggle
+  $('.bootstrap-switch-handle-on').text(credentials['name'].substr(0,5));
+  $("[name='setting-anonymous']").bootstrapSwitch('state', true, true);
+
+  $('#input input[type="checkbox"]').attr('checked', 'checked')
+  $('#input input[type="checkbox"]').trigger('change')
+}
+
+$('#uport-connect').on('click', uportConnect);
+
 function userObjectModalInit() {
   $("#debugModal").on("hidden.bs.modal", function(event) {
     updateCards();
@@ -127,6 +219,9 @@ $(document).ready(function() {
   userObjectModalInit();
   benefitApplyModalInit();
   questionsInit();
+  $('.closeAlert').on('click', function() {
+    $(this).closest('.alert').addClass('hidden');
+  });
 });
 
 function setValue(question_id, button){
@@ -168,7 +263,7 @@ function getObjects(obj, key, val) {
 function createBizRuleCards(obj) {
   var counter = 0;
   for (var rule_num in obj) {
-    business_rule = obj[rule_num];
+    var business_rule = obj[rule_num];
 
     var rule_id = business_rule.name + counter;
     createRulePanel(business_rule, rule_id);
@@ -196,7 +291,7 @@ function createChildren(requirement_name, requirement_value, rule_panel) {
 
 // Create a new div for each business Rule
 function createRulePanel(rule, id) {
-  text = rule.name;
+  var text = rule.name;
   var view_data = {
     text: text,
     id: id,
@@ -246,6 +341,7 @@ function removeChecks() {
   $(".unchecked").remove();
   $(".green").removeClass("green");
   $(".red").removeClass("red");
+  $(".orange").removeClass("orange");
 }
 
 // Render business rules specific to life event clicked
@@ -313,9 +409,9 @@ function findMostCommonRequirement(array) {
 }
 
 function askQuestion() {
-  top_result = returnTopRequirement();
+  var top_result = returnTopRequirement();
   if ($(".life-events input:checkbox:checked").length > 0) {
-    result_options = determineResultOptions(top_result);
+    var result_options = determineResultOptions(top_result);
     // top_result == 0 if there are no more questions
     if (top_result === 0) {
       $("#criteria1").html("");
@@ -426,6 +522,9 @@ function tickTopLevelRequirements(item) {
       if (parent_panel_BizRule.find(".unchecked").length === 0) {
         parent_panel_BizRule.addClass("red");
       }
+    }
+    if (checked_children >= 1 && checked_children < all_children && failed_children == 0) {
+      parent_panel_BizRule.addClass("orange");
     }
   });
 }

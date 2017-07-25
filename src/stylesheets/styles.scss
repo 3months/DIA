@@ -85,10 +85,23 @@ input {
   }
 }
 
+#uportError {
+  position: absolute;
+  z-index: 10000;
+  left: 15px;
+  right: 15px;
+  top: 10px;
+}
+
 $pleasant-green: #5cb85c;
 
 .green {
   background-color: $pleasant-green !important;
+  color: white;
+}
+
+.orange {
+  background-color: #ec971f !important;
   color: white;
 }
 
@@ -185,6 +198,23 @@ $pleasant-green: #5cb85c;
   color: $primary-text-color;
 }
 
+#uportModal {
+  top: 100px;
+  color: $primary-text-color;
+}
+
+#uportModal p {
+  padding: 10px;
+}
+
+#uport_img {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  max-width: 100px;
+  max-height: 100px;
+}
+
 @keyframes apply {
     0%   {background-color: #455A64}
     25%  {background-color: #5cb85c;}
@@ -260,6 +290,10 @@ $pleasant-green: #5cb85c;
     outline: none;
   }
 
+}
+
+#uport-qr-cancel {
+  color: black;
 }
 
 .biz-rule-card {

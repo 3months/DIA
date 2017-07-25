@@ -138,11 +138,45 @@
 </head>
 
 <body>
+	<div id="uportError" class="alert alert-danger alert-dismissible fade in hidden" role="alert">
+		<button type="button" class="close closeAlert" aria-label="Close"><span aria-hidden="true">×</span></button>
+		<h4>Oh boy! You got an error!</h4>
+		<p>uPort is still in an Alpha stage and not all phones are supported. Sometimes changing your uPort profile picture can resolve this issue by refreshing your saved information.</p>
+		<p>
+			<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#debugInfo" aria-expanded="false" aria-controls="debugInfo">
+			  Show debug information
+			</button>
+			<div class="collapse" id="debugInfo">
+			  <div class="well" id="debugPanel">
+			  </div>
+			</div>
+		</p>
+	</div>
 	<div class="container-fluid">
 
 		<!-- User Answers Modal -->
 		<div class="pull-left debug-container">
 			<a href="https://webtoolkit.govt.nz/blog/2017/06/lab-potential-future-states-for-government-service-delivery/" class="btn btn-info" id="user-obj-btn" target="_blank">What is this?</a>
+
+			<button type="button" class="btn btn-info" id="uport-connect">uPort Connect</button>
+
+			<div class="modal fade" id="uportModal" role="dialog" tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-body">
+							<p id="uportError" class="hidden bg-danger"></p>
+							<div class="form-group">
+								<label for="uport_resident">Are you a resident of New Zealand?</label>
+								<input class="form-control" type="text" id="uport_resident">
+							</div>
+							<p>
+								<button class="save btn btn-primary">Save</button>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="modal fade" id="debugModal" role="dialog" tabindex="-1">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -199,6 +233,8 @@
 			</div>
 		</div>
 		<!-- END Top right corner buttons -->
+
+		<img id="uport_img" src="" class="hidden" />
 
 		<div class="col-lg-6 text-center">
 			<div class="text-center">

@@ -156,7 +156,7 @@
       {"name": "ParentOrGrandparentVisitorVisa",
         "category": "immigration",
         "requirements": {
-          "ProofOfIdentity?": "true",
+          "proofOfIdentity?": "true",
           "InGoodHealth?": "true",
           "OfGoodCharachter?": "true",
           "IntendToMeetVisaConditions?": "true",
