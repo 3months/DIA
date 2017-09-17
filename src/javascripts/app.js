@@ -37,9 +37,9 @@ const uportConnect = function() {
     return false;
   }
   const uport = new Connect('Lab+ Prototype', {
-    clientId: '2oTAKoi7wviLZdHYX3wqks5HuXeF4qBigQA',
-    signer: SimpleSigner('15903750fb6f17ff2569542ca5646b2b065f47d7d4d7cb1a6549423a2da48f33'),
-    network: 'ropsten'
+    clientId: '2oiUayrjWPXQd5bgGQd43CsYy1iNZGQxmsd',
+    signer: SimpleSigner('2440cb4fc4b5e3b74fe6b4e79890b622fc23c0d5bd281d9f7b26790341453374'),
+    network: 'rinkeby'
     //public key 0x040951f3c3f6919b3238768ad12fd24bff02b75d66c42632a377ff7f9553847dc6837e9e09625ad137b5fd6732331cd4ab9a4bd26d929a3e6a8170227975a0cdf8
   })
 
