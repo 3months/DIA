@@ -45,7 +45,7 @@ const uportConnect = function() {
 
   // Request credentials to login
   uport.requestCredentials({
-    requested: ['name', 'phone', 'country', 'nz_resident'],
+    requested: ['name', 'phone', 'country', 'nz_resident', 'image'],
     notifications: true // We want this if we want to recieve credentials
   })
   .then(function(credentials) {
@@ -87,9 +87,12 @@ function uportConnected(nz_resident, credentials) {
   $('#uport-connect').addClass('btn-success')
 
   // Load User Image
-  var image_url = "https://ipfs.io" + credentials['image']['contentUrl']
-  $('#uport_img').attr('src', image_url)
-  $('#uport_img').removeClass("hidden")
+  console.log(credentials);
+  if (typeof credentials['image'] != 'undefined' && typeof credentials['image']['contentUrl'] != 'undefined') {
+    var image_url = "https://ipfs.io" + credentials['image']['contentUrl']
+    $('#uport_img').attr('src', image_url)
+    $('#uport_img').removeClass("hidden")
+  }
 
   // Load user object
   var nz_resident_answer = 'No';
