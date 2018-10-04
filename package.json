@@ -7,7 +7,8 @@
     "test": "test",
     "start": "node server.js",
     "bundle": "webpack",
-    "build": "webpack-dev-server --progress --colors --watch --content-base ./dist --open"
+    "build": "webpack-dev-server --progress --colors --watch --content-base ./dist --open",
+    "publish": "node publish.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "bootstrap-loader": "^2.1.0",
     "expose-loader": "^0.7.3",
     "express": "^4.15.3",
+    "gh-pages": "^2.0.0",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "mustache-loader": "^0.4.1",
